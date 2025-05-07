@@ -1,0 +1,155 @@
+%%=============================================================================
+%% Evaluatie
+%%=============================================================================
+
+\chapter{\IfLanguageName{dutch}{Evaluatie}{Evaluation}}%
+\label{ch:evaluatie}
+
+
+\section{\IfLanguageName{dutch}{Evaluatie Criteria}{Evaluation Criteria}}
+\label{sec:evaluatie-criteria}
+
+Zoals besproken in Hoofdstuk \ref{ch:stand-van-zaken} zijn er verschillende evaluatiecriteria die we kunnen gebruiken om de resultaten van de proof of concept te evalueren. 
+Deze criteria zijn onderverdeeld in vier hoofdcategorieën: \textit{functionaliteit}, \textit{correctheid}, \textit{performantie} en \textit{gebruiksvriendelijkheid}. 
+De evaluatieperiode loopt van 22 april 2025 tot 22 mei 2025. 
+Werknemers van Evolane zullen hun feedback meegeven tijdens deze periode, zodat false positives geleidelijk aan verminderen. 
+Voor geen foutieve evaluatie mee te geven, zal de confusion matrix \ref{tab:confusion_matrix} bestaan uit resultaten van de laatste week. 
+In deze week zullen eerder gedetecteerde false positives opnieuw getest worden om te zien of het resultaat verschild. 
+
+
+\subsection{\IfLanguageName{dutch}{Functionaliteit}{Functionality}}
+\label{sec:functionaliteit}
+
+De functionaliteit van de proof of concept heeft volgende evaluatiecriteria:
+
+\begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{p{4cm} p{6cm} p{6cm}}
+        \toprule
+        \textbf{Evaluatiecriteria} & \textbf{Omschrijving} & \textbf{Bron} \\
+        \midrule
+        
+
+    \end{tabular}
+    \caption{\IfLanguageName{dutch}{Evaluatiecriteria voor functionaliteit}{Evaluation criteria for functionality}}
+    \label{tab:eval-criteria-functionality}
+\end{table}
+
+\subsection{\IfLanguageName{dutch}{Correctheid}{Correctness}}
+\label{sec:correctheid}
+
+Confusion matrix
+
+\subsection{\IfLanguageName{dutch}{Performantie}{Performance}}
+\label{sec:performantie}
+
+% https://chatgpt.com/c/67f97c2a-0020-8013-b19f-6df460292b38
+
+% - CPU-gebruik
+% - RAM-gebruik
+% - Netwerkimpact (upload/download/latency)
+% - Mogelijk disk I/O (indien relevant)
+
+% - zonder Netskope actief
+% - met Netskope actief maar idle
+% - met Netskope actief én DLP-policy actief (bijv. bij upload van gevoelige data)
+
+De metingen van de performantie gebeuren met behulp van de tools beschreven in \ref{sec:evaluatie-criteria-performance}. 
+Deze tools zijn vooral gericht op \textit{MacOS}-systemen, aangezien de Netskope agent vooral op deze besturingssystemen draait binnen de organisatie. 
+
+Voor de performantie-evaluatie van de Netskope agent werd gebruik gemaakt van zowel grafische als command-line gebaseerde tools die compatibel zijn met macOS. Tools werden geselecteerd op basis van nauwkeurigheid, loggingmogelijkheden en hun vermogen om relevante systeem- en netwerkinformatie te capteren.
+
+De tabel hieronder geeft een overzicht van de gebruikte tools per evaluatiecriterium, met vermelding van type en eventuele alternatieven.
+
+\textbf{HIER MAG WEL WAT VAN WEG. ZAL NIETS VAN RESULTAAT OPLEVEREN}
+
+\begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{
+        >{\raggedright\arraybackslash}p{3.5cm} 
+        >{\raggedright\arraybackslash}p{4cm} 
+        >{\raggedright\arraybackslash}p{2.5cm} 
+        >{\raggedright\arraybackslash}p{4cm}
+    }
+        \toprule
+        \textbf{Evaluatiecriterium} & \textbf{Tool} & \textbf{Type} & \textbf{Toelichting / Alternatief} \\ 
+        \midrule
+        CPU-gebruik & Activity Monitor & GUI & Basis realtime overzicht, geen logging \\
+                    & htop & CLI & Real-time overzicht per proces, logging mogelijk \\
+                    & dstat & CLI & Combineert CPU, RAM, netwerk en disk in één tool \\
+        \midrule
+        RAM-gebruik & Activity Monitor & GUI & Beperkt overzicht per proces \\
+                    & htop & CLI & Gedetailleerd geheugenverbruik per proces \\
+        \midrule
+        Netwerkimpact & iPerf3 & CLI & Meet upload/download throughput, vereist server \\
+                      & ping / traceroute & CLI & Latency en route-analyse \\
+                      & Wireshark & GUI & Inspectie op pakketniveau, diepgaand netwerkverkeer \\
+        \midrule
+        Disk I/O & iostat & CLI & Meet disk throughput, latency, queue depth \\
+                 & fs\_usage & CLI & File-level tracing van systeemprocessen \\
+        \bottomrule
+    \end{tabular}
+    \caption{Overzicht evaluatiecriteria en bijhorende tools voor performantieanalyse (macOS)}
+    \label{tab:eval-criteria-performance}
+\end{table}
+
+
+% \begin{table}[h]
+%     \centering
+%     \small
+%     \begin{tabular}{p{4cm} p{6cm} p{6cm}}
+%         \toprule
+%         \textbf{Evaluatiecriteria} & \textbf{Tool(s)} & \textbf{Alternatief} \\ 
+%         \midrule
+%         CPU-gebruik & \textit{Activity Monitor} & \textit{htop, sysctl, iostat, dstat} \\
+%         RAM-gebruik & \textit{Activity Monitor} & \textit{htop} \\
+%         Netwerkimpact (Throughput en latency) & \textit{Activity Monitor} & \textit{iPerf3, Wireshark} \\
+%         Disk I/O & \textit{Activity Monitor} & \textit{iostat} \\
+%         \bottomrule
+%     \end{tabular}
+%     \caption{\IfLanguageName{dutch}{Evaluatiecriteria en tools voor performantie}{Evaluation criteria and tools for performance}}
+%     \label{tab:eval-criteria-performance}
+% \end{table}
+
+\subsubsection{\IfLanguageName{dutch}{Testscenario's}{Test scenarios}}
+\label{sec:testscenario's}
+
+Tabel \ref{tab:test-scenarios-performance} geeft een overzicht van de testscenario's die uitgevoerd zijn om de performantie van de Netskope agent te evalueren. 
+De testscenario's zijn ontworpen om de impact van de Netskope agent op de performantie van de computer te meten in verschillende situaties. 
+
+\begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{p{2cm} p{6cm} p{8cm}}
+        \toprule
+        \textbf{Scenario} & \textbf{Netskope} & \textbf{Beschrijving} \\
+        \midrule
+        \textbf{1} & niet actief & Computer draait op normale manier zonder Netskope \\
+        \textbf{2} & actief maar idle & DLP-Policy is niet actief \\
+        \textbf{3} & actief, samen met DLP-Policy & DLP-Policy is actief maar er wordt geen data verwerkt \\
+        \textbf{4} & actief, en DLP-Policy wordt gestimuleerd & Confidentiële data wordt verwerkt terwijl de DLP-Policy actief is \\
+        \bottomrule
+    \end{tabular}
+    \caption{\IfLanguageName{dutch}{Testscenario's voor performantie}{Test scenarios for performance}}
+    \label{tab:test-scenarios-performance}
+\end{table}
+
+
+\subsection{\IfLanguageName{dutch}{Gebruiksvriendelijkheid}{Usability}}
+\label{sec:gebruiksvriendelijkheid}
+
+De gebruiksvriendelijkheid van de proof of concept bevat volgende evaluatiecriteria: 
+\textit{Configuratiegemak}, \textit{Documentatie}, \textit{Gebruiksgemak} en \textit{Ondersteuning}. 
+De beoordeling van deze criteria gebeurt aan de hand van feedback van eindgebruikers bij Evolane en mijn persoonlijke ervaring tijdens het configureren van de DLP-regels. 
+De volgende centrale vragen vormen de basis voor de evaluatie van de gebruiksvriendelijkheid:
+
+\begin{itemize}
+    \item \textbf{Configuratiegemak}: Hoe eenvoudig is het om de DLP-regels te configureren?
+    \item \textbf{Documentatie}: Is er voldoende documentatie beschikbaar voor de DLP-regels?
+    \item \textbf{Gebruiksgemak}: Hoe eenvoudig is het om de DLP-regels te gebruiken?
+    \item \textbf{Ondersteuning}: Is er voldoende ondersteuning beschikbaar voor de DLP-regels?
+    \label{sec:gebruiksvriendelijkheid-criteria}
+\end{itemize}
+

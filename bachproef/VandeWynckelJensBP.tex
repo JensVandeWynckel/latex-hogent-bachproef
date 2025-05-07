@@ -23,7 +23,6 @@
 %% import instead:
 % \usepackage[chapter,outputdir=../output]{minted}
 
-
 \usemintedstyle{solarized-light}
 
 %% Formatting for minted environments.
@@ -34,6 +33,54 @@
     linenos,
     tabsize=4
 }
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{custompython}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{teal},
+  commentstyle=\color{gray}\itshape,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  captionpos=b,
+  numbers=left,
+  numberstyle=\tiny,
+}
+
+
+% \usepackage{listings}
+% \usepackage{xcolor}
+
+% \definecolor{codegreen}{rgb}{0,0.6,0}
+% \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+% \definecolor{codepurple}{rgb}{0.58,0,0.82}
+% \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% \lstdefinestyle{mystyle}{
+%     backgroundcolor=\color{backcolour},   
+%     commentstyle=\color{codegreen},
+%     keywordstyle=\color{magenta},
+%     numberstyle=\tiny\color{codegray},
+%     stringstyle=\color{codepurple},
+%     basicstyle=\ttfamily\footnotesize,
+%     breakatwhitespace=false,         
+%     breaklines=true,                 
+%     captionpos=b,                    
+%     keepspaces=true,                 
+%     numbers=left,                    
+%     numbersep=5pt,                  
+%     showspaces=false,                
+%     showstringspaces=false,
+%     showtabs=false,                  
+%     tabsize=2
+% }
+
+% \lstset{style=mystyle}
+
 
 %% Ensure the list of listings is in the table of contents
 \renewcommand\listoflistingscaption{%
@@ -47,14 +94,19 @@
     \listof{listing}{\listoflistingscaption}%
 }
 
-% Other packages not already included can be imported here
+\usepackage[utf8]{inputenc}
+\usepackage{glossaries}
+
+% \makeglossaries
+\input{glossary-preamble}
 
 %%---------- Document metadata -------------------------------------------------
 % TODO: Replace this with your own information
 \author{Jens Van de Wynckel}
 \supervisor{Dhr. T. Desmedt}
 \cosupervisor{Dhr. M. Cremers}
-\title[Optionele ondertitel]%
+% \title[Optionele ondertitel]%
+\title%
     {Ontwikkeling en integratie van een Net\-skope-gebaseerde Data Leakage Prevention (DLP)-oplossing voor vertrouwelijke bedrijfsdata volgens de Belgische regelgeving}
 \academicyear{\advance\year by -1 \the\year--\advance\year by 1 \the\year}
 \examperiod{1}
@@ -98,6 +150,7 @@
 
 \input{voorwoord}
 \input{samenvatting}
+\input{glossary-entries}
 
 %---------- Inhoud, lijst figuren, ... -----------------------------------------
 
@@ -122,6 +175,14 @@
 % hier thuis. Gebruik bijvoorbeeld de ``glossaries'' package.
 % https://www.overleaf.com/learn/latex/Glossaries
 
+% Other packages not already included can be imported here
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\IfLanguageName{dutch}{Lijst van afkortingen}{Glossary}}
+\printglossaries
+
+
 %---------- Kern ---------------------------------------------------------------
 
 \mainmatter{}
@@ -140,7 +201,10 @@
 % vormen. De structuur en titels hangen af van je eigen onderzoek. Je kan bv.
 % elke fase in je onderzoek in een apart hoofdstuk bespreken.
 
-%\input{...}
+\input{risicoanalyse}
+\input{proofofconcept}
+\input{evaluatie}
+\input{resultaten}
 %\input{...}
 %...
 

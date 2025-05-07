@@ -1,6 +1,16 @@
 {
-  "latex-workshop.latex.outDir": "../output",
+//   "latex-workshop.latex.outDir": "../output",
   "latex-workshop.latex.recipes": [
+            {
+            "name": "xelatex ➞ makeglossaries ➞ biber ➞ xelatex× 2",
+            "tools": [
+                "xelatex",
+                "makeglossaries",
+                "biber",
+                "xelatex",
+                "xelatex"
+            ]
+        },   
         {
             "name": "xelatex ➞ biber ➞ xelatex× 2",
             "tools": [
@@ -9,7 +19,7 @@
                 "xelatex",
                 "xelatex"
             ]
-        },
+        },     
         {
             "name": "xelatex× 2",
             "tools": [
@@ -33,7 +43,7 @@
                 "-synctex=1",
                 "-interaction=nonstopmode",
                 "-file-line-error",
-                "-outdir=%OUTDIR%",
+                // "-outdir=%OUTDIR%",
                 "%DOC%"
             ],
             "command": "latexmk",
@@ -45,7 +55,7 @@
                 "-synctex=1",
                 "-interaction=nonstopmode",
                 "-shell-escape",
-                "-output-directory=%OUTDIR%",
+                // "-output-directory=%OUTDIR%",
                 "-file-line-error",
                 "%DOC%"
             ],
@@ -56,12 +66,19 @@
         {
             "args": [
                 "--input-directory=%OUTDIR%",
-                "--output-directory=%OUTDIR%",
+                // "--output-directory=%OUTDIR%",
                 "%DOCFILE%"
             ],
             "command": "biber",
             "env": {},
             "name": "biber"
+        },
+        {
+            "name": "makeglossaries",
+            "command": "makeglossaries",
+            "args": [
+                "%DOCFILE%"
+            ]
         }
     ],
     "latex-workshop.view.pdf.viewer": "tab",
@@ -114,7 +131,7 @@
     "latex-workshop.latex.magic.args": [
         "-synctex=1",
         "-interaction=nonstopmode",
-        "-outputdir=%OUTDIR%",
+        // "-outputdir=%OUTDIR%",
         "-file-line-error",
         "--shell-escape",
         "%DOC%"

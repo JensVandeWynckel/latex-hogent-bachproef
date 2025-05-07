@@ -5,46 +5,178 @@
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}%
 \label{ch:inleiding}
 
-De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
+% Datalekken poseert nu de grootste bedreiging voor industrieen en overheden. Cyberaanvallen, menselijke fouten en misconfiguraties veroorzaken gevoelige informatieverlies en financiele schade.
+% Enkele van de technologieën daarbij zijn Data Loss Prevention (DLP)-oplossingen. Such DLP-tools identify, monitor & beschermen gevoelige gegevens zoals persoonlijke identificeerbare informatie (PII) en betalingsgegevens (PII) tegen ongeautoriseerd gebruik en lekken. De implementatie van DLP-oplossingen is dan ook best practice en vaak wettelijk verplicht door regelgeving als de AVG, de Payment Card Industry Data Security Standards (PCI DSS), de NIS2-richtlijn over netwerk en informatiebeveiliging. Hierdoor zijn DLP-oplossingen essentiële hulpmiddelen om gevoelige informatie te beschermen en de gegevensintegriteit te waarborgen.
 
-\begin{itemize}
-  \item context, achtergrond
-  \item afbakenen van het onderwerp
-  \item verantwoording van het onderwerp, methodologie
-  \item probleemstelling
-  \item onderzoeksdoelstelling
-  \item onderzoeksvraag
-  \item \ldots
-\end{itemize}
+Datalekken zijn tegenwoordig een ernstige bedreiging voor industrieën en overheden. 
+Cyberaanvallen, menselijke fouten en misconfiguraties kunnen leiden tot het verlies van gevoelige informatie. 
+Een van de technologieën dat hierbij kan helpen, zijn Data Loss Prevention (DLP)-oplossingen.
+DLP-tools identificeren, monitoren en beschermen gevoelige gegevens, zoals persoonlijke identificeerbare informatie (PII) en betalingsgegevens (PCI). 
+De implementatie van DLP-oplossingen is niet alleen een best practice, maar vaak ook een wettelijke vereiste onder regelgeving zoals de 
+Algemene Verordening Gegevensbescherming (AVG), de Payment Card Industry Data Security Standards (PCI DSS) en de NIS2-richtlijn voor netwerk- en informatiebeveiliging.
+Hierdoor zijn DLP-oplossingen essentiële hulpmiddelen geworden om gevoelige informatie te beschermen en gegevensintegriteit te waarborgen. 
+In deze bachelorproef zal een DLP-oplossing opgesteld worden voor Evolane, een bedrijf dat zich specialiseert in het optimaliseren en beveiligen van cloud- en enterprise-omgevingen voor organisaties. 
+Evolane is een consultancybedrijf dat klanten helpt bij het implementeren van cloudoplossingen, zoals Akamai, Dynatrace en Netskope. 
+Deze services staan op hun beurt in voor de beveiliging van bedrijfsgegevens en het voorkomen van cyberaanvallen van binnen- en buitenaf. 
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 \label{sec:probleemstelling}
 
-Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's'', systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
+Zoals te zien is in Tabel~\ref{tab:probleemstelling}, zijn er verschillende uitdagingen bij het implementeren van DLP-oplossingen. 
+Voor security engineers bij Evolane is het een uitdaging om DLP-regels correct te implementeren zonder false positives. Hierdoor is het belangrijk om een uitgebreide evaluatieperiode in te lassen om de regels te verfijnen en te optimaliseren. 
+Deze evaluatieperiode wordt verder besproken in de methodologie (Hoofdstuk~\ref{ch:methodologie}). 
+Voor bedrijfsafdelingen bij Evolane is het belangrijk om een veilige manier te hebben om interne en externe communicatie te beheren zonder risico op gegevenslekken. 
+Deze afdelingen zullen tijdens de evaluatieperiode feedback geven over de DLP-regels en de impact op hun workflows. 
+Verder is het belangrijk om de DLP-oplossing gebruiksvriendelijk te maken voor bedrijfsafdelingen bij klanten van Evolane. 
+Zodat gebruikers weten wanneer ze gevoelige data verwerken. Mocht een poging tot datalek plaatsvinden, dan kan de DLP-oplossing dit voorkomen en de gebruiker verwittigen.   
+
+\begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{p{4cm} p{5cm} p{6cm}}
+        \toprule
+        \textbf{Doelgroep} & \textbf{Uitdaging(en)} & \textbf{Impact van de DLP-oplossing} \\
+        \midrule
+        Evolane als organisatie & Veilige manier van interne en externe communicatie zonder risico op datalekken. Feedback mochten gebruikers gevoelige data foutief verwerken. & Zorgt voor naleving van security policies en voorkomt onbedoelde blootstelling van gevoelige data zonder workflows te verstoren. \\
+        Security en Observability Engineers bij Evolane & Het correct implementeren van DLP-regels waarbij sommige gevoelige data niet geblokkeerd mag worden naar klanten toe. & Biedt een Netskope-gebaseerde oplossing met afgestemde DLP-regels en detectiemethoden \\ 
+        Bedrijfsafdelingen bij klanten & Willen datalekken voorkomen zonder bedrijfsprocessen te verstoren & Gebruiksvriendelijke implementatie, waardoor gebruikers weten wanneer ze gevoelige data verwerken en datalekken voorkomen \\
+        IT-afdelingen bij klanten & DLP integreren in bestaande IT-infrastructuur zonder hoge operationele overhead. Aan de hand van weinig kennis Netskope begrijpen en gebruiken. & Eenvoudige implementatie en beheer binnen Netskope. Kunnen rapport opvragen wat DLP tegenhoudt en dit contractueel aanpassen. \\
+        \bottomrule
+    \end{tabular}
+    \caption{Overzicht van de probleemstelling en doelgroep}
+    \label{tab:probleemstelling}
+\end{table}
+
+% \hline
+% Security Engineers bij Evolane & Het correct implementeren van DLP-regels die bedrijfsdata beschermen zonder false positives & Biedt een Netskope-gebaseerde oplossing met afgestemde DLP-regels en detectiemethoden voor hen en voor klanten \\
+% \hline
+% Bedrijfsafdelingen bij Evolane & Behoefte aan een veilige manier om interne en externe communicatie te beheren zonder risico op gegevenslekken & Zorgt voor naleving van security policies en voorkomt onbedoelde blootstelling van gevoelige data zonder workflows te verstoren \\
+% \hline
+% IT-afdelingen bij klanten & DLP integreren in bestaande IT-infrastructuur zonder hoge operationele overhead & Eenvoudige implementatie en beheer binnen Netskope, met monitoring en logging voor compliance en auditing \\
+% \hline
+% Bedrijfsafdelingen bij klanten & Willen datalekken voorkomen zonder bedrijfsprocessen te verstoren & Gebruiksvriendelijke implementatie waardoor gebruikers weten wanneer ze gevoelige data verwerken en datalekken voorkomen \\
+% \hline
+% Compliance Officers & Naleving van regelgeving zoals GDPR, NIS2 en PCI DSS zonder impact op operationele efficiëntie & Geeft inzicht in datastromen en biedt rapportagefunctionaliteiten voor audits en nalevingsevaluaties \\
+% \hline
+
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}%
 \label{sec:onderzoeksvraag}
 
-Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. '' welke tools bestaan er voor deze toepassing? '') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan 
+De centrale vraag van dit onderzoek is: “Hoe kan een op Netskope gebaseerde DLP-oplossing worden ontworpen en geïmplementeerd om vertrouwelijke gegevens te beschermen en te voldoen aan de Belgische regelgeving?”. 
+Vanuit deze hoofdvraag kunnen we een aantal deelvragen afleiden:
+
+\begin{itemize}
+    \item Welke mogelijkheden biedt Netskope's Secure Service Edge (SSE) platform voor Data Leakage Prevention in de context van vertrouwelijke gegevensbescherming?
+    \item Hoe kunnen regelsets en dataclassificatie in Netskope DLP worden afgestemd op de Belgische wetgeving, zoals de AVG en NIS2-richt\-lijn?
+    \item Welke technieken en methoden kunnen worden toegepast om persoons- en betalingsgegevens effectief te detecteren en te beschermen binnen het Net\-skope-platform?
+    \item Hoe kan een Proof of Concept (PoC) voor Netskope DLP worden opgezet in een testomgeving om de effectiviteit van de oplossing te evalueren?
+    \item Welke juridische en technische normen moeten worden meegenomen bij het ontwerpen van een DLP-oplossing voor een Belgische organisatie, en hoe kan Netskope aan deze eisen voldoen?
+\end{itemize}
+
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}%
 \label{sec:onderzoeksdoelstelling}
 
-Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bv.\ om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
+In dit onderzoek wordt een Proof of Concept (PoC) klantomgeving ontwikkeld voor Evolane. 
+In deze omgeving worden zowel confidentiële als niet-confidentiële gegevens verwerkt en opgeslagen. 
+Door een Data Leakage Prevention-oplossing te implementeren, worden deze gegevens beveiligd tegen lekken. De DLP-oplossing moet voldoen aan de Belgische wetgeving, 
+waaronder de Algemene Verordening Gegevensbescherming (AVG) over persoonsgegevens (PII) en de Payment Card Industry Data Security Standards (PCI DSS) met betrekking tot betalingsgegevens (PCI). 
+De DLP-oplossing moet verder rekening houden met de NIS2-richtlijn en andere cybersecuritykaders, zoals het CCB-kader of ISO 27001. 
+De PoC bevat een Netskope-gebaseerde DLP-oplossing die confidentiële gegevens beschermt en voldoet aan de Belgische regelgeving. 
+
+Om een breder inzicht te verkrijgen in de implementatie en optimalisatie van Data Loss Prevention (DLP)-oplossingen, wordt in deze bachelorproef verder onderzocht hoe DLP kan worden toegepast in verschillende contexten en omgevingen. De onderstaande gebieden vormen de focus van dit onderzoek:
+
+\begin{itemize}
+\item \textbf{SaaS} (Software as a Service): DLP-oplossingen richten zich op gegevens in beweging (\textit{Data-in-Motion}), zoals bij het gebruik van forward proxies en bij statische gegevens (\textit{Data-at-Rest}) voor APIs.
+\item \textbf{Web}: Hier wordt DLP toegepast op geëncrypteerd verkeer en voor alle poorten, met focus op gegevens in beweging tussen systemen.
+\item \textbf{IaaS} (Infrastructure as a Service): Net zoals bij SaaS, wordt DLP toegepast op gegevens in beweging en in rust, respectievelijk voor forward proxies en APIs.
+\item \textbf{Email}: Bij het beheren van e-mailverkeer, zoals webmail, richt de uitgewerkte DLP-oplossing zich zowel op gegevens in beweging als op gegevens in rust.
+\item \textbf{Endpoint}: Endpoint Data Loss Prevention (DLP) richt zich op het beschermen van gegevens in gebruik (\textit{Data-in-Use}) door middel van endpointbeveiliging. Dit houdt het volgende in: het monitoren en beperken van gegevensoverdracht via USB-opslagmedia, klemborden, printers en andere externe apparaten.
+\end{itemize}
+
+
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}%
 \label{sec:opzet-bachelorproef}
+
+De rest van deze bachelorproef is als volgt opgebouwd: 
+In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie. 
+In Hoofdstuk~\ref{ch:methodologie} komen de methodologie en de gebruikte onderzoekstechnieken aan bod om een antwoord te kunnen formuleren op de onderzoeksvragen. 
+In Hoofdstuk~\ref{ch:risicoanalyse} wordt een risicoanalyse uitgevoerd om de impact van datalekken en de noodzaak van DLP-oplossingen te onderbouwen. 
+In Hoofdstuk~\ref{ch:proofofconcept} wordt een Proof of Concept (PoC) opgezet om de effectiviteit van de Netskope DLP-oplossing te evalueren. 
+In Hoofdstuk~\ref{ch:evaluatie} wordt de PoC geëvalueerd door gebruikers. 
+In Hoofdstuk~\ref{ch:resultaten} worden de resultaten van het onderzoek besproken en wordt een antwoord geformuleerd op de onderzoeksvragen. 
+In Hoofdstuk~\ref{ch:conclusie} zal tenslotte de conclusie en de toekomstige onderzoeksmogelijkheden binnen dit domein worden besproken. 
+
+% Hoofdstuk 2: Stand van zaken
+% Hoofdstuk 3: Methodologie
+% Hoofdstuk 4: Risicoanalyse
+% Hoofdstuk 5: Proof of Concept
+% Hoofdstuk 6: Evaluatie
+% Hoofdstuk 7: Resultaten
+% Hoofdstuk 8: Conclusie
+
+
+% -----------------------------------------------------------------
+% tabel gebruiken als samenvatting, schematisch overzicht.
+% mis in literatuurstudie: 2.2 netskope, 2.3 dlp oplossingen (3 a 4 oplossingen ) KAN OOK IN Methodologie [NTESKOPE vinkt alles af]
+
+% meetbare criteria, probeer in literatuurstudie te vinden op welke basis je concreet kan maken. (literatuur risk management DLP metriek opstellen hiervan)
+
+% het risicoanalyse bepaalt het nut 
+% het is nuttig om te weten op basis van metriek (3 of 4 mogelijke oplossingen, netskope kan ze allemaal afvinken, de rest minder)
+
+% KPI, welke zijn dat dan? NOG niet gedefinieerd
+% Risicoo analyse ,cijfers onderbouwen (zoek literatuur voor de cijfers van risiscoanalyse)
+
+% references
+
+% ITgovernance ()
+
+% -----------------------------------------------------------------
+% Dit onderzoek focust op het onderzoeken en ontwikkelen van een DLP-oplossing voor Evolane, een bedrijf dat zich specialiseert in het optimaliseren en beveiligen van IT-omgevingen voor organisaties. 
+
+% In dit onderzoek wordt een klantomgeving voor Evolane ontwikkeld. 
+% In deze omgeving worden zowel confidentiële als niet-confidentiële gegevens verwerkt en opgeslagen. 
+% Door een Data Leakage Prevention-oplossing te implementeren, worden deze gegevens beveiligd tegen lekken. De DLP-oplossing moet ook voldoen aan de Belgische wetgeving, 
+% waaronder de Algemene Verordening Gegevensbescherming (AVG) over persoonsgegevens (PII) en de Payment Card Industry Data Security Standards (PCI DSS) met betrekking tot betalingsgegevens (PCI). 
+% De DLP-oplossing moet verder rekening houden met de NIS2-richtlijn en andere cybersecuritykaders, zoals het CCB-kader of ISO 27001. 
+% De centrale vraag van dit onderzoek is dus: “Hoe kan een op Netskope gebaseerde DLP-oplossing worden ontworpen en geïmplementeerd om vertrouwelijke gegevens te beschermen en te voldoen aan de Belgische regelgeving?”. 
+% Vanuit deze hoofdvraag kunnen we een aantal deelvragen afleiden:
+
+% De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. 
+% In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. 
+% Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. 
+% Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
+
+% \begin{itemize}
+%   \item context, achtergrond
+%   \item afbakenen van het onderwerp
+%   \item verantwoording van het onderwerp, methodologie
+%   \item probleemstelling
+%   \item onderzoeksdoelstelling
+%   \item onderzoeksvraag
+%   \item \ldots
+% \end{itemize}
+
+% Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's'', systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
+
+% Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. '' welke tools bestaan er voor deze toepassing? '') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan 
+
+% Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bijv.\ om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
 
 % Het is gebruikelijk aan het einde van de inleiding een overzicht te
 % geven van de opbouw van de rest van de tekst. Deze sectie bevat al een aanzet
 % die je kan aanvullen/aanpassen in functie van je eigen tekst.
 
-De rest van deze bachelorproef is als volgt opgebouwd:
+% De rest van deze bachelorproef is als volgt opgebouwd:
 
-In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie.
+% In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie.
 
-In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
+% In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
 
-% TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk
+% % TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk
 
-In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
+% In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
+

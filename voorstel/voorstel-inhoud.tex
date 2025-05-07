@@ -40,10 +40,15 @@ Vanuit deze hoofdvraag kunnen we een aantal deelvragen afleiden:
 %   \item de onderzoeksdoelstelling
 % \end{itemize}
 
-% Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, een \textbf{casus}. Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, op basis van de huidige kennis in het vakgebied.
-% De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
+% Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, 
+% een \textbf{casus}. Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, 
+% op basis van de huidige kennis in het vakgebied.
+% De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. 
+% Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. 
+% Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
 % Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
-% Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
+% Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? 
+% Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
 
 %---------- Stand van zaken ---------------------------------------------------
 
@@ -205,15 +210,35 @@ zoals het identificeren van gevoelige informatie, het balanceren van de detectie
 
 \subsubsection{Andere relevante wetgeving}%
 
-De onderstaande tabel bevat de belangrijkste wettelijke richtlijnen en uitspraken die relevant zijn voor het ontwerp en de implementatie van een Data Leakage Prevention-oplossing voor Belgische bedrijven.
+De onderstaande tabel \ref{tab:wetgeving_dlp_voorstel} bevat de belangrijkste wettelijke richtlijnen en uitspraken die relevant zijn voor het ontwerp en de implementatie van een Data Leakage Prevention-oplossing voor Belgische bedrijven.
 
-\begin{figure}
-    \centering
-    % \includegraphics[width=.2\textwidth]
-    \includegraphics[scale=0.50]
-    {img/overzicht.png}
-    \caption{\label{fig:overzicht}Overzicht van de belangrijkste wettelijke richtlijnen en uitspraken voor DLP-oplossingen in België.}
-  \end{figure}
+% \begin{figure}
+%     \centering
+%     % \includegraphics[width=.2\textwidth]
+%     \includegraphics[scale=0.50]
+%     {img/overzicht.png}
+%     \caption{\label{fig:overzicht}Overzicht van de belangrijkste wettelijke richtlijnen en uitspraken voor DLP-oplossingen in België.}
+%   \end{figure}
+
+\begin{table}[h]
+  \centering
+  \small
+  \begin{tabular}{p{4cm} p{5cm} p{6cm}}
+      \toprule
+      \textbf{Wetgeving} & \textbf{Doel} & \textbf{Relevantie voor DLP} \\
+      \midrule
+      AVG & Bescherming persoonsgegevens & Dataclassificatie en toegangscontrole \\
+      PCI DSS & Beveiliging van betalingsgegevens & Encryptie en toegangsbeheer \\
+      ISO 27001 & Informatiebeveiliging & Risicoanalyse en ISMS-implementatie \\
+      CCB-framework & Strategie voor cybersecurity België & Aanbevelingen voor risicobeheer \\
+      NIS2 & Beveiliging netwerken en diensten & Incidentrapportage en risicoanalyse \\
+      EU Cybersecurity Act & Certificering van beveiligingstechnologie & DLP-oplossingen certificeren \\
+      Schrems II & Gegevensoverdracht naar niet-EU-landen & Beperking van cloud-gebaseerde opslag \\
+      \bottomrule
+  \end{tabular}
+  \caption{Overzicht van wetgeving en relevantie voor DLP (Voorstel)}
+  \label{tab:wetgeving_dlp_voorstel}
+\end{table}
 
 \subsection{Ethische overwegingen}%
 
