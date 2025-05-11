@@ -424,7 +424,19 @@ Dit zijn toepassingen van de eerder opgestelde regels in Tabel \ref{tab:datatype
 % Via de API werden bestanden gescand op gevoelige informatie op het moment van upload, synchronisatie of delen. 
 % Door middel van policyregels gebaseerd op GDPR- en PCI-profielen werd onder andere het delen van persoonsgegevens en creditcardinformatie geblokkeerd of gelogd.
 
+In de SaaS-omgeving worden cloudapplicaties zoals \textbf{\textit{Slack}}, \textbf{\textit{Microsoft Teams}}, \textbf{\textit{Teamleader}}, 
+\textbf{\textit{Google Drive}}, \textbf{\textit{Jira}} en \textbf{\textit{Confluence}} beveiligd door een combinatie van forward proxy-verkeer en geavanceerde API-integraties binnen Netskope. 
+Deze toepassingen \ref{tab:toepassingen} vallen onder de categorieën \textit{Collaboration}, \textit{Cloud Storage} en \textit{Application Suite} \autocite{Netskope2025API}.
 
+De \textit{\textbf{forward proxy}}-setup zorgt voor real-time controle over gebruikersverkeer, 
+inclusief het scannen van bestanden en berichten tijdens het verzenden of uploaden. 
+Hierdoor wordt data-in-motion onmiddellijk geanalyseerd en geblokkeerd indien nodig.
+
+Via API-integraties worden bestanden en berichten gescand op het moment van upload, synchronisatie of delen \autocite{Netskope2025API}. 
+Zo wordt ook data-at-rest beschermd, bijvoorbeeld bij reeds opgeslagen documenten in Google Drive of bij gedeelde bestanden in Slack-kanalen \autocite{Netskope2022Slack}.
+
+De integraties van deze applicaties met Netskope zijn deels al geïmplementeerd door Evolane. 
+Aangezien de focus van dit onderzoek ligt op de DLP-regels, zal deze integratie niet verder uitgewerkt worden.
 
 \subsection{\IfLanguageName{dutch}{Web}{Web}}
 \label{subsubsec:web-poc}
@@ -438,7 +450,8 @@ Dit zijn toepassingen van de eerder opgestelde regels in Tabel \ref{tab:datatype
 % De Netskope Client zorgde voor real-time handhaving van DLP-beleidsregels op het webverkeer van de eindgebruiker, 
 % inclusief detectie van RRN-nummers, IBANs en gezondheidsgegevens.
 
-\gls{nis2} test \gls{cpu}
+% \gls{nis2} test \gls{cpu}
+
 
 \begin{lstlisting}[language=Python,label={lst:dlp-selenium},caption={Selenium-script voor batchgewijze verzending van testdata}]
     code hier
@@ -509,10 +522,6 @@ Dit zijn toepassingen van de eerder opgestelde regels in Tabel \ref{tab:datatype
 % In deze omgeving werd gecontroleerd op het onbedoeld delen van gevoelige bestanden of configuraties, 
 % zoals exports van databases met persoonsgegevens. Met behulp van aangepaste DLP-profielen werd onder meer detectie uitgevoerd op Belgische identiteitsnummers en medische gegevens. 
 % Incidentmeldingen werden gelogd conform de NIS2-verplichtingen.
-
-
-
-
 
 
 \subsection{\IfLanguageName{dutch}{Email}{Email}}

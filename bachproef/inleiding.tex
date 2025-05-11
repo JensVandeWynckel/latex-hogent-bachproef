@@ -10,14 +10,16 @@
 
 Datalekken zijn tegenwoordig een ernstige bedreiging voor industrieën en overheden. 
 Cyberaanvallen, menselijke fouten en misconfiguraties kunnen leiden tot het verlies van gevoelige informatie. 
-Een van de technologieën dat hierbij kan helpen, zijn Data Loss Prevention (DLP)-oplossingen.
-DLP-tools identificeren, monitoren en beschermen gevoelige gegevens, zoals persoonlijke identificeerbare informatie (PII) en betalingsgegevens (PCI). 
+Een van de technologieën dat hierbij kan helpen, zijn Data Loss Prevention (\gls{dlp})-oplossingen.
+DLP-tools identificeren, monitoren en beschermen gevoelige gegevens, zoals persoonlijke identificeerbare informatie (\gls{pii}) en betalingsgegevens (\gls{pci}). 
 De implementatie van DLP-oplossingen is niet alleen een best practice, maar vaak ook een wettelijke vereiste onder regelgeving zoals de 
-Algemene Verordening Gegevensbescherming (AVG), de Payment Card Industry Data Security Standards (PCI DSS) en de NIS2-richtlijn voor netwerk- en informatiebeveiliging.
+Algemene Verordening Gegevensbescherming (\gls{avg}), de Payment Card Industry Data Security Standards (\gls{pcidss}) en de \gls{nis2}-richtlijn voor netwerk- en informatiebeveiliging.
 Hierdoor zijn DLP-oplossingen essentiële hulpmiddelen geworden om gevoelige informatie te beschermen en gegevensintegriteit te waarborgen. 
 In deze bachelorproef zal een DLP-oplossing opgesteld worden voor Evolane, een bedrijf dat zich specialiseert in het optimaliseren en beveiligen van cloud- en enterprise-omgevingen voor organisaties. 
-Evolane is een consultancybedrijf dat klanten helpt bij het implementeren van cloudoplossingen, zoals Akamai, Dynatrace en Netskope. 
+Evolane is een consultancybedrijf dat klanten helpt bij het implementeren van cloudoplossingen, zoals \textit{Akamai}, \textit{Dynatrace} en \textit{Netskope}. 
 Deze services staan op hun beurt in voor de beveiliging van bedrijfsgegevens en het voorkomen van cyberaanvallen van binnen- en buitenaf. 
+
+\textbf{Mark: een stukje opnemen over ransomware, welke vooral gericht is op illegaal verkregen bedrijfsdata, oftewel data leakage. Dit is het verdienmodel, zoveel en zo gevoelig mogelijke data verkrijgen. }
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 \label{sec:probleemstelling}
@@ -47,6 +49,9 @@ Zodat gebruikers weten wanneer ze gevoelige data verwerken. Mocht een poging tot
     \label{tab:probleemstelling}
 \end{table}
 
+\textbf{Praat nog over Sales != Security.}
+\textbf{aanleiding van het onderzoek 'dus niet alleen evolane' Wat was trigger} 
+
 % \hline
 % Security Engineers bij Evolane & Het correct implementeren van DLP-regels die bedrijfsdata beschermen zonder false positives & Biedt een Netskope-gebaseerde oplossing met afgestemde DLP-regels en detectiemethoden voor hen en voor klanten \\
 % \hline
@@ -67,8 +72,8 @@ De centrale vraag van dit onderzoek is: “Hoe kan een op Netskope gebaseerde DL
 Vanuit deze hoofdvraag kunnen we een aantal deelvragen afleiden:
 
 \begin{itemize}
-    \item Welke mogelijkheden biedt Netskope's Secure Service Edge (SSE) platform voor Data Leakage Prevention in de context van vertrouwelijke gegevensbescherming?
-    \item Hoe kunnen regelsets en dataclassificatie in Netskope DLP worden afgestemd op de Belgische wetgeving, zoals de AVG en NIS2-richt\-lijn?
+    \item Welke mogelijkheden biedt Netskope's Secure Service Edge (\gls{sse}) platform voor Data Leakage Prevention in de context van vertrouwelijke gegevensbescherming?
+    \item Hoe kunnen regelsets en dataclassificatie in Netskope DLP worden afgestemd op de Belgische wetgeving, zoals de \gls{avg} en \gls{nis2}-richt\-lijn?
     \item Welke technieken en methoden kunnen worden toegepast om persoons- en betalingsgegevens effectief te detecteren en te beschermen binnen het Net\-skope-platform?
     \item Hoe kan een Proof of Concept (PoC) voor Netskope DLP worden opgezet in een testomgeving om de effectiviteit van de oplossing te evalueren?
     \item Welke juridische en technische normen moeten worden meegenomen bij het ontwerpen van een DLP-oplossing voor een Belgische organisatie, en hoe kan Netskope aan deze eisen voldoen?
@@ -81,16 +86,16 @@ Vanuit deze hoofdvraag kunnen we een aantal deelvragen afleiden:
 In dit onderzoek wordt een Proof of Concept (PoC) klantomgeving ontwikkeld voor Evolane. 
 In deze omgeving worden zowel confidentiële als niet-confidentiële gegevens verwerkt en opgeslagen. 
 Door een Data Leakage Prevention-oplossing te implementeren, worden deze gegevens beveiligd tegen lekken. De DLP-oplossing moet voldoen aan de Belgische wetgeving, 
-waaronder de Algemene Verordening Gegevensbescherming (AVG) over persoonsgegevens (PII) en de Payment Card Industry Data Security Standards (PCI DSS) met betrekking tot betalingsgegevens (PCI). 
-De DLP-oplossing moet verder rekening houden met de NIS2-richtlijn en andere cybersecuritykaders, zoals het CCB-kader of ISO 27001. 
+waaronder de Algemene Verordening Gegevensbescherming (\gls{avg}) over persoonsgegevens (\gls{pii}) en de \gls{pcidss} met betrekking tot betalingsgegevens (\gls{pci}). 
+De DLP-oplossing moet verder rekening houden met de \gls{nis2}-richtlijn en andere cybersecuritykaders, zoals het CCB-kader of \gls{iso}. 
 De PoC bevat een Netskope-gebaseerde DLP-oplossing die confidentiële gegevens beschermt en voldoet aan de Belgische regelgeving. 
 
 Om een breder inzicht te verkrijgen in de implementatie en optimalisatie van Data Loss Prevention (DLP)-oplossingen, wordt in deze bachelorproef verder onderzocht hoe DLP kan worden toegepast in verschillende contexten en omgevingen. De onderstaande gebieden vormen de focus van dit onderzoek:
 
 \begin{itemize}
-\item \textbf{SaaS} (Software as a Service): DLP-oplossingen richten zich op gegevens in beweging (\textit{Data-in-Motion}), zoals bij het gebruik van forward proxies en bij statische gegevens (\textit{Data-at-Rest}) voor APIs.
+\item \textbf{\gls{saas}} (Software as a Service): DLP-oplossingen richten zich op gegevens in beweging (\textit{Data-in-Motion}), zoals bij het gebruik van forward proxies en bij statische gegevens (\textit{Data-at-Rest}) voor APIs.
 \item \textbf{Web}: Hier wordt DLP toegepast op geëncrypteerd verkeer en voor alle poorten, met focus op gegevens in beweging tussen systemen.
-\item \textbf{IaaS} (Infrastructure as a Service): Net zoals bij SaaS, wordt DLP toegepast op gegevens in beweging en in rust, respectievelijk voor forward proxies en APIs.
+\item \textbf{\gls{iaas}} (Infrastructure as a Service): Net zoals bij \gls{saas}, wordt DLP toegepast op gegevens in beweging en in rust, respectievelijk voor forward proxies en APIs.
 \item \textbf{Email}: Bij het beheren van e-mailverkeer, zoals webmail, richt de uitgewerkte DLP-oplossing zich zowel op gegevens in beweging als op gegevens in rust.
 \item \textbf{Endpoint}: Endpoint Data Loss Prevention (DLP) richt zich op het beschermen van gegevens in gebruik (\textit{Data-in-Use}) door middel van endpointbeveiliging. Dit houdt het volgende in: het monitoren en beperken van gegevensoverdracht via USB-opslagmedia, klemborden, printers en andere externe apparaten.
 \end{itemize}

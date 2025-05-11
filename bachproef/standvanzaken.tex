@@ -30,14 +30,15 @@ Om te voldoen aan de PCI DSS-norm (Payment Card Industry Data Security Standard)
 moeten organisaties strenge maatregelen implementeren om deze kaartgegevens te beveiligen. 
 Bedrijven die persoonlijk identificeerbare informatie (PII) en PCI-data verwerken lopen het risico op zware sancties als deze gegevens niet voldoende beschermd worden.
 
-\subsection{Gegevensverlies detectie methoden}
+\subsection{Detectie methoden voor gegevensverlies}
 
 Identificatiemiddelen worden gebruikt om gevoelige informatie, zoals PII en PCI, te detecteren. 
 Dit gebeurt op basis van reguliere expressies (regex). 
 Regex is een krachtig hulpmiddel dat DLP helpt specifieke gegevenstypen te herkennen door middel van uitdrukkingen, termen en patronen, 
 zoals \texttt{BE\textbackslash d\{2\}\textbackslash s?\textbackslash d\{4\}\textbackslash s?\textbackslash d\{4\}\-\textbackslash s?\textbackslash d\{4\}} 
-dat kan dienen voor Belgische IBAN-codes. Hoewel dit patroon effectief is voor standaard IBAN-formaten, kan het worden omzeild door een karakter toe te voegen in de invoer, 
-wat de nood benadrukt van extra controles. 
+dat kan dienen voor Belgische IBAN-codes. 
+Hoewel dit patroon effectief is voor standaard IBAN-formaten, 
+kan het worden omzeild door een karakter toe te voegen in de invoer, wat het belang benadrukt van extra controles. 
 
 De aangemaakte identificatie voor confidentiële gegevens moet voldoen aan de volgende richtlijnen:
 
@@ -55,12 +56,14 @@ Het houdt bij hoe de confidentiële data wordt opgeslagen en verplaatst/verwerkt
 \subsection{\IfLanguageName{dutch}{Regelsets}{Rule sets}}
 \label{subsec:regelsets-literatuurstudie}
 
-De regelsets binnen Netskope zijn de focus van dit onderzoek. En bestaan uit een combinatie van verschillende identificatiemethoden, zoals beschreven in de documentatie van \textcite{Netskope2025DLP}. 
-Deze identificatoren of ook entiteiten genoemd, zijn de bouwstenen van de DLP-regels en vormen samen een regelset. 
+De regelsets binnen Netskope zijn de focus van dit onderzoek. Deze bestaan uit een combinatie van verschillende identificatiemethoden, zoals beschreven in de documentatie van \textcite{Netskope2025DLP}. 
+Deze identificatoren of ook entiteiten genoemd, zijn de basis van DLP-regels en vormen samen een regelset. 
 Meerdere regelsets kunnen worden gedefinieerd binnen een profiel \autocite{Netskope2025Profiles}.
 
 
 % A DLP profile is a collection of predefined or custom DLP rules, classifiers, and custom fingerprint rules. If any of the rules or classifiers match the content, then the DLP profile flags the content as a policy violation. Using predefined profiles let you start evaluating loss of critical data in the cloud immediately. Creating new DLP profiles and rules enables you to refine custom methods of prevention. For insight about building custom DLP profiles and rules, see DLP Best Practices Runbook.
+
+\textbf{Tabel naar Nederlands}
 
 {\small
 \begin{itemize}
@@ -134,15 +137,6 @@ Deze aangepaste entiteiten zullen vooral bestaan uit 'Exact Match', aangezien re
 % \label{subsec:fingerprint-literatuurstudie}
 
 % MOCHT IK FINGERPRINTS GEBRUIKEN, DAN ZAL IK DIT VERDER AANVULLEN
-
-\subsection{False Positives}
-\label{sec:false-positives-literatuurstudie}
-
-False positives ontstaan wanneer het DLP-syst\-eem onterecht normale gegevens als confidentieel identificeert. 
-Dit kan leiden tot onnodige waarschuwingen en vertragingen in de bedrijfsprocessen. 
-Om false positives te vermijden, kan in Netskope bij custom identifiers worden aangegeven dat een bepaald keyword in de buurt moet staan, zoals `RRN' of `Rijksregisternummer'. 
-Hierdoor ziet Netskope het niet als een match of zal het een lagere vertrouwheidsscore geven. 
-
 \subsection{Detectienauwkeurigheid}
 \label{sec:detectienauwkeurigheid-literatuurstudie}
 
@@ -156,6 +150,12 @@ wat nodig is voor het verminderen van false positives en false negatives.
 Om deze nauwkeurigheid te verhogen, kunnen regelsets aangepast worden aan nieuwe typen confidentiële data of veranderende bedrijfsprocessen.
 In deze proof-of-concept wordt de detectienauwkeurigheid beoordeeld door de verhouding tussen true positives, false positives, 
 false negatives en true negatives, samengevat in een Confusion Matrix \autocite{Microsoftn.d.}.
+Bij de evaluatie van de detectienauwkeurigheid wordt er gebruik gemaakt van generieke datasets, zoals de \textit{Enron Email Dataset} en de \textit{CICIDS 2017} dataset.
+
+% Voor de validatie van de detectienauwkeurigheid dient een Belgische of Europese dataset als uitgangspunt. Voor testdoeleinden komen echter ook generieke datasets aan bod, die niet specifiek gericht zijn op de Europese context.
+% Bij de evaluatie van de detectieprestaties fungeert een Belgische of Europese dataset als referentiepunt. Ter ondersteuning van de testfase worden daarnaast diverse algemene datasets ingezet, die niet noodzakelijk gericht zijn op Europese regelgeving of datatypes, maar wel geschikt zijn om de robuustheid van het systeem in bredere contexten te toetsen.
+
+% In dit onderzoek zal gebruikt gemaakt worden van een bepaalde Europese/ Belgische dataset, maar om te testen worden verschillende datasets gebruikt, niet specifiek voor Europa
 
 \subsection{Systeemimpact}
 \label{sec:systeemimpact-literatuurstudie}
@@ -213,7 +213,7 @@ zoals te zien in Figuur \ref{fig:netskope}.
 Toen waren ze volgens \textcite{Hille2018} nog relatief onder de radar, maar met een zeer aantrekkelijk productaanbod. 
 Dit aanbod is sindsdien verder uitgebreid en omvat nu een breed assortiment aan functies die zijn ontworpen om cloudarchitecturen te beschermen. 
 
-In de meest recente Magic Quadrant voor Security Service Edge (SSE) positioneert Gartner Netskope opnieuw als Leader, zoals te zien in Figuur \ref{fig:netskope2024}.
+In de meest recente Magic Quadrant voor Security Service Edge (SSE) positioneert Gartner Netskope opnieuw als Leader, zoals weergegeven in Figuur \ref{fig:netskope2024}.
 
 \begin{figure}[h]
     \centering
@@ -264,6 +264,126 @@ In de meest recente Magic Quadrant voor Security Service Edge (SSE) positioneert
 %     \caption{Vergelijking van DLP-oplossingen per factor}
 %     \label{tab:netskope}
 % \end{table}
+
+% Een belangrijke uitdaging bij het implementeren van een Data Loss Prevention (DLP)-oplossing is het omgaan met false positives. 
+% Een false positive doet zich voor wanneer een legitieme handeling onterecht als een beveiligingsincident wordt aangeduid. 
+% Dit kan leiden tot operationele vertragingen, frustratie bij eindgebruikers en een verlaagde efficiëntie van het systeem. 
+% In het geval van Netskope kan een verkeerd geclassificeerd bestand – 
+% bijvoorbeeld een legitiem gedeeld rapport dat persoonlijke namen bevat – leiden tot een geblokkeerde workflow of onnodige escalaties.
+
+% Volgens Olateju et al. (2024) vormen false positives een bijzonder knelpunt in AI-gedreven anomaliedetectiesystemen. 
+% Hun studie benadrukt hoe een oversensitieve configuratie de nauwkeurigheid verlaagt en tot alertmoeheid leidt bij analisten, 
+% wat het risico verhoogt dat echte incidenten over het hoofd worden gezien . 
+% Ze stellen tevens dat fine-tuning en continue validatie van modellen essentieel zijn voor het behoud van een werkbare balans tussen veiligheid en gebruiksgemak .
+
+% Ook Lukas (2023) wijst op de uitdagingen van false positives in taalmodellen die worden toegepast in beveiligingscontexten. 
+% Zijn onderzoek toont aan dat modellen soms irrelevante of niet-gevoelige informatie als "gevoelig" classificeren, wat leidt tot valse alarmen. 
+% Dit is vooral problematisch wanneer DLP-oplossingen gebruik maken van machine learning voor patroonherkenning in natuurlijke taal – 
+% iets wat in moderne platforms zoals Netskope steeds vaker het geval is.
+
+% Om deze problematiek te verhelpen, zijn meerdere technieken noodzakelijk:
+% Training op domeinspecifieke datasets, zodat modellen context beter begrijpen.
+% Gebruik van meerdere detection layers, bijvoorbeeld reguliere expressies in combinatie met ML-gebaseerde detectie.
+% Feedback loops, waarin meldingen door gebruikers worden bevestigd of tegengesproken om toekomstige detecties te verbeteren.
+% Threshold management, om de gevoeligheid van detectie af te stemmen op bedrijfsbehoeften.
+% De balans tussen beveiliging en bruikbaarheid is cruciaal: een te strikte configuratie leidt tot hinder, terwijl een te lakse aanpak risico’s creëert. Netskope biedt hier mogelijkheden tot fijnmazige afstelling, onder andere via confidence levels, policy exceptions en custom DLP rules.
+% Kortom, false positives zijn onvermijdelijk in elk geautomatiseerd detectiesysteem, maar door een combinatie van techniek, feedbackmechanismen en zorgvuldig beheer kan hun impact sterk beperkt worden.
+
+% In het onderzoek van Lukas (2023) wordt dieper ingegaan op de problematiek van false positives bij het gebruik van taalmodellen binnen beveiligingscontexten, zoals bij Data Loss Prevention (DLP). Zijn analyse wijst uit dat deze modellen vaak geneigd zijn om ook niet-gevoelige of contextueel irrelevante informatie verkeerd te classificeren als “gevoelig”. Deze overdetectie is problematisch, vooral wanneer modellen op natuurlijke taal getraind zijn en in productieomgevingen zoals Netskope DLP ingezet worden .
+
+% Concreet stelt Lukas dat deze false positives voortkomen uit:
+% Overmatige generalisatie van patronen: Het taalmodel associeert bepaalde woordcombinaties (zoals e-mailadressen of namen) automatisch met gevoeligheid, zonder voldoende contextuele verificatie.
+% Gebrek aan semantisch onderscheid: De modellen begrijpen onvoldoende het verschil tussen bv. een fictieve naam in een handleiding versus een echte naam in een medisch verslag.
+% Bias in trainingsdata: Als de trainingsgegevens oververtegenwoordigd zijn met bepaalde formats of types van informatie, zal het model die patronen als gevoelig beschouwen, ook als dat in de praktijk niet klopt.
+% Om deze problematiek te verhelpen, beveelt het onderzoek meerdere technieken aan:
+% Context-aware classificatie: In plaats van alleen naar entiteit-types te kijken (zoals "e-mailadres"), moet ook de semantische en syntactische context meewegen.
+% Feedback-loops met menselijke evaluatie: Door gebruikers meldingen te laten beoordelen (correct / fout), kan het model bijgestuurd worden.
+% Hybride benaderingen: Combinatie van patroon-gebaseerde detectie (regex, heuristieken) en ML om precisie te verhogen.
+% Confidence scoring en drempels: Enkel waarschuwingen genereren als het model een hoge mate van zekerheid heeft.
+
+\section{False Positives}
+\label{sec:false-positives-literatuurstudie}
+
+False positives bij een DLP-systeem ontstaan wanneer legitieme gegevens onterecht als confidentieel worden geclassificeerd.
+Dit kan leiden tot  \textit{\textbf{onnodige waarschuwingen}}, \textit{\textbf{vertragingen in bedrijfsprocessen}} en \textit{\textbf{frustratie bij eindgebruikers}}. 
+% Bij overmatige false positives kunnen gebruikers belangrijke waarschuwingen negeren, wat leidt tot \textit{\textbf{alertmoeheid}}.
+\textcite{Lukas2023} legt uit dat dit probleem vooral voorkomt in systemen die gebruik maken van machine learning (\gls{ml}) en natuurlijke taalverwerking (\gls{nlp}). 
+Dit komt doordat deze systemen vaak niet in staat zijn om de context van gegevens correct te interpreteren, wat leidt tot onjuiste classificaties.
+Concreet stelt \textcite{Lukas2023} dat deze false positives vooral voorkomen door:
+
+\begin{itemize}
+    \item \textbf{Overmatige generalisatie van patronen}: Het taalmodel associeert bepaalde woordcombinaties, zoals e-mailadressen of namen, automatisch met gevoeligheid, zonder voldoende contextuele verificatie.
+    \item \textbf{Gebrek aan semantisch onderscheid}: De modellen begrijpen onvoldoende het verschil tussen bv. een fictieve naam in een handleiding versus een echte naam in een medisch verslag.
+   \item \textbf{Bias in trainingsdata}: Als de trainingsgegevens oververtegenwoordigd zijn met bepaalde formats of types van informatie, zal het model die patronen als gevoelig beschouwen, ook als dat in de praktijk niet klopt.
+\end{itemize}
+
+\textcite{Olateju2024} stelt vast dat DLP-systemen gemiddeld een false positive-percentage van 4\% tot 5\% vertonen, zelfs bij gebruik van geavanceerde deep learning-algoritmen.
+Dit lijkt misschien beperkt, maar in grote organisaties of cloudomgevingen met duizenden datatransacties per dag kan dit resulteren in een aanzienlijke hoeveelheid foutieve waarschuwingen.
+
+
+
+% De gevolgen zijn niet louter technisch van aard. 
+% False positives leiden tot toegenomen werkdruk voor beveiligingsteams, 
+% vertraging van workflows en verminderde gebruikersbetrokkenheid. 
+% In het ergste geval ontstaat alertmoeheid, waarbij echte beveiligingsincidenten over het hoofd worden gezien omdat gebruikers of
+% analisten gewend raken aan irrelevante meldingen. Dit vergroot het risico op datalekken en non-compliance met wetgeving zoals GDPR of PCI DSS.
+
+% Hoewel volledige eliminatie van false positives onrealistisch is, 
+% zijn er diverse manieren om hun impact te beperken. 
+% Dit kan via contextuele classificatie, hybride detectiemethoden, 
+% en het integreren van gebruikersfeedback in het leerproces van modellen. 
+% Moderne platforms zoals Netskope bieden daarnaast concrete instellingen om detectiegevoeligheid te beheren via confidence scores, 
+% policy exceptions en maatwerkregels. 
+% Door technische, menselijke en beleidsmatige maatregelen te combineren, kan een werkbare balans worden gevonden tussen beveiliging en gebruiksgemak.
+
+
+
+% False positives ontstaan wanneer een DLP-systeem onterecht normale gegevens als confidentieel identificeert. 
+% Dit kan leiden tot onnodige waarschuwingen en vertragingen in de bedrijfsprocessen.
+% Om false positives te vermijden, kan in Netskope bij custom identifiers worden aangegeven dat een bepaald keyword in de buurt moet staan, zoals `RRN' of `Rijksregisternummer'. 
+% Hierdoor ziet Netskope het niet als een match of zal het een lagere vertrouwheidsscore geven.
+% \autocite{Lukas2023}
+
+
+% In sectoren zoals de publieke sector en cloud service providers worden grote hoeveelheden gevoelige gegevens verwerkt, w
+% aaronder persoonsgegevens (PII) en betalingsgegevens (PCI). 
+% Om deze data te beschermen worden Data Leakage Prevention (DLP)-systemen ingezet die gebruikmaken van AI en machine learning om potentieel 
+% ongewenste gegevensoverdracht te detecteren. Ondanks technologische vooruitgang kampen deze systemen met een gemiddeld false positive-percentage 
+% van circa 4{,}23\%~\cite{detectionaccuracy}. Dit betekent dat een aanzienlijk deel van de gegenereerde waarschuwingen onterecht is, wat verstrekkende
+% gevolgen kan hebben voor operationele processen en compliance.
+
+% \subsection{Concreet effect van false positives}
+% De aanwezigheid van false positives heeft meerdere negatieve effecten:
+
+% \begin{itemize}
+%     \item \textbf{Vertraging van workflows}: Valse meldingen onderbreken bedrijfsprocessen, omdat elke waarschuwing handmatig moet worden gevalideerd. In omgevingen met hoge volumes, zoals overheidsinstanties, leidt dit tot significante vertragingen.
+%     \item \textbf{Toegenomen werkdruk}: Security teams worden geconfronteerd met een verhoogde werklast. Onterechte waarschuwingen vergen tijd en middelen die anders besteed zouden worden aan het behandelen van daadwerkelijke incidenten.
+%     \item \textbf{Gebruikersfrustratie en verminderde betrouwbaarheid}: Wanneer eindgebruikers regelmatig geconfronteerd worden met valse alarmen, kan dit leiden tot frustratie, verminderde acceptatie van het systeem, en in sommige gevallen zelfs het negeren van belangrijke waarschuwingen (alert fatigue).
+%     \item \textbf{Compliance- en veiligheidsrisico's}: Overmatige false positives kunnen ervoor zorgen dat echte datalekken over het hoofd worden gezien. Dit vergroot het risico op non-compliance met regelgeving zoals GDPR of PCI DSS, en kan ernstige gevolgen hebben voor de organisatie.
+% \end{itemize}
+
+
+
+
+
+% Binnen cloudomgevingen en de publieke sector zijn de gevolgen van false positives extra problematisch vanwege de schaal en gevoeligheid van de verwerkte gegevens.
+% Hoewel sommige recente studies verbeteringen rapporteren in detectienauwkeurigheid door het gebruik van deep learning 
+% (bijv. 3{,}90\% false positives versus 4{,}35\% bij decision trees~\cite{detectionaccuracy}), ligt de focus in de literatuur hoofdzakelijk op technische performance metrics.
+
+% Er is opvallend weinig onderzoek dat zich richt op de operationele impact van deze valse meldingen. 
+% Factoren zoals workflowvertraging, menselijke belasting en verminderde gebruikersvertrouwen worden zelden gekwantificeerd, ondanks hun potentiële invloed op de effectiviteit van DLP-systemen.
+
+% \subsection{Onderzoeksnoden en aanbevelingen}
+
+% Deze lacune in de literatuur onderstreept de nood aan meer contextueel onderzoek, met focus op:
+
+% \begin{itemize}
+%     \item Het kwantificeren van de operationele impact van false positives in praktijksituaties.
+%     \item Het betrekken van eindgebruikers en security professionals in kwalitatieve analyses (zoals casestudies of interviews).
+%     \item Het ontwikkelen van verbeterde validatie- en feedbackmechanismen binnen DLP-workflows.
+% \end{itemize}
+% Toekomstig onderzoek zou de brug moeten slaan tussen technische prestatieverbeteringen en hun reële effect op organisaties. 
+% Dit is essentieel om het vertrouwen in DLP-systemen te versterken en de bescherming van PII- en PCI-gegevens in gevoelige sectoren duurzaam te garanderen.
 
 
 
@@ -370,46 +490,34 @@ Deze regelsets moeten niet alleen voldoen aan de wettelijke vereisten, maar ook 
 Om monitoring van data en gebruikersgedrag te minimaliseren, 
 zal de implementatie van de DLP-oplossing specifiek gericht zijn op het beschermen van gevoelige gegevens en het voorkomen van datalekken. 
 
+Tijdens het vak \textit{IT Professional \& Career Orientation (ITPCO)} kwam het belang van ethische en juridische aspecten binnen informatieveiligheid uitgebreid aan bod. 
+Gastspreker \textcite{SoficoGuestLecture2024} van \textit{Sofico} presenteerde een overzicht van hoe een internationaal bedrijf dat softwareoplossingen ontwikkelt voor autofinanciering, 
+leasing, fleetmanagement en mobiliteitsbeheer, privacy en compliance structureel integreert in zijn processen \autocite{SoficoGuestLecture2024}. 
+Het gastcollege behandelde onder meer fysieke beveiligingsmaatregelen, toegangsbeheer tot ontwikkelomgevingen en de inzet van white hat hackers voor het identificeren van kwetsbaarheden.
+De organisatie gebruikt principes zoals \textit{Privacy by Design} en \textit{Security by Design} binnen de volledige ontwikkeling en implementatie van software. 
+Deze principes staan in lijn met de \gls{avg} en \gls{iso} normen, waarbij de focus ligt op het minimaliseren van gegevensverwerking en het behouden van de privacy van gebruikers.
+De inzichten van Sofico zijn rechtstreeks van toepassing op dit onderzoek.
+\textit{Privacy by Design} en \textit{Security by Design} zijn namelijk gericht op minimale gegevensverwerking, transparantie, logging en traceerbaarheid. 
+Binnen \textcite{Netskope2024PrivByDesign} worden deze principes toegepast via \textit{\textbf{in-memory verwerking}}, \textit{\textbf{gegevensobfuscatie}}, \textit{\textbf{klantgecontroleerde datalokalisatie}} en \textit{\textbf{uitgebreide transactie-logging}}.
 
-% % Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
+% Tijdens het vak \textit{IT Professional \& Career Orientation (ITPCO)} werd aandacht besteed aan de ethische, 
+% juridische en organisatorische aspecten van gegevensverwerking en informatieveiligheid. 
+% Deze inzichten zijn rechtstreeks van toepassing op dit onderzoek, 
+% dat zich toespitst op de implementatie van een DLP-oplossing binnen een cloud- en compliancegevoelige omgeving.
 
-% % Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz.\ naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin (narratieve referentie), gebruik je \texttt{$\backslash${}textcite\{\}}. Soms is de auteursnaam niet expliciet een onderdeel van de zin, dan gebruik je \texttt{$\backslash${}autocite\{\}} (referentie tussen haakjes). Dit gebruik je bijv. bij een citaat, of om in het bijschrift van een overgenomen afbeelding, broncode, tabel, enz. te verwijzen naar de bron. In de volgende paragraaf een voorbeeld van elk.
+% Een bijzonder waardevol onderdeel van het vak was het gastcollege door een medewerker van Sofico, 
+% een internationaal softwarebedrijf actief binnen de automotive-sector. 
+% Dit college illustreerde hoe bedrijven zoals Sofico concreet omgaan met databeveiliging, 
+% toegangsbeheer en regelgeving zoals de AVG en ISO/IEC 27001. De spreker benadrukte onder andere het belang van:
 
-% % \textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
+% \begin{itemize}
+%   \item \textbf{Data Classification en Secure Development:} het correct classificeren en beveiligen van data over de volledige softwareontwikkelingscyclus, conform het principe van \textit{Privacy by Design}.
+%   \item \textbf{Datalekken en verantwoordelijkheden:} een datalek moet binnen 24 uur gemeld worden aan de bevoegde autoriteiten (zoals de GBA in België). Hiervoor zijn rollen zoals de \textit{Data Protection Officer (DPO)} essentieel.
+%   \item \textbf{\gls{iso}-certificatie:} organisaties worden via deze norm verplicht om informatieveiligheid systematisch aan te pakken. Topics zoals thuiswerken, wachtwoordbeheer, netwerkstructuren en leveranciersbeheer worden hierbij geëvalueerd.
+% \end{itemize}
 
-% % Let er ook op: het \texttt{cite}-commando voor de punt, dus binnen de zin. Je verwijst meteen naar een bron in de eerste zin die erop gebaseerd is, dus niet pas op het einde van een paragraaf.
-
-% % \begin{figure}
-% %   \centering
-% %   \includegraphics[width=0.8\textwidth]{grail.jpg}
-% %   \caption[Voorbeeld figuur.]{\label{fig:grail}Voorbeeld van invoegen van een figuur. Zorg altijd voor een uitgebreid bijschrift dat de figuur volledig beschrijft zonder in de tekst te moeten gaan zoeken. Vergeet ook je bronvermelding niet!}
-% % \end{figure}
-
-% % \begin{listing}
-% %   \begin{minted}{python}
-% %     import pandas as pd
-% %     import seaborn as sns
-
-% %     penguins = sns.load_dataset('penguins')
-% %     sns.relplot(data=penguins, x="flipper_length_mm", y="bill_length_mm", hue="species")
-% %   \end{minted}
-% %   \caption[Voorbeeld codefragment]{Voorbeeld van het invoegen van een codefragment.}
-% % \end{listing}
-
-% % \lipsum[7-20]
-
-% % \begin{table}
-% %   \centering
-% %   \begin{tabular}{lcr}
-% %     \toprule
-% %     \textbf{Kolom 1} & \textbf{Kolom 2} & \textbf{Kolom 3} \\
-% %     $\alpha$         & $\beta$          & $\gamma$         \\
-% %     \midrule
-% %     A                & 10.230           & a                \\
-% %     B                & 45.678           & b                \\
-% %     C                & 99.987           & c                \\
-% %     \bottomrule
-% %   \end{tabular}
-% %   \caption[Voorbeeld tabel]{\label{tab:example}Voorbeeld van een tabel.}
-% % \end{table}
-
+% Deze inzichten waren bijzonder relevant gezien mijn bachelorproef een DLP-oplossing onderzoekt die PII/PCI-gegevens in de cloud moet beschermen. 
+% Vanuit ethisch oogpunt is het cruciaal om dataminimalisatie, transparantie en toestemming (\textit{lawfulness, fairness, transparency}) 
+% centraal te plaatsen in zowel ontwerp als configuratie. 
+% Daarnaast vormde het college een reflectiemoment: in welke mate houdt mijn stagebedrijf zelf rekening met deze normen en 
+% is het bewust van certificeringsvereisten zoals ISO/IEC 27001?
