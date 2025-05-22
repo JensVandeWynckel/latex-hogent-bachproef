@@ -32,16 +32,16 @@ de bedrijfsomgeving van Evolane. De onderzoeksmethode is een combinatie van een 
 
 \section{Literatuurstudie}%
 
-Het onderzoek begint met een uitgebreide literatuurstudie naar bestaande DLP-oplossingen, Netskope's Secure Service Edge (SSE) platform en de relevante Belgische en Europese wetgevingen. 
+Het onderzoek begint met een uitgebreide literatuurstudie naar bestaande DLP-oplossingen, Netskope's Secure Service Edge (\gls{sse}) platform en de relevante Belgische en Europese wetgevingen. 
 Hierbij wordt gebruik gemaakt van academische artikelen, technische documentatie en juridische bronnen om een basis te leggen. 
 Voor de literatuurstudie is ongeveer twee weken voorzien, waarin de focus ligt op het verder verzamelen en verwerken van recente bronnen
-over DLP-technologie, juridische eisen (AVG, PCI DSS, NIS2) en Netskope's DLP-oplossing.
+over DLP-technologie, juridische eisen (\gls{avg}, \gls{pcidss}, \gls{nis2}) en Netskope's DLP-oplossing.
 
 \section{Analyse en planning}%
 
-Na de literatuurstudie volgt de selectie van specifieke datasets, zoals persoonlijk identificeerbare informatie (PII) en betalingsgegevens (PCI), voor testen binnen de PoC.
+Na de literatuurstudie volgt de selectie van specifieke datasets, zoals persoonlijk identificeerbare informatie (\gls{pii}) en betalingsgegevens (\gls{pci}), voor testen binnen de PoC.
 Een voorbeeld hiervan zijn de synthetische e-maildatasets van \textcite{Whelan2014}. 
-Deze datasets bevatten in totaal 4796 e-mails, waarvan 4010 geen PII bevatten en 786 e-mails dit wel hebben, 
+Deze datasets bevatten in totaal 4796 e-mails, waarvan 4010 geen \gls{pii} bevatten en 786 e-mails dit wel hebben, 
 waaronder adressen, creditcardnummers en namen. 
 De opgestelde testscenario's sluiten aan bij de bedrijfsprocessen van Evolane, zoals e-mailverkeer en bestandsoverdrachten naar cloudservices. 
 Naast deze scenario's richt de analyse zich ook op de workflow van eindgebruikers, met als doel False Positives te beperken en de de workflow van de eindgebruikers niet te verstoren.
@@ -51,7 +51,7 @@ Deze fase begint al deels tijdens de literatuurstudie en duurt ongeveer drie wek
 
 Een belangrijk onderdeel van dit onderzoek is het uitvoeren van een risicoanalyse, waarbij mogelijke technische, juridische en organisatorische risico's worden geïdentificeerd en beoordeeld. 
 Technische risico's kunnen bijvoorbeeld bestaan uit het niet volledig detecteren van gevoelige gegevens of prestatieproblemen van het DLP-systeem. 
-Juridische risico's hebben te maken met het niet naleven van de AVG-vereisten of andere relevante wetgeving. 
+Juridische risico's hebben te maken met het niet naleven van de \gls{avg}-vereisten of andere relevante wetgeving. 
 Organisatorische risico's omvatten mogelijke weerstand van medewerkers tegen nie\-uwe beveiligingsmaatregelen of een gebrek aan training, 
 wat de effectiviteit van de DLP-oplossing kan verminderen. 
 Voor elk vastgesteld risico worden geschikte maatregelen genomen om de gevolgen te beperken. 
@@ -61,7 +61,7 @@ Deze fase duurt ongeveer twee weken, overlappend met Analyse en Planning. Op het
 
 Technische risico's zijn gerelateerd aan de operationele elementen van de DLP-oplossing en de technische infrastructuur van Evolane.
 Een van de belangrijkste technische risico's is de onvolledige detectie van confidentiële gegevens. 
-Het DLP-systeem kan mogelijk niet alle vormen van PII en PCI detecteren, vooral als er nieuwe of onbekende datatypes worden gebruikt.
+Het DLP-systeem kan mogelijk niet alle vormen van \gls{pii} en \gls{pci} detecteren, vooral als er nieuwe of onbekende datatypes worden gebruikt.
 Daarnaast kan de implementatie van Netskope leiden tot prestatieproblemen, zoals vertragingen in netwerkverkeer of een verhoogd gebruik van systeemresources.
 Integratieproblemen vormen een ander potentieel risico, aangezien het DLP-systeem moet werken met bestaande IT-infrastructuren.
 Onverwachte compatibiliteitsproblemen kunnen de implementatie vertragen. Vervolgens kunnen verdere beveiligingslekken ontstaan 
@@ -72,13 +72,13 @@ Tenslotte zal een plan worden opgesteld hoe het DLP-systeem veilig geüpdatet ka
 
 \subsection{Juridische risico's}
 
-Juridische risico's hebben betrekking op de naleving van wet- en regelgeving, zoals de Algemene Verordening Gegevensbescherming (AVG) en de NIS2-richtlijn.
-Onvoldoende naleving van deze wetten en richtlijnen (waaronder AVG, PCI DSS, ISO 27001, NIS2, Schrems II,..) kan leiden tot juridische sancties. 
-Een belangrijk juridisch risico betreft onjuiste Data Processing Agreements (DPA) met dataverwerkers. 
+Juridische risico's hebben betrekking op de naleving van wet- en regelgeving, zoals de Algemene Verordening Gegevensbescherming (\gls{avg}) en de NIS2-richtlijn.
+Onvoldoende naleving van deze wetten en richtlijnen (waaronder \gls{avg}, \gls{pci} DSS, ISO 27001, NIS2, Schrems II,..) kan leiden tot juridische sancties. 
+Een belangrijk juridisch risico betreft onjuiste Data Processing Agreements (\gls{dpa}) met dataverwerkers. 
 Verkeerde of ontbrekende overeenkomsten met dataverwerkers kunnen juridische complicaties veroorzaken. 
 Daarnaast kan het niet correct toepassen van dataminimalisatieprincipes of het verwerken van data voor andere doeleinden dan waarvoor ze zijn verzameld, 
 ook leiden tot juridische gevolgen. 
-Om deze juridische risico's te beperken, stellen betrokken partijen zorgvuldig DPA's op en voeren zij regelmatige herzieningen uit.
+Om deze juridische risico's te beperken, stellen betrokken partijen zorgvuldig \gls{dpa}'s op en voeren zij regelmatige herzieningen uit.
 
 \subsection{Organisatorische risico's}
 
@@ -93,7 +93,7 @@ Door medewerkers actief te betrekken en voldoende training te bieden, wordt het 
 De PoC wordt opgezet in een interne testomgeving binnen het bedrijf, waarbij een Netskope-licentie wordt gebruikt om de DLP-service in te stellen. 
 Deze omgeving zal verschillende datatypes bevatten (data-in-use, data-in-motion, data-at-rest), 
 waarbij zowel vertrouwelijke als niet\--vertr\-ouwelijke bestanden worden gebruikt om te testen of de DLP-service alle vertrouwelijke data effectief kan identificeren en verdere verwerking kan blokkeren. 
-De data bestaat voornamelijk uit persoonlijk identificeerbare informatie (PII) en betalingsgegevens (PCI), die volgens de geldende wet- en regelgeving (zoals AVG, PCI DSS, ISO 27001, NIS2, Schrems II, enz.) beschermd moeten worden. 
+De data bestaat voornamelijk uit persoonlijk identificeerbare informatie (\gls{pii}) en betalingsgegevens (\gls{pci}), die volgens de geldende wet- en regelgeving (zoals \gls{avg}, \gls{pci} DSS, ISO 27001, NIS2, Schrems II, enz.) beschermd moeten worden. 
 Gebruikers met verschillende rechten zullen data doorsturen en verwerken binnen de testomgeving. 
 De duur van de PoC is afhankelijk van de complexiteit van de testscenario's en de detectie van gevoelige gegevens, 
 maar wordt geschat op 5 tot 6 weken. 
@@ -110,10 +110,10 @@ De feedback van deze gebruikers is essentieel om inzicht te krijgen in de gebrui
 
 \section{Evaluatie en meetbare criteria}%
 
-De effectiviteit van de geïmplementeerde DLP-oplossing wordt geëvalueerd aan de hand van vooraf gedefinieerde Key Performance Indicators (KPI's). 
-Deze KPI's dienen als indicator om te beoordelen in hoeverre de DLP-oplossing voldoet aan de gestelde vereisten en doelstellingen.
+De effectiviteit van de geïmplementeerde DLP-oplossing wordt geëvalueerd aan de hand van vooraf gedefinieerde Key Performance Indicators (\gls{kpi}'s). 
+Deze \gls{kpi}'s dienen als indicator om te beoordelen in hoeverre de DLP-oplossing voldoet aan de gestelde vereisten en doelstellingen.
 Detectienauwkeurigheid meet het percentage correct geïdentificeerde confidentiële gegevens binnen de totale dataset, 
-wat aangeeft hoe effectief de DLP-oplossing is in het herkennen van PII en PCI. 
+wat aangeeft hoe effectief de DLP-oplossing is in het herkennen van \gls{pii} en \gls{pci}. 
 Het aantal false positives geeft aan hoeveel gegevens onterecht zijn geblokkeerd of gemarkeerd, 
 wat inzicht geeft in de nauwkeurigheid van de detectiemethoden en helpt bij het finetunen van de regelsets. 
 Dit zal in een Confusion Matrix worden weergegeven \autocite{Microsoftn.d.}.

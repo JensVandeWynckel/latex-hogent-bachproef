@@ -149,7 +149,7 @@
 
 \cleardoublepage
 \phantomsection
-\addcontentsline{toc}{chapter}{\IfLanguageName{dutch}{Lijst van afkortingen}{Glossary}}
+\addcontentsline{toc}{chapter}{\IfLanguageName{dutch}{Woordenlijst}{Glossary}}
 \printglossaries
 
 
@@ -179,6 +179,7 @@
 %...
 
 \input{conclusie}
+\input{discussie}
 
 %---------- Bijlagen -----------------------------------------------------------
 
@@ -196,12 +197,6 @@ Het onderwerp van deze bachelorproef is gebaseerd op een onderzoeksvoorstel dat 
 % Verwijzing naar het bestand met de inhoud van het onderzoeksvoorstel
 \input{../voorstel/voorstel-inhoud}
 
-%%---------- Andere bijlagen --------------------------------------------------
-% TODO: Voeg hier eventuele andere bijlagen toe. Bv. als je deze BP voor de
-% tweede keer indient, een overzicht van de verbeteringen t.o.v. het origineel.
-%\input{...}
-
-%%---------- Backmatter, referentielijst ---------------------------------------
 
 \backmatter{}
 
@@ -209,5 +204,14 @@ Het onderwerp van deze bachelorproef is gebaseerd op een onderzoeksvoorstel dat 
 \printbibliography[heading=bibintoc]
 
 % % % % % % % % xelatex -shell-escape -output-directory="..\output" .\VandeWynckelJensBP.tex
+
+%%---------- Andere bijlagen --------------------------------------------------
+% TODO: Voeg hier eventuele andere bijlagen toe. Bv. als je deze BP voor de
+% tweede keer indient, een overzicht van de verbeteringen t.o.v. het origineel.
+%\input{...}
+
+\input{appendix}
+
+%%---------- Backmatter, referentielijst ---------------------------------------
 
 \end{document}

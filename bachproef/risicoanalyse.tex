@@ -66,54 +66,122 @@ Tabel \ref{tab:risico_thresholds} definieert de thresholds op basis van de gehan
     \item \textbf{4: Hoog Risico} Gevoelige informatie, zoals financiële gegevens, die een aanzienlijke impact kunnen hebben bij een lek, zoals bankrekeningnummers of vertrouwelijke bedrijfsinformatie.
     \item \textbf{5: Zeer Hoog Risico} Kritieke gegevenscombinaties die grootschalige beveiligingsrisico's kunnen veroorzaken of ernstige schade kunnen aanrichten, zoals toegangscertificaten of gevoelige financiële informatie.
 \end{itemize}
+% \begin{table}[h]
+%     \centering
+%     \small
+%     \begin{tabular}{|l|c|}
+%     \hline
+%     \textbf{Datatype/combinatie} & \textbf{Risicogewicht (1-5)} \\
+%     \hline
+%     \multicolumn{2}{|l|}{\textbf{Persoonlijke Identificeerbare Informatie (PII)}} \\
+%     \hline
+%     Naam alleen                 & 1 \\
+%     Publiek IP-adres            & 1 \\
+%     Naam + E-mailadres          & 2 \\
+%     Naam + Telefoonnummer       & 2 \\
+%     Naam + Geboortedatum        & 3 \\
+%     Naam + BSN (NL) / NISS (BE) & 4 \\
+%     Paspoortnummer              & 4 \\
+%     Privaat IP-adres (intern)   & 2 \\
+%     \hline
+%     \multicolumn{2}{|l|}{\textbf{Betaalkaart \& PCI Gegevens}} \\
+%     \hline
+%     Bankrekeningnummer alleen   & 2 \\
+%     Naam + Bankrekeningnummer   & 4 \\
+%     Creditcardnummer            & 4 \\
+%     Naam + Creditcardnummer     & 5 \\
+%     CVV/CVC-code alleen         & 1 \\
+%     CVV/CVC-code + Creditcardnummer & 5 \\
+%     PIN-code + Kaartnummer      & 5 \\
+%     \hline
+%     \multicolumn{2}{|l|}{\textbf{Authenticatie \& Inloggegevens}} \\
+%     \hline
+%     E-mailadres alleen          & 1 \\
+%     E-mailadres + Wachtwoord    & 5 \\
+%     API-sleutel                 & 5 \\
+%     JWT-token                   & 4 \\
+%     SSH-private key             & 5 \\
+%     \hline
+%     \multicolumn{2}{|l|}{\textbf{Bedrijfsgevoelige Data}} \\
+%     \hline
+%     Klantnaam + Contractdetails & 4 \\
+%     Klantnaam + Factuurgegevens & 5 \\
+%     Interne projectinformatie   & 3 \\
+%     Gevoelige e-mails (bijv. NDA's) & 4 \\
+%     Configuratiebestanden met credentials & 5 \\
+%     \hline
+%     \end{tabular}
+%     \caption{Waarschijnlijkheid van datatypes voor DLP-risico}
+%     \label{tab:datatypes_risico}
+% \end{table}
+
+
 \begin{table}[h]
     \centering
     \small
-    \begin{tabular}{|l|c|}
+    \scriptsize
+    \begin{tabular}{|c|c|c|c|c|}
     \hline
-    \textbf{Datatype/combinatie} & \textbf{Risicogewicht (1-5)} \\
+    \textbf{Datatype/combinatie} & \textbf{Waarschijnlijkheid (1-5)} & \textbf{Impact (1-5)} & \textbf{Totaal Risico} & \textbf{Categorie} \\
     \hline
-    \multicolumn{2}{|l|}{\textbf{Persoonlijke Identificeerbare Informatie (PII)}} \\
+    \multicolumn{5}{|l|}{\textbf{Persoonlijke Identificeerbare Informatie (PII)}} \\
     \hline
-    Naam alleen                 & 1 \\
-    Publiek IP-adres            & 1 \\
-    Naam + E-mailadres          & 2 \\
-    Naam + Telefoonnummer       & 2 \\
-    Naam + Geboortedatum        & 3 \\
-    Naam + BSN (NL) / NISS (BE) & 4 \\
-    Paspoortnummer              & 4 \\
-    Privaat IP-adres (intern)   & 2 \\
+    Naam alleen                 & 5 & 1 & 5  & Laag \\
+    Publiek IP-adres            & 4 & 1 & 4  & Laag \\
+    Naam + E-mailadres          & 5 & 3 & 15 & Hoog \\
+    Naam + Telefoonnummer       & 4 & 3 & 12 & Gemiddeld \\
+    Naam + Geboortedatum        & 4 & 4 & 16 & Hoog \\
+    Naam + BSN (NL) / NISS (BE) & 3 & 5 & 15 & Hoog \\
+    Paspoortnummer              & 2 & 5 & 10 & Gemiddeld \\
+    Privaat IP-adres (intern)   & 3 & 2 & 6  & Laag \\
     \hline
-    \multicolumn{2}{|l|}{\textbf{Betaalkaart \& PCI Gegevens}} \\
+    \multicolumn{5}{|l|}{\textbf{Betaalkaart \& PCI Gegevens}} \\
     \hline
-    Bankrekeningnummer alleen   & 2 \\
-    Naam + Bankrekeningnummer   & 4 \\
-    Creditcardnummer            & 4 \\
-    Naam + Creditcardnummer     & 5 \\
-    CVV/CVC-code alleen         & 1 \\
-    CVV/CVC-code + Creditcardnummer & 5 \\
-    PIN-code + Kaartnummer      & 5 \\
+    Bankrekeningnummer alleen   & 3 & 2 & 6  & Laag \\
+    Naam + Bankrekeningnummer   & 4 & 4 & 16 & Hoog \\
+    Creditcardnummer            & 3 & 4 & 12 & Gemiddeld \\
+    Naam + Creditcardnummer     & 3 & 5 & 15 & Hoog \\
+    CVV/CVC-code alleen         & 2 & 3 & 6  & Laag \\
+    CVV + Creditcardnummer      & 3 & 5 & 15 & Hoog \\
+    PIN-code + Kaartnummer      & 2 & 5 & 10 & Gemiddeld \\
     \hline
-    \multicolumn{2}{|l|}{\textbf{Authenticatie \& Inloggegevens}} \\
+    \multicolumn{5}{|l|}{\textbf{Authenticatie \& Inloggegevens}} \\
     \hline
-    E-mailadres alleen          & 1 \\
-    E-mailadres + Wachtwoord    & 5 \\
-    API-sleutel                 & 5 \\
-    JWT-token                   & 4 \\
-    SSH-private key             & 5 \\
+    E-mailadres alleen          & 5 & 1 & 5  & Laag \\
+    E-mailadres + Wachtwoord    & 5 & 5 & 25 & Zeer hoog \\
+    API-sleutel                 & 4 & 5 & 20 & Zeer hoog \\
+    JWT-token                   & 3 & 4 & 12 & Gemiddeld \\
+    SSH-private key             & 3 & 5 & 15 & Hoog \\
     \hline
-    \multicolumn{2}{|l|}{\textbf{Bedrijfsgevoelige Data}} \\
+    \multicolumn{5}{|l|}{\textbf{Bedrijfsgevoelige Data}} \\
     \hline
-    Klantnaam + Contractdetails & 4 \\
-    Klantnaam + Factuurgegevens & 5 \\
-    Interne projectinformatie   & 3 \\
-    Gevoelige e-mails (bijv. NDA's) & 4 \\
-    Configuratiebestanden met credentials & 5 \\
+    Klantnaam + Contractdetails & 4 & 4 & 16 & Hoog \\
+    Klantnaam + Factuurgegevens & 4 & 5 & 20 & Zeer hoog \\
+    Interne projectinformatie   & 4 & 3 & 12 & Gemiddeld \\
+    Gevoelige e-mails (bv. NDA's) & 3 & 4 & 12 & Gemiddeld \\
+    Config-bestanden met credentials & 3 & 5 & 15 & Hoog \\
     \hline
     \end{tabular}
-    \caption{Waarschijnlijkheid van datatypes voor DLP-risico}
-    \label{tab:datatypes_risico}
+    \caption{Risico-analyse van datatypes voor DLP-configuratie binnen een Sales/IT-omgeving}
+    \label{tab:datatypes_risico_uitgebreid}
 \end{table}
+
+
+
+\textbf{Toelichting bij belangrijke combinaties:}
+\begin{enumerate}
+    \item \textbf{Naam + geboortedatum + IBAN:} Zeer gevoelig voor identiteitsfraude; valt onder \gls{avg}.
+    \item \textbf{E-mail + wachtwoord:} Hoog risico op account takeovers; vaak doelwit bij datalekken.
+    \item \textbf{API-sleutels en config-bestanden:} Vaak hardcoded in code, eenvoudig te lekken via cloudstorage.
+    \item \textbf{Creditcardgegevens:} Vallen onder \gls{pcidss}; verwerking en opslag zijn streng gereguleerd.
+    \item \textbf{Biometrie en gezondheid:} Speciale categorie onder \gls{avg}; impact bij lek is zeer hoog.
+    \item \textbf{Tokens (JWT/OAuth):} Directe toegang tot accounts/sessies bij lek; iets lagere waarschijnlijkheid.
+\end{enumerate}
+
+
+
+
+
 
 \begin{table}[h]
     \centering
@@ -210,6 +278,8 @@ Tabel \ref{tab:risico_thresholds} definieert de thresholds op basis van de gehan
 \subsection {\IfLanguageName{dutch}{DORA}{DORA}} % Nog toe te voegen aan literatuurstudie
 \label{sec:dora}
 
+% STUDIE VOOR IEDEREEN https://chatgpt.com/c/6829e2e1-262c-8010-8b7a-a362d5f19a38 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 \subsection{\IfLanguageName{dutch}{CCB Framework}{CCB Framework}}
 \label{sec:ccb_framework}
 
@@ -273,6 +343,8 @@ De belangrijkste prestatiemetrics zijn:
     \item Recall \( = \frac{TP}{TP + FN} \) Hoeveel gevoelige data correct werd gedetecteerd.
     \item F1-score \( = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} \) Gebalanceerde prestatiemeting.
 \end{itemize}
+
+
 
 % --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 % Specificiteit, positief voorspellende waarde, negatief voorspellende waarde, likelihood ratio's, enz. kunnen ook worden berekend om de prestaties van de detectie te evalueren \autocite{Fawcett2006}.

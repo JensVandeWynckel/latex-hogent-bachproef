@@ -11,59 +11,108 @@
 Datalekken zijn tegenwoordig een ernstige bedreiging voor industrieën en overheden. 
 Cyberaanvallen, menselijke fouten en misconfiguraties kunnen leiden tot het verlies van gevoelige informatie. 
 Een van de technologieën dat hierbij kan helpen, zijn Data Loss Prevention (\gls{dlp})-oplossingen.
-DLP-tools identificeren, monitoren en beschermen gevoelige gegevens, zoals persoonlijke identificeerbare informatie (\gls{pii}) en betalingsgegevens (\gls{pci}). 
-De implementatie van DLP-oplossingen is niet alleen een best practice, maar vaak ook een wettelijke vereiste onder regelgeving zoals de 
+DLP-tools identificeren, monitoren en beschermen gevoelige gegevens, zoals \textbf{persoonlijke identificeerbare informatie} (\gls{pii}) en \textbf{betalingsgegevens} (\gls{pci}). 
+De implementatie van DLP-oplossingen is niet alleen een best practice, maar vaak ook een \textbf{wettelijke vereiste} onder regelgevingen zoals de 
 Algemene Verordening Gegevensbescherming (\gls{avg}), de Payment Card Industry Data Security Standards (\gls{pcidss}) en de \gls{nis2}-richtlijn voor netwerk- en informatiebeveiliging.
 Hierdoor zijn DLP-oplossingen essentiële hulpmiddelen geworden om gevoelige informatie te beschermen en gegevensintegriteit te waarborgen. 
-In deze bachelorproef zal een DLP-oplossing opgesteld worden voor Evolane, een bedrijf dat zich specialiseert in het optimaliseren en beveiligen van cloud- en enterprise-omgevingen voor organisaties. 
+In deze bachelorproef zal een DLP-oplossing opgesteld worden voor \textbf{Evolane}, een bedrijf dat zich specialiseert in het optimaliseren en beveiligen van cloud- en enterprise-omgevingen voor organisaties. 
 Evolane is een consultancybedrijf dat klanten helpt bij het implementeren van cloudoplossingen, zoals \textit{Akamai}, \textit{Dynatrace} en \textit{Netskope}. 
 Deze services staan op hun beurt in voor de beveiliging van bedrijfsgegevens en het voorkomen van cyberaanvallen van binnen- en buitenaf. 
 
-\textbf{Mark: een stukje opnemen over ransomware, welke vooral gericht is op illegaal verkregen bedrijfsdata, oftewel data leakage. Dit is het verdienmodel, zoveel en zo gevoelig mogelijke data verkrijgen. }
+\textcite{VerizonBusiness2025} stelt in hun \textit{Data Breach Investigations Report 2025} vast dat ransomware in \textbf{44\%} van alle datalekken voorkwam. 
+Deze aanvallen richten zich steeds meer op gevoelige bedrijfsdata. 
+Aanvallers zullen na de exfiltratie van deze data de organisatie onder druk zetten om losgeld te betalen.
+Dit soort \textit\textbf{{dubbele-afpersing}-aanvallen} worden ook wel \textit{leakware} of \textit{doxware} genoemd \autocite{IBM2024}. 
+Deze aanvallen sluiten aan bij \gls{enisa}'s bevindingen, dat het aantal incidenten met datadiefstal en afpersing jaar na jaar ziet toenemen \autocite{EUAC2022,EUAC2023}.
+\textcite{IBMSecurity2024} gaven in hun \textit{Cost of a Data Breach Report 2024} aan dat de gemiddelde schade van een ransomware-gerelateerde datalek in 2024 \textbf{4,37 miljoen} euro bedroegen (exclusief betaalde losgelden).
+Deze groei toont aan dat ransomware-aanvallen steeds vaker dienen als bewuste inkomstenbron voor cybercriminelen.
+Aangezien de aanvallen steeds vaker voorkomen, is het als bedrijf belangrijk om de juiste maatregelen te nemen om gevoelige data te beschermen. 
+Evolane stelt vast dat, hoewel de bescherming van \textbf{extern} bereikbare applicaties via bijvoorbeeld \textit{Akamai} op een geavanceerde en succesvolle manier gebeurt,
+de \textbf{interne risico's} niet voldoende worden aangepakt.
+Traditionele beveiliging richt zich voornamelijk op de \textit{externe bezoeker} of \textit{surfer}, maar wanneer een \textbf{aanval} via een \textbf{eigen medewerker} wordt ingezet, al dan niet bewust, verdwijnt die controle.
+Klantgesprekken tonen aan dat \textit{phishingcampagnes steeds moeilijker te onderscheiden} zijn van legitieme communicatie. 
+Zelfs goed opgeleide medewerkers kunnen slachtoffer worden van zulke aanvallen.
+In plaats van het vertrouwen op wantrouwen te baseren,  implementeert Evolane een aanpak die medewerkers \textbf{ondersteunt} met technologie die hen \textbf{helpt fouten} te voorkomen. 
+
+Daarom kiest de organisatie voor een architectuur gebaseerd op Secure Service Edge (\gls{sse}), waarin Data Loss Prevention (\gls{dlp}) een centrale rol speelt.
+De keuze valt op Netskope vanwege zijn innovatieve visie op DLP, zijn financiële stabiliteit en zijn erkenning binnen het rechterkwadrant van het \textbf\textit{{Gartner Magic Quadrant}}, 
+zoals besproken in Hoofdstuk~\ref{ch:stand-van-zaken}.
+De technologische sterkte van Netskope sluit bovendien aan bij de klantgerichte aanpak van Evolane. 
+Dit alles vormt de aanleiding om in deze bachelorproef de mogelijkheden van Netskope binnen een DLP-context te onderzoeken.
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 \label{sec:probleemstelling}
 
-Zoals te zien is in Tabel~\ref{tab:probleemstelling}, zijn er verschillende uitdagingen bij het implementeren van DLP-oplossingen. 
-Voor security engineers bij Evolane is het een uitdaging om DLP-regels correct te implementeren zonder false positives. Hierdoor is het belangrijk om een uitgebreide evaluatieperiode in te lassen om de regels te verfijnen en te optimaliseren. 
-Deze evaluatieperiode wordt verder besproken in de methodologie (Hoofdstuk~\ref{ch:methodologie}). 
-Voor bedrijfsafdelingen bij Evolane is het belangrijk om een veilige manier te hebben om interne en externe communicatie te beheren zonder risico op gegevenslekken. 
-Deze afdelingen zullen tijdens de evaluatieperiode feedback geven over de DLP-regels en de impact op hun workflows. 
-Verder is het belangrijk om de DLP-oplossing gebruiksvriendelijk te maken voor bedrijfsafdelingen bij klanten van Evolane. 
-Zodat gebruikers weten wanneer ze gevoelige data verwerken. Mocht een poging tot datalek plaatsvinden, dan kan de DLP-oplossing dit voorkomen en de gebruiker verwittigen.   
+% Zoals te zien is in Tabel~\ref{tab:probleemstelling}, zijn er verschillende uitdagingen bij het implementeren van DLP-oplossingen. 
+% Voor security engineers bij Evolane is het een uitdaging om DLP-regels correct te implementeren zonder false positives. 
+% Hierdoor is het belangrijk om een uitgebreide evaluatieperiode in te lassen om de regels te verfijnen en te optimaliseren. 
+% Deze evaluatieperiode wordt verder besproken in Hoofdstuk\ref{ch:methodologie}. 
+% Voor bedrijfsafdelingen bij Evolane is het belangrijk om een veilige manier te hebben om interne en externe communicatie te beheren zonder risico op gegevenslekken. 
+% Deze afdelingen zullen tijdens de evaluatieperiode feedback geven over de DLP-regels en de impact op hun workflows. 
+% Verder is het belangrijk om de DLP-oplossing gebruiksvriendelijk te maken voor bedrijfsafdelingen bij klanten van Evolane. 
+% Zodat gebruikers weten wanneer ze gevoelige data verwerken. Mocht een poging tot datalek plaatsvinden, dan kan de DLP-oplossing dit voorkomen en de gebruiker verwittigen.   
+
+% begin met te praten over interne risico's
+Evolane wilt de interne risico's van datalekken aanpakken door Netskope's DLP-oplossing te implementeren binnen hun \gls{sse}-architectuur.
+Het probleem begint met het bekijken welke verschillende doelgroepen er bestaan binnen het bedrijf en welke confidentiële gegevens er het meest worden verwerkt per groep.
+Sales medewerkers komen bijvoorbeeld meer in contact met \textbf{klantinformatie}, terwijl security engineers meer bezig zijn met \textbf{technische configuraties}.
+Beide groepen verwerken gevoelige gegevens, maar de types gegevens zijn verschillend, net zoals de verwerking van deze gegevens.
+Tabel~\ref{tab:probleemstelling} geeft een overzicht van de verschillende doelgroepen en hun specifieke uitdagingen bij de implementatie van een DLP-oplossing binnen dit onderzoek.
+Om false positives te vermijden, zal er een uitgebreide evaluatieperiode moeten plaatsvinden, zoals verder uitgewerkt in Hoofdstuk~\ref{ch:methodologie}.
+Deze periode zorgt ervoor dat de DLP-regels correct worden ingesteld, verfijnt en geoptimaliseerd.
+De Security engineers zullen tijdens de evalutatieperiode feedback geven over de DLP-regels en de impact op hun workflows.
 
 \begin{table}[h]
     \centering
     \small
     \begin{tabular}{p{4cm} p{5cm} p{6cm}}
         \toprule
-        \textbf{Doelgroep} & \textbf{Uitdaging(en)} & \textbf{Impact van de DLP-oplossing} \\
+        \textbf{Doelgroep} & \textbf{Uitdaging(en)} & \textbf{Rol van DLP binnen de oplossing} \\
         \midrule
-        Evolane als organisatie & Veilige manier van interne en externe communicatie zonder risico op datalekken. Feedback mochten gebruikers gevoelige data foutief verwerken. & Zorgt voor naleving van security policies en voorkomt onbedoelde blootstelling van gevoelige data zonder workflows te verstoren. \\
-        Security en Observability Engineers bij Evolane & Het correct implementeren van DLP-regels waarbij sommige gevoelige data niet geblokkeerd mag worden naar klanten toe. & Biedt een Netskope-gebaseerde oplossing met afgestemde DLP-regels en detectiemethoden \\ 
-        Bedrijfsafdelingen bij klanten & Willen datalekken voorkomen zonder bedrijfsprocessen te verstoren & Gebruiksvriendelijke implementatie, waardoor gebruikers weten wanneer ze gevoelige data verwerken en datalekken voorkomen \\
-        IT-afdelingen bij klanten & DLP integreren in bestaande IT-infrastructuur zonder hoge operationele overhead. Aan de hand van weinig kennis Netskope begrijpen en gebruiken. & Eenvoudige implementatie en beheer binnen Netskope. Kunnen rapport opvragen wat DLP tegenhoudt en dit contractueel aanpassen. \\
+        Salesmedewerkers bij Evolane 
+        & Verwerken en delen van klantinformatie via e-mail, cloudopslag of SaaS zonder datalekken te veroorzaken. 
+        & Detecteert en blokkeert gevoelige klantgegevens bij ongeoorloofd delen. Verhoogt bewustzijn bij het verwerken van vertrouwelijke data. \\
+
+        Security en Observability engineers bij Evolane 
+        & Werken met configuratiebestanden, secrets en infrastructuurgegevens (zoals API keys, IP-adressen) zonder onbedoelde blootstelling.
+        & Herkent technische datatypes (zoals API keys, wachtwoorden, configbestanden) en voorkomt dat deze uitlekken via niet-vertrouwde kanalen. \\
+
+        IT-afdelingen van klanten 
+        & Integreren van DLP-oplossing zonder grote architecturale wijzigingen of complexe opleidingsvereisten. 
+        & Biedt laagdrempelige integratie, inzichtelijke logging en rapportage met minimale operationele overhead. Evolane blijft implementatie ondersteunen. \\
+
+        Eindgebruikers bij klanten 
+        & Onbewuste blootstelling van gevoelige data door gebruik van cloudtools of misleidende phishing-aanvallen. 
+        & Intercepteert gevoelige handelingen in real-time en waarschuwt gebruikers bij risicovolle acties zonder workflows te blokkeren. \\
         \bottomrule
     \end{tabular}
-    \caption{Overzicht van de probleemstelling en doelgroep}
+    \caption{Overzicht van doelgroepen, uitdagingen en rol van DLP}
     \label{tab:probleemstelling}
 \end{table}
 
-\textbf{Praat nog over Sales != Security.}
-\textbf{aanleiding van het onderzoek 'dus niet alleen evolane' Wat was trigger} 
 
-% \hline
-% Security Engineers bij Evolane & Het correct implementeren van DLP-regels die bedrijfsdata beschermen zonder false positives & Biedt een Netskope-gebaseerde oplossing met afgestemde DLP-regels en detectiemethoden voor hen en voor klanten \\
-% \hline
-% Bedrijfsafdelingen bij Evolane & Behoefte aan een veilige manier om interne en externe communicatie te beheren zonder risico op gegevenslekken & Zorgt voor naleving van security policies en voorkomt onbedoelde blootstelling van gevoelige data zonder workflows te verstoren \\
-% \hline
-% IT-afdelingen bij klanten & DLP integreren in bestaande IT-infrastructuur zonder hoge operationele overhead & Eenvoudige implementatie en beheer binnen Netskope, met monitoring en logging voor compliance en auditing \\
-% \hline
-% Bedrijfsafdelingen bij klanten & Willen datalekken voorkomen zonder bedrijfsprocessen te verstoren & Gebruiksvriendelijke implementatie waardoor gebruikers weten wanneer ze gevoelige data verwerken en datalekken voorkomen \\
-% \hline
-% Compliance Officers & Naleving van regelgeving zoals GDPR, NIS2 en PCI DSS zonder impact op operationele efficiëntie & Geeft inzicht in datastromen en biedt rapportagefunctionaliteiten voor audits en nalevingsevaluaties \\
-% \hline
-
+% \begin{table}[h]
+%     \centering
+%     \small
+%     \begin{tabular}{p{4cm} p{5cm} p{6cm}}
+%         \toprule
+%         \textbf{Doelgroep} & \textbf{Uitdaging(en)} & \textbf{Impact van de DLP-oplossing} \\
+%         \midrule
+%         Evolane als organisatie
+%         & Veilige manier van interne en externe communicatie zonder risico op datalekken. Feedback mochten gebruikers gevoelige data foutief verwerken. 
+%         & Zorgt voor naleving van security policies en voorkomt onbedoelde blootstelling van gevoelige data zonder workflows te verstoren. \\
+%         Security en Observability Engineers binnen Evolane
+%         & Het correct implementeren van DLP-regels waarbij sommige gevoelige data niet geblokkeerd mag worden naar klanten toe. 
+%         & Biedt een Netskope-gebaseerde oplossing met afgestemde DLP-regels en detectiemethoden \\ 
+%         Bedrijfsafdelingen bij klanten                     & Willen datalekken voorkomen zonder bedrijfsprocessen te verstoren 
+%                                                            & Gebruiksvriendelijke implementatie, waardoor gebruikers weten wanneer ze gevoelige data verwerken en datalekken voorkomen \\
+%         IT-afdelingen bij klanten                          & DLP integreren in bestaande IT-infrastructuur zonder hoge operationele overhead. Aan de hand van weinig kennis Netskope begrijpen en gebruiken. 
+%                                                            & Eenvoudige implementatie en beheer binnen Netskope. Kunnen rapport opvragen wat DLP tegenhoudt en dit contractueel aanpassen. \\
+%         \bottomrule
+%     \end{tabular}
+%     \caption{Overzicht van de probleemstelling en doelgroep}
+%     \label{tab:probleemstelling}
+% \end{table}
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}%
 \label{sec:onderzoeksvraag}
@@ -97,7 +146,7 @@ Om een breder inzicht te verkrijgen in de implementatie en optimalisatie van Dat
 \item \textbf{Web}: Hier wordt DLP toegepast op geëncrypteerd verkeer en voor alle poorten, met focus op gegevens in beweging tussen systemen.
 \item \textbf{\gls{iaas}} (Infrastructure as a Service): Net zoals bij \gls{saas}, wordt DLP toegepast op gegevens in beweging en in rust, respectievelijk voor forward proxies en APIs.
 \item \textbf{Email}: Bij het beheren van e-mailverkeer, zoals webmail, richt de uitgewerkte DLP-oplossing zich zowel op gegevens in beweging als op gegevens in rust.
-\item \textbf{Endpoint}: Endpoint Data Loss Prevention (DLP) richt zich op het beschermen van gegevens in gebruik (\textit{Data-in-Use}) door middel van endpointbeveiliging. Dit houdt het volgende in: het monitoren en beperken van gegevensoverdracht via USB-opslagmedia, klemborden, printers en andere externe apparaten.
+\item \textbf{Endpoint}: Endpoint Data Loss Prevention (DLP) richt zich op het beschermen van gegevens in gebruik (\textit{Data-in-Use}) door middel van endpointbeveiliging. Dit houdt het volgende in: het monitoren en beperken van gegevensoverdracht via \gls{usb}-opslagmedia, klemborden, printers en andere externe apparaten.
 \end{itemize}
 
 

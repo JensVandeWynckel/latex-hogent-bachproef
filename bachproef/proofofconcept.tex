@@ -279,88 +279,6 @@ Dankzij het gebruik van DLP-regels met en zonder termen, kunnen false positives 
     \label{tab:custom-be-iban-terms}
 \end{table}
 
-\begin{table}[h]
-    \centering
-    \small
-    \begin{tabular}{p{4cm} p{10cm}}
-        \toprule
-        \textbf{Regel} & EU - PCI - Card Number \\
-        \midrule
-        \textbf{Type} & DLP Rule \\
-        \textbf{Expressie} & \texttt{P0 OR P1 OR P2 OR P3 OR P4 OR P5 OR P6 OR P7 OR P8 OR P9 OR P10 OR P11 OR P12 OR (P13 OR P14 OR P15 OR P16) OR (P17 OR P18 OR P19 OR P20) OR (P21 OR P22 OR P23 OR P24) OR (P25 OR P26 OR P27 OR P28 OR P29 OR P30 OR P31) OR (P32 OR P33 OR P34 OR P35) OR (P36 OR P37 OR P38)} \\
-        \textbf{Predefined Identifiers} & 
-        (P0) - Card Numbers (all) \newline
-        (P1) - Card Numbers (Major Networks; with spaces) \newline
-        (P2) - Card Numbers (Major Networks; all) \newline
-        (P3) - Card Numbers (Major Networks; unformatted) \newline
-        (P4) - Card Numbers (Major Networks; with dots) \newline
-        (P5) - Card Numbers (Major Networks; with hyphens) \newline
-        (P6) - Card Numbers (Maestro) \newline
-        (P7) - Deposit Account Numbers (BE) \newline
-        (P8) - Card Numbers (Mastercard) \newline
-        (P9) - Card Numbers (VISA) \newline
-        (P10) - Defunct Card Numbers (Bankcard) \newline
-        (P11) - Defunct Card Numbers (all) \newline
-        (P12) - Domestic Card Numbers (all) \newline
-        (P13) - Card Numbers (19 digits, all) \newline
-        (P14) - Card Numbers (19 digits, unformatted) \newline
-        (P15) - Card Numbers (19 digits, with hyphens) \newline
-        (P16) - Card Numbers (19 digits, with spaces) \newline
-        (P17) - Card Numbers (18 digits, all) \newline
-        (P18) - Card Numbers (18 digits, unformatted) \newline
-        (P19) - Card Numbers (18 digits, with hyphens) \newline
-        (P20) - Card Numbers (18 digits, with spaces) \newline
-        (P21) - Card Numbers (17 digits, all) \newline
-        (P22) - Card Numbers (17 digits, unformatted) \newline
-        (P23) - Card Numbers (17 digits, with hyphens) \newline
-        (P24) - Card Numbers (17 digits, with spaces) \newline
-        (P25) - Card Numbers (16 digits, all) \newline
-        (P26) - Card Numbers (16 digits, unformatted) \newline
-        (P27) - Card Numbers (16 digits, with dots) \newline
-        (P28) - Card Numbers (16 digits, with hyphens) \newline
-        (P29) - Card Numbers (16 digits, with non-breaking spaces) \newline
-        (P30) - Card Numbers (16 digits, with soft hyphens) \newline
-        (P31) - Card Numbers (16 digits, with spaces) \newline
-        (P32) - Card Numbers (15 digits, all) \newline
-        (P33) - Card Numbers (15 digits, unformatted) \newline
-        (P34) - Card Numbers (15 digits, with hyphens) \newline
-        (P35) - Card Numbers (15 digits, with spaces) \\
-        \textbf{Gebruikte techniek} & Vooraf gedefinieerde DLP identifiers gebruikt rond creditcardnummers \\
-        \textbf{Bron(nen)} & Null \\
-        \textbf{Threshold} & Low: 1 \quad Medium: 2 \quad High: 5 \quad Critical: 9 \\
-        \bottomrule
-    \end{tabular}
-    \caption{Custom DLP-regel: Detectie van creditcardnummers}
-    \label{tab:custom-eu-card}
-\end{table}
-
-\begin{table}[h]
-    \centering
-    \small
-    \begin{tabular}{p{4cm} p{10cm}}
-        \toprule
-        \textbf{Regel} & BE - Card Number with Terms \\
-        \midrule
-        \textbf{Type} & DLP Rule \\
-        \textbf{Expressie} & \texttt{(P0 NEAR P36) OR (P0 NEAR P37) OR (P0 NEAR P38) OR (P0 NEAR P39) OR (P0 NEAR P40) OR (P1 NEAR P36) OR (P1 NEAR P37) OR (P1 NEAR P38) OR (P1 NEAR P39) OR (P1 NEAR P40) OR (P2 NEAR P36) OR (P2 NEAR P37) OR (P2 NEAR P38) OR (P2 NEAR P39) OR (P2 NEAR P40) OR (P3 NEAR P36) OR (P3 NEAR P37) OR (P3 NEAR P38) OR (P3 NEAR P39) OR (P3 NEAR P40) OR (P4 NEAR P36) OR (P4 NEAR P37) OR (P4 NEAR P38) OR (P4 NEAR P39) OR (P4 NEAR P40) OR (P5 NEAR P36) OR (P5 NEAR P37) OR (P5 NEAR P38) OR (P5 NEAR P39) OR (P5 NEAR P40) OR (P6 NEAR P36) OR (P6 NEAR P37) OR (P6 NEAR P38) OR (P6 NEAR P39) OR (P6 NEAR P40) OR (P7 NEAR P36) OR (P7 NEAR P37) OR (P7 NEAR P38) OR (P7 NEAR P39) OR (P7 NEAR P40) OR \newline
-        ... \newline
-        (P35 NEAR P36) OR (P35 NEAR P37) OR (P35 NEAR P38) OR (P35 NEAR P39) OR (P35 NEAR P40)} \\
-        \textbf{Predefined Identifiers} & 
-        Same as \ref{tab:custom-eu-card} \newline
-        (P36) - Card Number Terms (English) \newline
-        (P37) - Card Number Terms (Spanish) \newline
-        (P38) - Card Security Terms (English) \newline
-        (P39) - Bank Account Number Terms (English) \newline
-        (P40) - Bank Account Terms (BE) \\
-        \textbf{Gebruikte techniek} & Combinatie van vooraf gedefinieerde DLP identifiers rond creditcardnummers met woordenlijsten van Belgische termen. \\
-        \textbf{Bron(nen)} & Null \\
-        \textbf{Threshold} & Low: 1 \quad Medium: 2 \quad High: 5 \quad Critical: 9 \\
-        \bottomrule
-    \end{tabular}
-    \caption{Custom DLP-regel: Detectie van creditcardnummers in combinatie met banktermen}
-    \label{tab:custom-eu-card-terms}
-\end{table}
-
 
 
 \subsection{\IfLanguageName{dutch}{Persoonlijke gegevens (PII)}{Personal Data}}
@@ -394,15 +312,15 @@ Dit zijn toepassingen van de eerder opgestelde regels in Tabel \ref{tab:datatype
 \begin{table}[h]
     \centering
     \small
-    \begin{tabular}{lll}
+    \begin{tabular}{p{3cm}p{5cm}p{6cm}}
         \toprule
         \textbf{Toepassing} & \textbf{Categorieën (Netskope)} & \textbf{Voorbeelden van applicaties} \\
         \midrule
         \textbf{SaaS}     & Collaboration, Cloud Storage, Application Suite & Slack, Teams, Teamleader, Google Drive, Jira, Confluence \\
         \textbf{Web}      & Professional Networking, Development Tools & LinkedIn, GitHub \\
-        \textbf{IaaS}     & IaaS/PaaS, Web Hosting, ISP & AWS, Azure, Google Cloud, OVH, DigitalOcean, Cloudflare \\
+        \textbf{IaaS}     & \gls{iaas}/\gls{paas}, Web Hosting, \gls{isp} & AWS, Azure, Google Cloud, OVH, DigitalOcean, Cloudflare \\
         \textbf{Email}    & Webmail, Email Outbound App & Gmail, Outlook, ProtonMail, Mailchimp, Thunderbird \\
-        \textbf{Endpoint} & Endpoint DLP, Utilities & USB, clipboard, printers, external devices \\
+        \textbf{Endpoint} & Endpoint DLP, Utilities & \gls{usb}, clipboard, printers, external devices \\
         \bottomrule
     \end{tabular}
     \caption{Overzicht van de verschillende toepassingen van de DLP-regels}
@@ -443,19 +361,52 @@ Aangezien de focus van dit onderzoek ligt op de DLP-regels, zal deze integratie 
 % Forward proxy hiermee 
 % LinkedIn, Github
 
-% Voor de webomgeving werd gebruik gemaakt van een forward proxy-oplossing waarbij geëncrypteerd verkeer (HTTPS) werd onderschept met behulp van SSL-inspectie. 
-% Specifiek werd verkeer naar applicaties zoals LinkedIn en GitHub gemonitord. 
-% In deze omgeving lag de nadruk op Data-in-Motion, waarbij het lekken van gevoelige gegevens via webuploads, 
-% formulieren of berichten werd voorkomen.
-% De Netskope Client zorgde voor real-time handhaving van DLP-beleidsregels op het webverkeer van de eindgebruiker, 
-% inclusief detectie van RRN-nummers, IBANs en gezondheidsgegevens.
+In de webomgeving wordt uitgaand verkeer beveiligd via een forward proxy in combinatie met SSL-inspectie. 
+Netskope onderschept versleutelde HTTPS-verzoeken en analyseert deze op de aanwezigheid van confidentiële data.
+Zo wordt het dataverlies via webformulieren, berichten of uploads proactief tegengehouden. 
+Deze aanpak focust op \textit{data-in-motion} en wordt toegepast op websites zoals \textbf{LinkedIn}, \textbf{GitHub}, \textbf{Messenger}, \textbf{ChatGPT} en \textbf{Google Forms}.
 
-% \gls{nis2} test \gls{cpu}
+Om deze functionaliteit te testen, wordt gebruikt gemaakt van een dataset met realistische testwaarden. 
+De testdata bevatte combinaties van persoonsnamen, en creditcardnummers (\textit{Visa} en \textit{Mastercard}), gestructureerd in \gls{csv}-formaat. Enkele voorbeelden:
 
+\begin{quote}\small
+\texttt{Robert Aragon, 4929-3813-3266-4295} \
+\texttt{Ashley Borden, 5370-4638-8881-3020}
+\end{quote}
 
-\begin{lstlisting}[language=Python,label={lst:dlp-selenium},caption={Selenium-script voor batchgewijze verzending van testdata}]
-    code hier
+Voor deze evaluatie werd een Python-script opgebouwd dat gebruikmaakt van Selenium. 
+Het script is ontworpen om testgegevens aan de hand van batches in te voeren via het online platform \texttt{dlptoolbox.com}.
+Dit platform biedt een veilige manier om DLP-regels realistisch te testen binnen de browseromgeving van de gebruiker.
+Het script stuurt gegevens automatisch in batches van tien rijen naar het testformulier \ref{lst:dlp-selenium} en verzendt deze data aan de hand van een \texttt{POST}-request naar de server.
+Dit werd tijdens de evaluatie in rijen van 10 gedaan, aangezien de testgegevens \ref{tab:csv-testdata} 30 000 rijen bevatten.
+
+{\small
+\begin{lstlisting}[language=Python,caption={Versturen van batches via Selenium},label={lst:dlp-selenium}, captionpos=b, basicstyle=\small\ttfamily]
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+textarea = wait.until(EC.presence_of_element_located((By.ID, "clientDataClear")))
+textarea.clear()
+textarea.send_keys(batch)
 \end{lstlisting}
+}
+
+
+Na verzending wordt de gelekte data teruggelezen en geëvalueerd \ref{lst:dlp-teruggelezen}. Netskope staat in alert modus, zodat alle keren dat er gevoelige data wordt gedetecteerd, een incident wordt aangemaakt. 
+
+{\small
+\begin{lstlisting}[language=Python, caption={Versturen van batches via Selenium},label={lst:dlp-teruggelezen}, captionpos=b, basicstyle=\small\ttfamily]
+leaked_box = driver.find_element(By.ID, "clientDataLeaked")
+leaked_data = leaked_box.get_attribute("value")
+print(f"Gelekte data:\n{leaked_data}")
+\end{lstlisting}
+}
+
+Elke testcyclus werd afgesloten met een reset van het formulier om interferentie te voorkomen. 
+Elk incident werd gelogd op Netskope en zal in Hoofdstuk \ref{ch:resultaten} verder worden besproken.
+
+% \begin{lstlisting}[language=Python,label={lst:dlp-selenium},caption={Selenium-script voor batchgewijze verzending van testdata}]
+%     code hier
+% \end{lstlisting}
 
 % \begin{lstlisting}[style=custompython,caption={Selenium-script voor batchgewijze verzending van testdata},label={lst:dlp-selenium}]
 %     from selenium import webdriver
@@ -517,6 +468,10 @@ Aangezien de focus van dit onderzoek ligt op de DLP-regels, zal deze integratie 
 % Forward proxy and API
 % Linode, Akamai, AWS, Azure, Google Cloud, Digital Ocean, OVH, Vultr, Hetzner, Kinsta, Cloudflare,
 
+In de IaaS-omgeving biedt Netskope beveiliging aan de hand van forward proxy en API-integraties. 
+Platforms zoals \textbf{\textit{AWS}}, \textbf{\textit{Azure}}, \textbf{\textit{Google Cloud}}, \textbf{\textit{DigitalOcean}}, \textbf{\textit{OVH}}, \textbf{\textit{Hetzner}}, \textbf{\textit{Linode}} 
+en \textbf{\textit{Cloudflare}} vallen onder deze categorie. Deze cloudinfrastructuurplatforms worden vaak gebruikt voor het hosten van virtuele machines, opslagdiensten en netwerkcomponenten.
+
 % De IaaS-toepassingen omvatten onder andere AWS, Azure en Google Cloud. 
 % Zowel API-gebaseerde scanning van opslag (zoals S3-buckets) als realtime monitoring via proxies werden onderzocht. 
 % In deze omgeving werd gecontroleerd op het onbedoeld delen van gevoelige bestanden of configuraties, 
@@ -524,10 +479,14 @@ Aangezien de focus van dit onderzoek ligt op de DLP-regels, zal deze integratie 
 % Incidentmeldingen werden gelogd conform de NIS2-verplichtingen.
 
 
+
+
 \subsection{\IfLanguageName{dutch}{Email}{Email}}
 \label{subsubsec:email-poc}
 % Webmail and API
 % Outlook, Gmail, Exchange, Office 365, Thunderbird, Protonmail, Mailchimp, Sendinblue
+
+
 
 % Voor e-mailverkeer werd DLP toegepast op zowel webmail (zoals Gmail, Outlook Web Access) als traditionele clients (Thunderbird, Outlook). 
 % Netskope detecteerde en blokkeerde gevoelige bijlagen of tekstinhoud vóór verzending (outbound). 
@@ -569,3 +528,56 @@ Aangezien de focus van dit onderzoek ligt op de DLP-regels, zal deze integratie 
 % \item \textbf{Email}: Bij het beheren van e-mailverkeer, zoals webmail, richt de uitgewerkte DLP-oplossing zich zowel op gegevens in beweging als op gegevens in rust.
 % \item \textbf{Endpoint}: Endpoint Data Loss Prevention (DLP) richt zich op het beschermen van gegevens in gebruik (\textit{Data-in-Use}) door middel van endpointbeveiliging. Dit houdt het volgende in: het monitoren en beperken van gegevensoverdracht via USB-opslagmedia, klemborden, printers en andere externe apparaten.
 % \end{itemize}
+
+\section{\IfLanguageName{dutch}{Automatisering van Gegevensverwerking en Testverkeer}{Automation of Data Processing and Test Traffic}}
+\label{sec:automatisering-poc}
+
+% Om de DLP-regels te testen werd een Python-script ontwikkeld dat een lokaal Flask-webformulier draait en dit via ngrok publiek toegankelijk stelt \autocite{ngrok2025}. 
+% Een Selenium WebDriver bestuurt vervolgens een browser om gebruikersgedrag te simuleren. Het script vult het formulier in met \textt{textarea.send_keys(..)} \ref{lst:ngrok-textarea}
+% en verstuurt de gegevens naar de server met \textt{element.click()} \ref{lst:ngrok-click} \autocite{Selenium2025ActionChains, Selenium2025WebDriver}.
+% \textcite{Parmar2024} legde kort de basis uit van hoe Selenium werkt en hoe het kan worden gebruikt om een webbrowser te automatiseren.
+% Deze aanpak is terug te vinden in de codefragmenten  
+
+% Selenium2025ActionChains   Selenium2025WebDriver   Parmar2024
+
+% {\small
+% \begin{lstlisting}[language=Python,caption={textarea_send_key},label={lst:ngrok-textarea}, captionpos=b, basicstyle=\small\ttfamily]
+% def try_send(email_content):
+% for attempt in range(RETRY_LIMIT + 1):
+%     try:
+%         textarea = wait.until(EC.presence_of_element_located((By.ID, "sensitive_data")))
+%         textarea.clear()
+%         try:
+%             textarea.send_keys(email_content)
+%         except Exception:
+%             actions = ActionChains(driver)
+%             actions.move_to_element(textarea).click().send_keys(email_content)
+%             actions.perform()
+% \end{lstlisting}
+% }
+
+% {\small
+% \begin{lstlisting}[language=Python,caption={element_click},label={lst:ngrok-click}, captionpos=b, basicstyle=\small\ttfamily]
+% WebDriverWait(driver, 5).until(
+%     EC.presence_of_element_located((By.ID, "result"))
+% )
+% \end{lstlisting}
+% }
+
+
+% In het kader van deze Proof of Concept werd een aangepaste automatisatiepijplijn ontwikkeld om testdata efficiënt en gecontroleerd aan een Data Loss Prevention (DLP)-systeem aan te bieden. 
+% Hiervoor werd gekozen om gebruik te maken van Selenium WebDriver in combinatie met een lokale webapplicatie die tijdelijk toegankelijk werd gemaakt via Ngrok. 
+% Selenium bood de flexibiliteit om menselijke interactie met de webinterface na te bootsen, wat essentieel was voor het correct simuleren van gebruikersgedrag zonder manuele tussenkomst. 
+% Ngrok werd gekozen om de applicatie die lokaal draait tijdelijk en veilig publiek beschikbaar te maken, zonder extra netwerkinfrastructuur of firewall-aanpassingen. 
+% Door testdata automatisch te injecteren in de webinterface en bijhorende response-informatie te verzamelen, 
+% werd een schaalbare en reproduceerbare testomgeving opgezet voor de evaluatie van verschillende DLP-regels en detectielogica.
+
+\section{\IfLanguageName{dutch}{Netskope alerts}{Netskope alerts}}
+\label{subsubsec:netskope-alerts}
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{img/netskopeinnovator.png}
+%     \caption{ \autocite{Hille2018}}
+%     \label{fig:netskope}
+% \end{figure}

@@ -1,0 +1,316 @@
+%%=============================================================================
+%% Appendix
+%%=============================================================================
+
+\chapter{Appendix}
+\label{app:appendix}
+
+De configuratie in Tabel~\ref{tab:custom-eu-card} werd gebruikt om in Netskope creditcardnummers te detecteren aan de hand van vooraf gedefinieerde identifiers.  
+Het script in Lijst~\ref{lst:dlp-script} automatiseert het verzenden van testgegevens via \texttt{https://dlptoolbox.com} en Netskope om de detectie van creditcardnummers te testen.
+
+% \section{Custom DLP-regel: Detectie van creditcardnummers}
+% \label{sec:custom-dlp-regel}
+
+\begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{p{4cm} p{10cm}}
+        \toprule
+        \textbf{Regel} & EU - PCI - Card Number \\
+        \midrule
+        \textbf{Type} & DLP Rule \\
+        \textbf{Expressie} & \texttt{P0 OR P1 OR P2 OR P3 OR P4 OR P5 OR P6 OR P7 OR P8 OR P9 OR P10 OR P11 OR P12 OR (P13 OR P14 OR P15 OR P16) OR (P17 OR P18 OR P19 OR P20) OR (P21 OR P22 OR P23 OR P24) OR (P25 OR P26 OR P27 OR P28 OR P29 OR P30 OR P31) OR (P32 OR P33 OR P34 OR P35) OR (P36 OR P37 OR P38)} \\
+        \textbf{Predefined Identifiers} & 
+        (P0) - Card Numbers (all) \newline
+        (P1) - Card Numbers (Major Networks; with spaces) \newline
+        (P2) - Card Numbers (Major Networks; all) \newline
+        (P3) - Card Numbers (Major Networks; unformatted) \newline
+        (P4) - Card Numbers (Major Networks; with dots) \newline
+        (P5) - Card Numbers (Major Networks; with hyphens) \newline
+        (P6) - Card Numbers (Maestro) \newline
+        (P7) - Deposit Account Numbers (BE) \newline
+        (P8) - Card Numbers (Mastercard) \newline
+        (P9) - Card Numbers (VISA) \newline
+        (P10) - Defunct Card Numbers (Bankcard) \newline
+        (P11) - Defunct Card Numbers (all) \newline
+        (P12) - Domestic Card Numbers (all) \newline
+        (P13) - Card Numbers (19 digits, all) \newline
+        (P14) - Card Numbers (19 digits, unformatted) \newline
+        (P15) - Card Numbers (19 digits, with hyphens) \newline
+        (P16) - Card Numbers (19 digits, with spaces) \newline
+        (P17) - Card Numbers (18 digits, all) \newline
+        (P18) - Card Numbers (18 digits, unformatted) \newline
+        (P19) - Card Numbers (18 digits, with hyphens) \newline
+        (P20) - Card Numbers (18 digits, with spaces) \newline
+        (P21) - Card Numbers (17 digits, all) \newline
+        (P22) - Card Numbers (17 digits, unformatted) \newline
+        (P23) - Card Numbers (17 digits, with hyphens) \newline
+        (P24) - Card Numbers (17 digits, with spaces) \newline
+        (P25) - Card Numbers (16 digits, all) \newline
+        (P26) - Card Numbers (16 digits, unformatted) \newline
+        (P27) - Card Numbers (16 digits, with dots) \newline
+        (P28) - Card Numbers (16 digits, with hyphens) \newline
+        (P29) - Card Numbers (16 digits, with non-breaking spaces) \newline
+        (P30) - Card Numbers (16 digits, with soft hyphens) \newline
+        (P31) - Card Numbers (16 digits, with spaces) \newline
+        (P32) - Card Numbers (15 digits, all) \newline
+        (P33) - Card Numbers (15 digits, unformatted) \newline
+        (P34) - Card Numbers (15 digits, with hyphens) \newline
+        (P35) - Card Numbers (15 digits, with spaces) \\
+        \textbf{Gebruikte techniek} & Vooraf gedefinieerde DLP identifiers gebruikt rond creditcardnummers \\
+        \textbf{Bron(nen)} & Null \\
+        \textbf{Threshold} & Low: 1 \quad Medium: 2 \quad High: 5 \quad Critical: 9 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Custom DLP-regel: Detectie van creditcardnummers}
+    \label{tab:custom-eu-card}
+\end{table}
+
+% \section{Custom DLP-regel: Detectie van creditcardnummers in combinatie met banktermen}
+
+\begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{p{4cm} p{10cm}}
+        \toprule
+        \textbf{Regel} & BE - Card Number with Terms \\
+        \midrule
+        \textbf{Type} & DLP Rule \\
+        \textbf{Expressie} & \texttt{(P0 NEAR P36) OR (P0 NEAR P37) OR (P0 NEAR P38) OR (P0 NEAR P39) OR (P0 NEAR P40) OR (P1 NEAR P36) OR (P1 NEAR P37) OR (P1 NEAR P38) OR (P1 NEAR P39) OR (P1 NEAR P40) OR (P2 NEAR P36) OR (P2 NEAR P37) OR (P2 NEAR P38) OR (P2 NEAR P39) OR (P2 NEAR P40) OR (P3 NEAR P36) OR (P3 NEAR P37) OR (P3 NEAR P38) OR (P3 NEAR P39) OR (P3 NEAR P40) OR (P4 NEAR P36) OR (P4 NEAR P37) OR (P4 NEAR P38) OR (P4 NEAR P39) OR (P4 NEAR P40) OR (P5 NEAR P36) OR (P5 NEAR P37) OR (P5 NEAR P38) OR (P5 NEAR P39) OR (P5 NEAR P40) OR (P6 NEAR P36) OR (P6 NEAR P37) OR (P6 NEAR P38) OR (P6 NEAR P39) OR (P6 NEAR P40) OR \newline
+        ... \newline
+        (P35 NEAR P36) OR (P35 NEAR P37) OR (P35 NEAR P38) OR (P35 NEAR P39) OR (P35 NEAR P40)} \\
+        \textbf{Predefined Identifiers} & 
+        Same as \ref{tab:custom-eu-card} \newline
+        (P36) - Card Number Terms (English) \newline
+        (P37) - Card Number Terms (Spanish) \newline
+        (P38) - Card Security Terms (English) \newline
+        (P39) - Bank Account Number Terms (English) \newline
+        (P40) - Bank Account Terms (BE) \\
+        \textbf{Gebruikte techniek} & Combinatie van vooraf gedefinieerde DLP identifiers rond creditcardnummers met woordenlijsten van Belgische termen. \\
+        \textbf{Bron(nen)} & Null \\
+        \textbf{Threshold} & Low: 1 \quad Medium: 2 \quad High: 5 \quad Critical: 9 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Custom DLP-regel: Detectie van creditcardnummers in combinatie met banktermen}
+    \label{tab:custom-eu-card-terms}
+\end{table}
+
+
+% \section{Selenium-script voor batchgewijze verzending van testdata}
+% \label{sec:selenium-script}
+
+\begin{lstlisting}[style=custompython,caption={Selenium-script voor batchgewijze verzending van testdata},label={lst:dlp-script}]
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    import time
+    
+    # Config
+    URL = "https://dlptoolbox.com/postmaster.aspx"
+    INPUT_FILE = "dlp_testdata.csv"
+    ROWS_PER_BATCH = 10
+    WAIT_SECONDS = 5
+    
+    # Setup Chrome
+    options = Options()
+    options.add_argument("--headless")
+    driver = webdriver.Chrome(options=options)
+    wait = WebDriverWait(driver, 10)
+    
+    driver.get(URL)
+    iframe = wait.until(EC.presence_of_element_located((By.ID, "ifrPOST")))
+    driver.switch_to.frame(iframe)
+    
+    with open(INPUT_FILE, 'r') as f:
+        lines = [line.strip() for line in f if line.strip()]
+    
+    for i in range(0, len(lines), ROWS_PER_BATCH):
+        batch = "\n".join(lines[i:i+ROWS_PER_BATCH])
+        print(f"Versturen batch {i//ROWS_PER_BATCH + 1}:\n{batch}")
+    
+        textarea = wait.until(EC.presence_of_element_located((By.ID, "clientDataClear")))
+        textarea.clear()
+        textarea.send_keys(batch)
+    
+        launch_btn = wait.until(EC.element_to_be_clickable((By.ID, "btnLaunch")))
+        launch_btn.click()
+        time.sleep(WAIT_SECONDS)
+    
+        leaked_box = driver.find_element(By.ID, "clientDataLeaked")
+        leaked_data = leaked_box.get_attribute("value")
+        print(f"Gelekte data ({len(leaked_data)} tekens):\n{leaked_data}")
+        print("—" * 50)
+    
+        try:
+            reset_btn = wait.until(EC.element_to_be_clickable((By.ID, "btnReset")))
+            reset_btn.click()
+            time.sleep(1)
+        except Exception as e:
+            print(f"[!] Reset mislukt: {e}")
+    
+    driver.quit()
+\end{lstlisting}
+
+test
+
+\begin{lstlisting}[style=custompython,caption={Selenium WebDriver script voor automatisering van gegevensverwerking},label={lst:send-request}]
+    import csv
+    import sys
+    import time
+    import os
+    import signal
+    from datetime import datetime
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.common.action_chains import ActionChains
+
+    csv.field_size_limit(sys.maxsize)
+
+    URL = "https://a5c0-2a02-1812-2e39-6e00-412f-e204-a11e-c6f2.ngrok-free.app/"
+    SUMMARY_FILE = "emails_summary.csv"
+    EMAILS_FILE = "emails.csv"
+    LAST_SENT_FILE = "last_sent.txt"
+    LOG_FILE = "log.csv"
+    WAIT_SECONDS = 1
+    RETRY_LIMIT = 1
+    PAUSE_BETWEEN_FIELDS = 0.05
+\end{lstlsting}
+
+\begin{lstlisting}
+    interrupted = False
+    def handle_sigint(signum, frame):
+        global interrupted
+        interrupted = True
+        print("\nOnderbroken (CTRL+C)...")
+
+    signal.signal(signal.SIGINT, handle_sigint)
+
+    options = Options()
+    #options.add_argument("--headless")  # Uncomment als je headless wil
+    options.add_argument("--disable-gpu")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    driver = webdriver.Chrome(options=options)
+    wait = WebDriverWait(driver, 6)
+
+    def bypass_ngrok_warning():
+        try:
+            visit_btn = WebDriverWait(driver, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Visit Site')]"))
+            )
+            print("Ngrok waarschuwingspagina gedetecteerd...")
+            visit_btn.click()
+            time.sleep(2)
+        except:
+            pass
+
+    def log_email_send(file_key, content):
+        timestamp = datetime.now().strftime("%-m/%-d/%y %-I:%M %p")
+        size = len(content.encode('utf-8'))
+        log_exists = os.path.exists(LOG_FILE)
+
+        with open(LOG_FILE, "a", encoding="utf-8", newline='') as logfile:
+            writer = csv.writer(logfile)
+            if not log_exists:
+                writer.writerow(["timestamp", "file", "size_bytes"])
+            writer.writerow([timestamp, file_key, size])
+
+    emails_dict = {}
+    with open(EMAILS_FILE, "r", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            emails_dict[row["file"].strip()] = row["message"].strip()
+
+    to_send = []
+    with open(SUMMARY_FILE, "r", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            file_key = row["file"].strip()
+            if file_key in emails_dict:
+                to_send.append(file_key)
+
+    start_index = 0
+    if os.path.exists(LAST_SENT_FILE):
+        with open(LAST_SENT_FILE, "r") as f:
+            last_sent = f.read().strip()
+            if last_sent in to_send:
+                start_index = to_send.index(last_sent) + 1
+
+    total_sent = 0
+    failed = []
+
+    def try_send(email_content):
+        for attempt in range(RETRY_LIMIT + 1):
+            try:
+                textarea = wait.until(EC.presence_of_element_located((By.ID, "sensitive_data")))
+                textarea.clear()
+                try:
+                    textarea.send_keys(email_content)
+                except Exception:
+                    actions = ActionChains(driver)
+                    actions.move_to_element(textarea).click().send_keys(email_content)
+                    actions.perform()
+
+                time.sleep(PAUSE_BETWEEN_FIELDS)
+
+                launch_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Launch']")))
+                launch_btn.click()
+
+                RESULTAAT ZICHTBAAR I
+                WebDriverWait(driver, 5).until(
+                    EC.presence_of_element_located((By.ID, "result"))
+                )
+                return True
+
+            except Exception:
+                if attempt < RETRY_LIMIT:
+                    print("Formulier mislukte, probeer herladen...")
+                    driver.get(URL)
+                    bypass_ngrok_warning()
+                    time.sleep(1)
+                else:
+                    return False
+
+    driver.get(URL)
+    bypass_ngrok_warning()
+    print(f"Start verzenden vanaf index {start_index} ({to_send[start_index]})")
+
+    try:
+        for i, file_key in enumerate(to_send[start_index:], start=start_index + 1):
+            if interrupted:
+                break
+
+            print(f"\n[{i}/{len(to_send)}] Versturen: {file_key}")
+            email_content = emails_dict[file_key]
+
+            success = try_send(email_content)
+            if success:
+                print(f"Succesvol verzonden ({len(email_content)} tekens)")
+                total_sent += 1
+                with open(LAST_SENT_FILE, "w") as f:
+                    f.write(file_key)
+                log_email_send(file_key, email_content)
+                time.sleep(WAIT_SECONDS)
+            else:
+                print(f"Mislukt na retry: {file_key}")
+                failed.append(file_key)
+
+    finally:
+        try:
+            driver.quit()
+        except Exception:
+            pass  # suppress quit errors
+
+        print("\nSAMENVATTING")
+        print(f"Verstuurd: {total_sent}")
+        print(f"Mislukt: {len(failed)}")
+        if failed:
+            print("Mislukte e-mails:")
+            for f in failed:
+                print(f" - {f}")
+        if total_sent > 0:
+            print(f"Laatste succesvolle e-mail: {to_send[start_index + total_sent - 1]}")
+        sys.exit(0)
+\end{lstlisting}
