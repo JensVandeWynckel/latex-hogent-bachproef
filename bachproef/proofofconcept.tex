@@ -19,6 +19,7 @@ Deze nieuwe regelset zal een aanvullende rol krijgen om samen met de vooraf gede
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{p{3cm}p{5cm}p{7cm}}
         \toprule
         \textbf{Wetgeving} & \textbf{Netskope Regelsets} & \textbf{Toelichting} \\
@@ -56,6 +57,7 @@ Deze nieuwe regelset zal een aanvullende rol krijgen om samen met de vooraf gede
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{p{3cm}p{5cm}p{6cm}}
         \toprule
         \textbf{DLP-profiel} & \textbf{Gebruikte regels (predefined \& custom)} & \textbf{Toelichting / Doel} \\
@@ -177,6 +179,7 @@ Dankzij het gebruik van DLP-regels met en zonder termen, kunnen false positives 
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{p{4cm} p{10cm}}
         \toprule
         \textbf{Regel} & BE - National ID and Surname \\
@@ -205,6 +208,7 @@ Dankzij het gebruik van DLP-regels met en zonder termen, kunnen false positives 
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{p{4cm} p{10cm}}
         \toprule
         \textbf{Regel} & BE -  \\
@@ -231,6 +235,7 @@ Dankzij het gebruik van DLP-regels met en zonder termen, kunnen false positives 
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{p{4cm} p{10cm}}
         \toprule
         \textbf{Regel} & BE - PCI - IBAN \\
@@ -254,6 +259,7 @@ Dankzij het gebruik van DLP-regels met en zonder termen, kunnen false positives 
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{p{4cm} p{10cm}}
         \toprule
         \textbf{Regel} & BE - PCI - IBAN with Bank Terms \\
@@ -280,38 +286,32 @@ Dankzij het gebruik van DLP-regels met en zonder termen, kunnen false positives 
 \end{table}
 
 
+% \subsection{\IfLanguageName{dutch}{Persoonlijke gegevens (PII)}{Personal Data}}
+% \label{subsubsec:Persoonlijke gegevens}
 
-\subsection{\IfLanguageName{dutch}{Persoonlijke gegevens (PII)}{Personal Data}}
-\label{subsubsec:Persoonlijke gegevens}
+% \subsubsection{\IfLanguageName{dutch}{Identificatiegerichte regels}{Identification Rules}}
+% \label{subsubsec:identificatiegerichte-regels}
 
-\subsubsection{\IfLanguageName{dutch}{Identificatiegerichte regels}{Identification Rules}}
-\label{subsubsec:identificatiegerichte-regels}
+% \subsubsection{\IfLanguageName{dutch}{Gevoelige persoonsgegevens}{Sensitive Personal Data}}
+% \label{subsubsec:gevoelige-persoonsgegevens}
 
-\subsubsection{\IfLanguageName{dutch}{Gevoelige persoonsgegevens}{Sensitive Personal Data}}
-\label{subsubsec:gevoelige-persoonsgegevens}
-
-
-
-\subsection{\IfLanguageName{dutch}{Betalingsgegevens (PCI)}{Financial Data}}
-\label{subsubsec:betalingsgegevens}
-
-% \subsubsection{\IfLanguageName{dutch}{)}{}}
-% \label{subsubsec:}
-
-https://www.b2bpay.co/list-banks-europe
-
+% \subsection{\IfLanguageName{dutch}{Betalingsgegevens (PCI)}{Financial Data}}
+% \label{subsubsec:betalingsgegevens}
+% % \subsubsection{\IfLanguageName{dutch}{)}{}}
+% % \label{subsubsec:}
+% % https://www.b2bpay.co/list-banks-europe
 
 
 \section{\IfLanguageName{dutch}{Toepassingen}{Applications}}
 \label{subsubsec:toepassingen}
 
 Tabel \ref{tab:toepassingen} geeft een overzicht van de gemaakte profielen 
-Dit zijn toepassingen van de eerder opgestelde regels in Tabel \ref{tab:datatypes_risico}.
-
+Dit zijn toepassingen van de eerder opgestelde regels in tabel \ref{tab:datatypes_risico_uitgebreid}.
 
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{p{3cm}p{5cm}p{6cm}}
         \toprule
         \textbf{Toepassing} & \textbf{Categorieën (Netskope)} & \textbf{Voorbeelden van applicaties} \\
@@ -327,6 +327,22 @@ Dit zijn toepassingen van de eerder opgestelde regels in Tabel \ref{tab:datatype
     \label{tab:toepassingen}
 \end{table}
 
+% In dit onderzoek wordt een Proof of Concept (PoC) klantomgeving ontwikkeld voor Evolane. 
+% In deze omgeving worden zowel confidentiële als niet-confidentiële gegevens verwerkt en opgeslagen. 
+% Door een Data Leakage Prevention-oplossing te implementeren, worden deze gegevens beveiligd tegen lekken. De DLP-oplossing moet voldoen aan de Belgische wetgeving, 
+% waaronder de Algemene Verordening Gegevensbescherming (AVG) over persoonsgegevens (PII) en de Payment Card Industry Data Security Standards (PCI DSS) met betrekking tot betalingsgegevens (PCI). 
+% De DLP-oplossing moet verder rekening houden met de NIS2-richtlijn en andere cybersecuritykaders, zoals het CCB-kader of ISO 27001. 
+% De PoC bevat een Netskope-gebaseerde DLP-oplossing die confidentiële gegevens beschermt en voldoet aan de Belgische regelgeving. 
+
+% Om een breder inzicht te verkrijgen in de implementatie en optimalisatie van Data Loss Prevention (DLP)-oplossingen, wordt in deze bachelorproef verder onderzocht hoe DLP kan worden toegepast in verschillende contexten en omgevingen. De onderstaande gebieden vormen de focus van dit onderzoek:
+
+% \begin{itemize}
+% \item \textbf{SaaS} (Software as a Service): DLP-oplossingen richten zich op gegevens in beweging (\textit{Data-in-Motion}), zoals bij het gebruik van forward proxies en bij statische gegevens (\textit{Data-at-Rest}) voor APIs.
+% \item \textbf{Web}: Hier wordt DLP toegepast op geëncrypteerd verkeer en voor alle poorten, met focus op gegevens in beweging tussen systemen.
+% \item \textbf{IaaS} (Infrastructure as a Service): Net zoals bij SaaS, wordt DLP toegepast op gegevens in beweging en in rust, ook 
+% \item \textbf{Email}: Bij het beheren van e-mailverkeer, zoals webmail, richt de uitgewerkte DLP-oplossing zich zowel op gegevens in beweging als op gegevens in rust.
+% \item \textbf{Endpoint}: Endpoint Data Loss Prevention (DLP) richt zich op het beschermen van gegevens in gebruik (\textit{Data-in-Use}) door middel van endpointbeveiliging. Dit houdt het volgende in: het monitoren en beperken van gegevensoverdracht via USB-opslagmedia, klemborden, printers en andere externe apparaten.
+% \end{itemize}
 
 
 \subsection{\IfLanguageName{dutch}{Software as a Service (SaaS)}{Software as a Service (SaaS)}}
@@ -361,27 +377,28 @@ Aangezien de focus van dit onderzoek ligt op de DLP-regels, zal deze integratie 
 % Forward proxy hiermee 
 % LinkedIn, Github
 
-In de webomgeving wordt uitgaand verkeer beveiligd via een forward proxy in combinatie met SSL-inspectie. 
-Netskope onderschept versleutelde HTTPS-verzoeken en analyseert deze op de aanwezigheid van confidentiële data.
+In de webomgeving wordt uitgaand verkeer beveiligd via een forward proxy in combinatie met \gls{ssl}-inspectie. 
+Netskope onderschept versleutelde \gls{https}-verzoeken en analyseert deze op de aanwezigheid van confidentiële data.
 Zo wordt het dataverlies via webformulieren, berichten of uploads proactief tegengehouden. 
 Deze aanpak focust op \textit{data-in-motion} en wordt toegepast op websites zoals \textbf{LinkedIn}, \textbf{GitHub}, \textbf{Messenger}, \textbf{ChatGPT} en \textbf{Google Forms}.
 
-Om deze functionaliteit te testen, wordt gebruikt gemaakt van een dataset met realistische testwaarden. 
-De testdata bevatte combinaties van persoonsnamen, en creditcardnummers (\textit{Visa} en \textit{Mastercard}), gestructureerd in \gls{csv}-formaat. Enkele voorbeelden:
+De eerste test om te zien of de Netskope DLP-regels correct werken, werd uitgevoerd op de website \texttt{dlptoolbox.com}.
+Het gebruikte script \ref{lst:dlp-script} is ontworpen om testgegevens van \texttt{dlptest.com} te versturen naar het testformulier op \texttt{dlptoolbox.com}.
+De testdata bevatte combinaties van persoonsnamen, en creditcardnummers (\textit{Visa} en \textit{Mastercard}), gestructureerd in \gls{csv}-formaat, zoals hieronder weergegeven:
 
 \begin{quote}\small
-\texttt{Robert Aragon, 4929-3813-3266-4295} \
+\texttt{Robert Aragon, 4929-3813-3266-4295} \newline
 \texttt{Ashley Borden, 5370-4638-8881-3020}
 \end{quote}
 
-Voor deze evaluatie werd een Python-script opgebouwd dat gebruikmaakt van Selenium. 
+Voor deze korte evaluatie werd een \textit{Python}-script opgebouwd dat gebruikmaakt van \textbf{Selenium}. 
 Het script is ontworpen om testgegevens aan de hand van batches in te voeren via het online platform \texttt{dlptoolbox.com}.
 Dit platform biedt een veilige manier om DLP-regels realistisch te testen binnen de browseromgeving van de gebruiker.
 Het script stuurt gegevens automatisch in batches van tien rijen naar het testformulier \ref{lst:dlp-selenium} en verzendt deze data aan de hand van een \texttt{POST}-request naar de server.
-Dit werd tijdens de evaluatie in rijen van 10 gedaan, aangezien de testgegevens \ref{tab:csv-testdata} 30 000 rijen bevatten.
+Dit werd tijdens de uitvoering in rijen van 10 gedaan, aangezien de dataset \autocite{DLPTest2025Sample} 30 000 rijen bevat.
 
 {\small
-\begin{lstlisting}[language=Python,caption={Versturen van batches via Selenium},label={lst:dlp-selenium}, captionpos=b, basicstyle=\small\ttfamily]
+\begin{lstlisting}[style=custompython,caption={Versturen van batches via Selenium},label={lst:dlp-selenium}, captionpos=b, basicstyle=\small\ttfamily]
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 textarea = wait.until(EC.presence_of_element_located((By.ID, "clientDataClear")))
@@ -390,21 +407,22 @@ textarea.send_keys(batch)
 \end{lstlisting}
 }
 
-
-Na verzending wordt de gelekte data teruggelezen en geëvalueerd \ref{lst:dlp-teruggelezen}. Netskope staat in alert modus, zodat alle keren dat er gevoelige data wordt gedetecteerd, een incident wordt aangemaakt. 
+Na verzending wordt de gelekte data teruggestuurd \ref{lst:dlp-teruggelezen}. Netskope staat in alert modus, zodat alle keren dat er gevoelige data wordt gedetecteerd, een incident wordt aangemaakt. 
 
 {\small
-\begin{lstlisting}[language=Python, caption={Versturen van batches via Selenium},label={lst:dlp-teruggelezen}, captionpos=b, basicstyle=\small\ttfamily]
+\begin{lstlisting}[style=custompython, caption={Versturen van batches via Selenium},label={lst:dlp-teruggelezen}, captionpos=b, basicstyle=\small\ttfamily]
 leaked_box = driver.find_element(By.ID, "clientDataLeaked")
 leaked_data = leaked_box.get_attribute("value")
 print(f"Gelekte data:\n{leaked_data}")
 \end{lstlisting}
 }
 
-Elke testcyclus werd afgesloten met een reset van het formulier om interferentie te voorkomen. 
-Elk incident werd gelogd op Netskope en zal in Hoofdstuk \ref{ch:resultaten} verder worden besproken.
+Elke testcyclus wordt afgesloten met een reset van het formulier om interferentie te voorkomen. 
+De testgegevens en het script zijn louter \textbf{\textit{ter illustratie}} en worden niet gebruikt in de uiteindelijke evaluatie van de DLP-regels.
+Het script wordt wel aangepast om aan de hand van een eigen opgestelde \textit{Ngrok}-server de data te versturen zodat Netskope de data kon scannen \ref{sec:automatisering-poc}.
 
-% \begin{lstlisting}[language=Python,label={lst:dlp-selenium},caption={Selenium-script voor batchgewijze verzending van testdata}]
+
+% \begin{lstlisting}[style=custompython,label={lst:dlp-selenium},caption={Selenium-script voor batchgewijze verzending van testdata}]
 %     code hier
 % \end{lstlisting}
 
@@ -486,91 +504,203 @@ en \textbf{\textit{Cloudflare}} vallen onder deze categorie. Deze cloudinfrastru
 % Webmail and API
 % Outlook, Gmail, Exchange, Office 365, Thunderbird, Protonmail, Mailchimp, Sendinblue
 
-
-
-% Voor e-mailverkeer werd DLP toegepast op zowel webmail (zoals Gmail, Outlook Web Access) als traditionele clients (Thunderbird, Outlook). 
-% Netskope detecteerde en blokkeerde gevoelige bijlagen of tekstinhoud vóór verzending (outbound). 
-% Via API-integraties met Microsoft 365 en Gmail konden berichten en bijlagen worden gescand op basis van GDPR-regels, 
-% PCI-gegevens en Belgische identifiers (zoals RRN of sociale zekerheid). Zo werd voorkomen dat vertrouwelijke informatie onbedoeld via e-mail naar onbevoegde ontvangers werd verzonden.
-
-
-
+Voor emailverkeer kan DLP worden toegepast op zowel webmail (zoals \textbf{\textit{Gmail}} en \textbf{\textit{Outlook Web Access}}) als softwareclients (zoals \textbf{\textit{Thunderbird}} en \textbf{\textit{Outlook}}).
+Netskope biedt ook SMTP Proxy-ondersteuning voor het scannen van emailverkeer \autocite{Netskope2025Email}. Dit omvat het scannen van uitgaande emails op gevoelige bijlagen of tekstinhoud vóór verzending (outbound).
+Deze ondersteuning ligt niet binnen de scope van dit onderzoek, maar eens deze geïmplementeerd is, werkt deze op dezelfde manier als de webmail en client-integraties.
+Netskope zal voordat de email wordt verzonden (\textit{data-in-motion}), de inhoud scannen op gevoelige gegevens.
+Via API-integraties met \textbf{\textit{Microsoft 365}} en \textbf{\textit{Gmail}} kunnen berichten en bijlagen worden gescand op basis van GDPR-regels, PCI-gegevens en Belgische identifiers (zoals RRN).
 
 \subsection{\IfLanguageName{dutch}{Endpoint}{Endpoint}}
 \label{subsubsec:endpoint-poc}
 % Endpoint DLP
 % USB, clipboard, printers, external devices
 
-% Op endpoints werd DLP geïmplementeerd via de Netskope Client. 
-% De focus lag op het beveiligen van Data-in-Use. 
-% Dit omvatte monitoring van kopieeracties naar USB-opslag, 
-% gebruik van het klembord (clipboard), en het printen van gevoelige documenten. 
-% In geval van een policyovertreding, zoals het kopiëren van een bestand met gevoelige persoonsgegevens naar een extern apparaat, 
-% werd een waarschuwing getoond of de actie geblokkeerd. Daarnaast werd gecontroleerd of data buiten het bedrijfsnetwerk werd verplaatst zonder encryptie.
+DLP kan op endpoints worden geïmplementeerd, waarbij de focus ligt op het beschermen van gegevens in gebruik (\textit{data-in-use}). 
+Netskope bekijkt en beperkt de overdracht van gevoelige gegevens via \gls{usb}-opslagmedia, klemborden, printers en andere externe apparaten.
+Deze functionaliteit kan geblokkeerd of toegelaten worden op basis van de DLP-regels die zijn ingesteld.
+De testen worden manueel uitgevoerd op een \textit{MacOS}-systeem, de confidentiële gegevens van reeds gedetecteerde testdata wordt opgeslagen en naar een \gls{usb}-stick gekopieerd.
+In geval van een overtreding, zal Netskope een waarschuwing tonen en daarna de actie blokkeren.
 
+\subsection{\IfLanguageName{dutch}{Testgegevens}{Test Data}}
+\label{subsubsec:poc-testgegevens}
 
+Voor dit onderzoek is \textbf{een achtste} van de testgegevens gebruikt van \textit{Enron's Email Dataset} \autocite{Cukierski2015Enron}.
+Deze dataset bevat emails van het bedrijf Enron, zoals besproken in sectie~\ref{sec:detectienauwkeurigheid-literatuurstudie}.
+De emails worden gecategoriseerd onder \textbf{user}~\ref{subsubsec:dataset-categorisering} en bevatten zowel confidentiële als niet-confidentiële gegevens.
+Het doel van deze testgegevens is om te zien hoeveel confidentiële gegevens gedetecteerd kunnen worden door de Netskope agent en om de detectienauwkeurigheid van de DLP-regels te evalueren.
+Tijdens de evaluatie zullen de door Netskope gedetecteerde gegevens steekproefsgewijs worden vergeleken en hieruit volgt een conclusie.
+Een voorbeeld van zo'n email is te zien in Listing~\ref{lst:dlp-email-ex}.
 
+\begin{lstlisting}[style=custompython, caption={Voorbeeld van een email uit de Enron dataset}, label={lst:dlp-email-ex}, captionpos=b]
+Message-ID: <14280616.1075855349137.JavaMail.evans@thyme>
+Date: Fri, 7 Dec 2001 09:40:02 -0800 (PST)
+From: martin.cuilla@enron.com
+To: rob@ramind.com
+Subject: RE:
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-From: Cuilla, Martin </O=ENRON/OU=NA/CN=RECIPIENTS/CN=MCUILLA>
+X-To: 'Rob Miller' <rob@ramind.com>
+X-cc: 
+X-bcc: 
+X-Folder: \Martin_Cuilla_Jan2002_1\Cuilla, Martin\Sent Items
+X-Origin: Cuilla-M
+X-FileName: mcuilla (Non-Privileged).pst
 
+yeah i am in the process of interviewing but i have a job at least for the next 90 days and they are working on a job offer for if i stay on past that.  unfortunately most of the other job offers are out of texas though - stamford, connecticut; columbus, ohio; and kansas city, missouri.  hopefully in a couple of weeks i will know if i am staying here or going elsewhere.
 
-% In dit onderzoek wordt een Proof of Concept (PoC) klantomgeving ontwikkeld voor Evolane. 
-% In deze omgeving worden zowel confidentiële als niet-confidentiële gegevens verwerkt en opgeslagen. 
-% Door een Data Leakage Prevention-oplossing te implementeren, worden deze gegevens beveiligd tegen lekken. De DLP-oplossing moet voldoen aan de Belgische wetgeving, 
-% waaronder de Algemene Verordening Gegevensbescherming (AVG) over persoonsgegevens (PII) en de Payment Card Industry Data Security Standards (PCI DSS) met betrekking tot betalingsgegevens (PCI). 
-% De DLP-oplossing moet verder rekening houden met de NIS2-richtlijn en andere cybersecuritykaders, zoals het CCB-kader of ISO 27001. 
-% De PoC bevat een Netskope-gebaseerde DLP-oplossing die confidentiële gegevens beschermt en voldoet aan de Belgische regelgeving. 
+-----Original Message-----
+From: Rob Miller [mailto:rob@ramind.com]
+Sent: Friday, December 07, 2001 11:34 AM
+To: Cuilla, Martin
+Subject: 
 
-% Om een breder inzicht te verkrijgen in de implementatie en optimalisatie van Data Loss Prevention (DLP)-oplossingen, wordt in deze bachelorproef verder onderzocht hoe DLP kan worden toegepast in verschillende contexten en omgevingen. De onderstaande gebieden vormen de focus van dit onderzoek:
+hey marty do you still have a job?
+\end{lstlisting}
 
-% \begin{itemize}
-% \item \textbf{SaaS} (Software as a Service): DLP-oplossingen richten zich op gegevens in beweging (\textit{Data-in-Motion}), zoals bij het gebruik van forward proxies en bij statische gegevens (\textit{Data-at-Rest}) voor APIs.
-% \item \textbf{Web}: Hier wordt DLP toegepast op geëncrypteerd verkeer en voor alle poorten, met focus op gegevens in beweging tussen systemen.
-% \item \textbf{IaaS} (Infrastructure as a Service): Net zoals bij SaaS, wordt DLP toegepast op gegevens in beweging en in rust, ook 
-% \item \textbf{Email}: Bij het beheren van e-mailverkeer, zoals webmail, richt de uitgewerkte DLP-oplossing zich zowel op gegevens in beweging als op gegevens in rust.
-% \item \textbf{Endpoint}: Endpoint Data Loss Prevention (DLP) richt zich op het beschermen van gegevens in gebruik (\textit{Data-in-Use}) door middel van endpointbeveiliging. Dit houdt het volgende in: het monitoren en beperken van gegevensoverdracht via USB-opslagmedia, klemborden, printers en andere externe apparaten.
-% \end{itemize}
+Deze email bevat een bijlage \texttt{X-FileName: pallen.nsf}, 
 
 \section{\IfLanguageName{dutch}{Automatisering van Gegevensverwerking en Testverkeer}{Automation of Data Processing and Test Traffic}}
 \label{sec:automatisering-poc}
 
-% Om de DLP-regels te testen werd een Python-script ontwikkeld dat een lokaal Flask-webformulier draait en dit via ngrok publiek toegankelijk stelt \autocite{ngrok2025}. 
-% Een Selenium WebDriver bestuurt vervolgens een browser om gebruikersgedrag te simuleren. Het script vult het formulier in met \textt{textarea.send_keys(..)} \ref{lst:ngrok-textarea}
-% en verstuurt de gegevens naar de server met \textt{element.click()} \ref{lst:ngrok-click} \autocite{Selenium2025ActionChains, Selenium2025WebDriver}.
-% \textcite{Parmar2024} legde kort de basis uit van hoe Selenium werkt en hoe het kan worden gebruikt om een webbrowser te automatiseren.
-% Deze aanpak is terug te vinden in de codefragmenten  
+Om de DLP-regels te evalueren werd een testscript ontwikkelt in \textbf{Python} dat gebruikersinteracties simuleert via een publieke webinterface. 
+Deze interface wordt gehost met behulp van een lokale Flask-applicatie die tijdelijk toegankelijk is gemaakt via ngrok \autocite{Ngrok2025Flask}. 
+Een Selenium WebDriver bestuurt vervolgens een browser om gebruikersgedrag te simuleren.
+De structuur van het script is onderverdeeld in onderstaande subsecties, die elk een specifiek aspect van de automatisering en evaluatie van DLP-regels behandelen.
+% De structuur van het script is gebaseerd op vier belangrijke pijlers:
 
-% Selenium2025ActionChains   Selenium2025WebDriver   Parmar2024
+% \begin{itemize}[label=\textbullet, leftmargin=2em, itemsep=0.5em]
+%     \item \textbf{Ngrok Webinterface}~\ref{subsubsec:ngrok-webinterface}
+%     \item \textbf{Dataset categorisering}~ \ref{subsubsec:dataset-categorisering}
+%     \item \textbf{Browserautomatisering}~\ref{subsubsec:browserautomatisering}
+%     \item \textbf{Clipboard met Pyperclip}~\ref{subsubsec:clipboard}
+%     \item \textbf{Gebruikersinteractie via ActionChains}~\ref{subsubsec:gebruikersinteractie}
+%     \item \textbf{Logging en herstartbaarheid}~\ref{subsubsec:logging-herstartbaarheid}
+% \end{itemize}
 
-% {\small
-% \begin{lstlisting}[language=Python,caption={textarea_send_key},label={lst:ngrok-textarea}, captionpos=b, basicstyle=\small\ttfamily]
-% def try_send(email_content):
-% for attempt in range(RETRY_LIMIT + 1):
-%     try:
-%         textarea = wait.until(EC.presence_of_element_located((By.ID, "sensitive_data")))
-%         textarea.clear()
-%         try:
-%             textarea.send_keys(email_content)
-%         except Exception:
-%             actions = ActionChains(driver)
-%             actions.move_to_element(textarea).click().send_keys(email_content)
-%             actions.perform()
-% \end{lstlisting}
-% }
+\subsection{\IfLanguageName{dutch}{Ngrok Webinterface}{Ngrok Web Interface}}
+\label{subsubsec:ngrok-webinterface}
 
-% {\small
-% \begin{lstlisting}[language=Python,caption={element_click},label={lst:ngrok-click}, captionpos=b, basicstyle=\small\ttfamily]
-% WebDriverWait(driver, 5).until(
-%     EC.presence_of_element_located((By.ID, "result"))
-% )
-% \end{lstlisting}
-% }
+Voor het opzetten van een tijdelijke webinterface werd gebruik gemaakt van \textbf{ngrok} \autocite{Ngrok2025Flask}.
+Deze tool maakt gratis lokale webapplicaties tijdelijk toegankelijk via een gehashte \gls{url} \texttt{https://<hash>.ngrok-free.app}.
+% \autocite{Ngrok2025NAT} ts 
+\ref{lst:ngrok-webinterface}.
+% Ngrok biedt een veilige tunnel naar de lokale Flask-webapplicatie die draait op poort 5000 \autocite{Ngrok2025NAT}~\ref{lst:ngrok-webinterface}.
+
+\begin{lstlisting}[style=custompython, label={lst:ngrok-webinterface}, caption={Ngrok configuratie voor Flask webinterface}, captionpos=b]
+from flask import Flask, request, render_template
+
+app = Flask(__name__)
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    user_input = None
+    if request.method == 'POST':
+        user_input = request.form.get('sensitive_data')
+        print(f"[RECEIVED DATA]: {user_input}")
+    return render_template('form.html', user_input=user_input)
+
+if __name__ == '__main__':
+    app.run(port=5000)
+\end{lstlisting}
+
+\subsection{\IfLanguageName{dutch}{Dataset categorisering}{Dataset Categorization}}
+\label{subsubsec:dataset-categorisering}
+
+Aangezien Enron's email-dataset \textbf{517 401} verschillende emails bevat \autocite{Cukierski2015Enron}, werd de dataset gecategoriseerd per \textbf{user} \ref{lst:email-summary}. 
+Elke email bevat informatie over de \textbf{user} en wat voor \textbf{type/token} email het is. Een voorbeeld hiervan is te zien in de \gls{csv}-file \ref{lst:dlp-email-ex}.
+De categorisering gebeurt aan de hand van een \gls{csv}-bestand dat \textbf{file}, \textbf{tokens} en \textbf{char\_len} als kolommen heeft.
+Dit is een samenvattend bestand om later bij de evaluatie van Netskope incidenten \ref{sec:incidenten-resultaten} de emails te kunnen terugvinden. 
+
+\begin{lstlisting}[style=custompython, label={lst:dlp-csv}, caption={emails\_summary.csv \gls{csv}-bestand}, captionpos=b]
+file,tokens,char_len
+allen-p/_sent_mail/1.,187,492
+allen-p/_sent_mail/10.,350,1276
+\end{lstlisting}
+
+\begin{lstlisting}[style=custompython, label={lst:dlp-categorisering}, caption={Categorisering van de dataset per gebruiker}, captionpos=b]
+    for row in tqdm(data.iter_rows(), total=data.height, desc="Verwerken"):
+        file, msg = row
+        if msg is None:
+            continue
+        token_count = count_tokens(msg)
+        char_len = len(msg)
+        writer.writerow([file, token_count, char_len])
+\end{lstlisting}
 
 
-% In het kader van deze Proof of Concept werd een aangepaste automatisatiepijplijn ontwikkeld om testdata efficiënt en gecontroleerd aan een Data Loss Prevention (DLP)-systeem aan te bieden. 
-% Hiervoor werd gekozen om gebruik te maken van Selenium WebDriver in combinatie met een lokale webapplicatie die tijdelijk toegankelijk werd gemaakt via Ngrok. 
-% Selenium bood de flexibiliteit om menselijke interactie met de webinterface na te bootsen, wat essentieel was voor het correct simuleren van gebruikersgedrag zonder manuele tussenkomst. 
-% Ngrok werd gekozen om de applicatie die lokaal draait tijdelijk en veilig publiek beschikbaar te maken, zonder extra netwerkinfrastructuur of firewall-aanpassingen. 
-% Door testdata automatisch te injecteren in de webinterface en bijhorende response-informatie te verzamelen, 
-% werd een schaalbare en reproduceerbare testomgeving opgezet voor de evaluatie van verschillende DLP-regels en detectielogica.
+\subsection{\IfLanguageName{dutch}{Browserautomatisering}{Browser Automation}}
+\label{subsubsec:browserautomatisering}
+
+Het script maakt gebruik van Selenium WebDriver om een browser te automatiseren.
+Deze WebDriver kan worden geconfigureerd om een browser te besturen en gebruikersinteracties te simuleren.
+
+\begin{lstlisting}[style=custompython, label={lst:dlp-chrome}, caption={Selenium-script voor browserautomatisering}, captionpos=b]
+    driver = webdriver.Chrome(options=options)
+\end{lstlisting}
+
+Aangezien de evaluatie gebaseerd is op realistische testdata, moest het gedrag van de browser ook realistisch zijn.
+Volgende \textcite{Selenium2025WebDriver} best practices werden toegepast om de browser te laten functioneren als een echte gebruiker:
+
+\begin{lstlisting}[style=custompython,label={lst:dlp-stealth},caption={Best practice voor browserautomatisering}, captionpos=b]
+    driver.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {
+        'source': "Object.defineProperty(navigator, 'webdriver', {
+            get: () => undefined });"
+    })
+\end{lstlisting}
+
+\subsection{\IfLanguageName{dutch}{Clipboard met Pyperclip}{Clipboard with Pyperclip}}
+\label{subsubsec:clipboard}
+
+Om de email-dataset in het formulier te injecteren, wordt pyperclip gebruikt \ref{lst:dlp-pyperclip}.
+Deze \textit{Python} module maakt het mogelijk om tekst naar het klembord te kopiëren en van het klembord te plakken \autocite{Pyperclip2025}.
+
+\begin{lstlisting}[style=custompython, label={lst:dlp-pyperclip}, caption={Clipboardmanipulatie met Pyperclip}, captionpos=b]
+    pyperclip.copy(content)
+\end{lstlisting}
+
+\subsection{\IfLanguageName{dutch}{Gebruikersinteractie via ActionChains}{User Interaction via ActionChains}}
+\label{subsubsec:gebruikersinteractie}
+
+De Netskope Client is geïnstalleerd op een \textit{MacOS} machine. De interactie met het formulier gebeurde eerste met de standaard Selenium-methode \texttt{\detokenize{textarea.send_keys(..)}}. 
+Deze methode voert karakters individueel in in het tekstveld en is niet altijd even betrouwbaar, vooral niet bij het invoeren van emails boven de \textbf{10 000} karakters oftewel \textbf{10 KB}.
+De interactie met het formulier gebeurt hierdoor met \textbf{ActionChains} \autocite{Selenium2025ActionChains}~\ref{lst:dlp-actionchain}. 
+Dit laat toe om toetsenbordcommando's zoals \texttt{Cmd+V} te simuleren, wat de invoer van grote hoeveelheden tekst vergemakkelijkt en versnelt.
+
+\begin{lstlisting}[style=custompython,label={lst:dlp-actionchain},caption={gebruikersinteractie via ActionChains}, captionpos=b]
+    ActionChains(driver) \
+    .key_down(Keys.COMMAND) \
+    .send_keys('v') \
+    .key_up(Keys.COMMAND) \
+    .perform()
+\end{lstlisting}
+
+Zoals toegelicht in de \textcite{Selenium2025ActionChains} ActionChains-documentatie maakt deze aanpak het mogelijk om gebruikersacties zoals hover, drag-and-drop en key-combinaties uit te voeren.
+
+\subsection{\IfLanguageName{dutch}{Logging en herstartbaarheid}{Logging and Restartability}}
+\label{subsubsec:logging-herstartbaarheid}
+
+Bij elke succesvolle verzending registreert het script het tijdstip (\textbf{timestamp}), 
+de bestandssleutel (\textbf{user} en \textbf{token}) en de grootte (\textbf{char\_len}) in een logbestand \ref{lst:dlp-logging}.
+
+\begin{lstlisting}[style=custompython,label={lst:dlp-logging}, caption={Logging van verzonden emails}, captionpos=b]
+def log_email_send(file_key, content):
+    ts = datetime.now().strftime("%-m/%-d/%y %-I:%M %p")
+    size = len(content.encode('utf-8'))
+    header = not os.path.exists(LOG_FILE)
+    with open(LOG_FILE, "a", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        if header:
+            w.writerow(["timestamp","file","size_bytes"])
+        w.writerow([ts, file_key, size])
+\end{lstlisting}
+
+Het script logt de laatst verzonden email in een apart tekstbestand, zodat het bij een herstart voorkomt dat reeds verzonden emails opnieuw worden verzonden \ref{lst:dlp-last-sent}.
+
+\begin{lstlisting}[style=custompython,label={lst:dlp-last-sent}, caption={Logging van verzonden emails}, captionpos=b]
+with open(LAST_SENT_FILE, "w") as f:
+    f.write(fk)
+\end{lstlisting}
 
 \section{\IfLanguageName{dutch}{Netskope alerts}{Netskope alerts}}
 \label{subsubsec:netskope-alerts}

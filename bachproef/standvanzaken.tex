@@ -100,6 +100,7 @@ De entiteit/ dataset zelf is niet publiek beschikbaar, dus zal deze aan de hand 
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{p{5cm}p{10cm}}
     \toprule
     \textbf{Categorie} & \textbf{Gegevens} \\
@@ -150,7 +151,12 @@ wat nodig is voor het verminderen van false positives en false negatives.
 Om deze nauwkeurigheid te verhogen, kunnen regelsets aangepast worden aan nieuwe typen confidentiële data of veranderende bedrijfsprocessen.
 In deze proof-of-concept wordt de detectienauwkeurigheid beoordeeld door de verhouding tussen true positives, false positives, 
 false negatives en true negatives, samengevat in een Confusion Matrix \autocite{Microsoftn.d.}.
-Bij de evaluatie van de detectienauwkeurigheid wordt er gebruik gemaakt van generieke datasets, zoals de \textit{Enron Email Dataset} en de \textit{CICIDS 2017} dataset.
+Bij de evaluatie van de detectienauwkeurigheid wordt er gebruik gemaakt van de \textit{Enron Email Dataset}, verkregen van \textcite{Cukierski2015Enron}.
+Deze dataset is door \textcite{Cukierski2015Enron} samengesteld uit de originele \textcite{Enron2015} Email Dataset, die oorspronkelijk is verzameld door de \textbf{Federal Energy Regulatory Commission} (FERC), 
+tijdens haar onderzoek naar het faillissement van Enron in 2001 \autocite{Wade2003, Healy2003}.
+Deze dataset bevat \textbf{meer dan 500.000 e-mails} van Enron-medewerkers, waaronder interne bedrijfscommunicatie, klantinteracties en financiële rapportages.
+
+
 
 % Voor de validatie van de detectienauwkeurigheid dient een Belgische of Europese dataset als uitgangspunt. Voor testdoeleinden komen echter ook generieke datasets aan bod, die niet specifiek gericht zijn op de Europese context.
 % Bij de evaluatie van de detectieprestaties fungeert een Belgische of Europese dataset als referentiepunt. Ter ondersteuning van de testfase worden daarnaast diverse algemene datasets ingezet, die niet noodzakelijk gericht zijn op Europese regelgeving of datatypes, maar wel geschikt zijn om de robuustheid van het systeem in bredere contexten te toetsen.
@@ -419,6 +425,7 @@ In dit verband bespreken \textcite{Alsanabani2020} de noodzaak van DLP-oploss\-i
 De preventieve aanpak probeert datalekken te vermijden door onder andere het gehele confidentiële bestand te versleutelen, toegangscontrole aan te passen en het labelen van de inhoud.
 
 \subsection{Nationale en Europese richtlijnen}%
+\label{sec:nationale-europese-richtlijnen-literatuurstudie}
 
 Buiten de Belgische wetgeving zijn er ook tal van Europese richtlijnen en nationale standaarden die een belangrijke rol hebben in de bescherming van bedrijfsdata. 
 Hierbij kan gedacht worden aan de Algemene Verordening Gegevensbescherming (\gls{avg}), de EU Cybersecurity Act en belangrijke Europese richtlijnen, waaronder de \gls{nis2}-richtlijn. 
@@ -460,6 +467,7 @@ Tabel \ref{tab:wetgeving_dlp} bevat de belangrijkste wettelijke richtlijnen en u
   \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{p{4cm} p{5cm} p{6cm}}
         \toprule
         \textbf{Wetgeving} & \textbf{Doel} & \textbf{Relevantie voor DLP} \\

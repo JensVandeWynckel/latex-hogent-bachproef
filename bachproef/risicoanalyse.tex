@@ -54,10 +54,10 @@ Niet elk individueel gegevenselement vormt een even groot risico. Een e-mailadre
 Volgens het model van \textcite{AlFikri2019} vormen impact en waarschijnlijkheid de basis voor risico\-inschattingen. 
 NIST SP 800-30 Rev. 1 \autocite{NIST800-30} en ISO 27005 \autocite{IOSIEC2022} vormen de basis van dit model.
 Het model kwantificeert risico's met een schaal van 0 tot 10. 
-Tabel \ref{tab:datatypes_risico} toont de waarschijnlijkheidsgewichten van verschillende datatypes en combinaties, 
+Tabel~\ref{tab:datatypes_risico_uitgebreid} toont de waarschijnlijkheidsgewichten van verschillende datatypes en combinaties, 
 met bijbehorende impactscores op een schaal van 1 tot 5.
 Deze schaal is beter geschikt voor de specifieke context van DLP-risico's bij Evolane.
-Tabel \ref{tab:risico_thresholds} definieert de thresholds op basis van de gehanteerde schaal.
+Tabel~\ref{tab:risico_thresholds} definieert de thresholds op basis van de gehanteerde schaal.
 
 \begin{itemize}
     \item \textbf{1: Zeer Laag Risico} Gegevens die op zichzelf weinig impact hebben bij een lek. Het verlies vormt geen directe bedreiging voor privacy of veiligheid, zoals een losse naam of publiek IP-adres.
@@ -160,11 +160,53 @@ Tabel \ref{tab:risico_thresholds} definieert de thresholds op basis van de gehan
     Interne projectinformatie   & 4 & 3 & 12 & Gemiddeld \\
     Gevoelige e-mails (bv. NDA's) & 3 & 4 & 12 & Gemiddeld \\
     Config-bestanden met credentials & 3 & 5 & 15 & Hoog \\
+    Source code                 & 3 & 5 & 15 & Hoog \\
     \hline
     \end{tabular}
     \caption{Risico-analyse van datatypes voor DLP-configuratie binnen een Sales/IT-omgeving}
     \label{tab:datatypes_risico_uitgebreid}
 \end{table}
+
+
+\subsubsection{Toelichting op impact- en waarschijnlijkheidsscores}
+\label{sec:toelichting_scores}
+
+\textbf{Wordt maandag verder uitgewerkt.}
+
+% Risicoscore=Waarschijnlijkheid (1-5)×Impact (1-5)
+% Je kan dan per datatype:
+% Waarschijnlijkheid beoordelen (hoe vaak komt dit voor + hoe makkelijk te detecteren)
+% Impact beoordelen (schade bij lek)
+
+% % De scores voor waarschijnlijkheid en impact in Tabel~\ref{tab:datatypes_risico_uitgebreid} zijn gebaseerd op factoren zoals;
+% % praktische ervaring binnen de context van Evolane en richtlijnen uit~\autocite{IOSIEC2022} en~\autocite{NIST800-30}.
+
+% % \paragraph{Persoonlijke identificeerbare informatie (PII):} 
+% % Losse persoonsgegevens zoals een naam of IP-adres zijn op zichzelf weinig schadelijk en komen vaak voor, 
+% % waardoor hun waarschijnlijkheid relatief hoog ligt maar impact beperkt blijft (score 1–2). 
+% % Zodra PII wordt gecombineerd — bijvoorbeeld naam + geboortedatum of naam + NISS — stijgt de impact significant omdat deze combinaties identiteitsfraude kunnen faciliteren. 
+% % De waarschijnlijkheid wordt hierbij vaak iets lager ingeschat, aangezien dergelijke gegevens minder frequent samen voorkomen in vrij toegankelijke contexten.
+
+% % \paragraph{Betaalkaart- en PCI-gegevens:}
+% % Gegevens zoals bankrekening- of creditcardnummers hebben doorgaans een hogere impactscore vanwege de mogelijke financiële schade. 
+% % Combinaties zoals naam + kaartnummer of CVV + creditcardnummer verhogen de kans op frauduleus gebruik. 
+% % De waarschijnlijkheid is hier meestal iets lager (2–3), omdat deze data minder snel opduiken zonder beveiliging.
+
+% % \paragraph{Authenticatie- en inloggegevens:}
+% % Inlogcombinaties zoals e-mailadres + wachtwoord worden frequent aangetroffen in datalekken en vormen een direct risico op account takeovers. 
+% % De waarschijnlijkheid is zeer hoog (5) en de impact potentieel catastrofaal (5).
+% % API-sleutels en tokens worden in technische contexten vaak onderschat, maar vormen bij lekkage een ernstig risico op ongeautoriseerde toegang, 
+% % wat hun impactscore rechtvaardigt.
+
+% % \paragraph{Bedrijfsgevoelige data:}
+% % Hoewel minder strikt gereguleerd dan persoonsgegevens, kan lekken van contractdetails, NDA’s of configuratiebestanden met credentials ernstige zakelijke gevolgen hebben. 
+% % De waarschijnlijkheid is hier afhankelijk van hoe deze informatie wordt gedeeld (via e-mail, cloudopslag, ...), wat meestal resulteert in een score van 3–4. 
+% % De impact is hoger bij strategische informatie of credentials (score 4–5).
+
+% % \paragraph{Speciale categorieën:}
+% % Bepaalde types gegevens zoals biometrische data of gezondheidsinformatie worden in deze context vermeld maar niet opgenomen in de tabel, 
+% % omdat ze minder relevant zijn voor de huidige PoC-omgeving. Desondanks worden ze bij aanwezigheid standaard beschouwd als zeer gevoelig volgens de GDPR (impactscore 5).
+
 
 
 
@@ -186,6 +228,7 @@ Tabel \ref{tab:risico_thresholds} definieert de thresholds op basis van de gehan
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{l c c c c}
         \toprule
         \textbf{Impact Level} & \textbf{Low} & \textbf{Medium} & \textbf{High} & \textbf{Critical} \\
@@ -206,6 +249,7 @@ Tabel \ref{tab:risico_thresholds} definieert de thresholds op basis van de gehan
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{l l l}
         \toprule
         \textbf{Impact Level} & \textbf{Severity} & \textbf{Action Taken} \\
@@ -231,7 +275,11 @@ Tabel \ref{tab:risico_thresholds} definieert de thresholds op basis van de gehan
 \subsection {\IfLanguageName{dutch}{NIS2-richtlijn}{NIS2 Directive}}
 \label{sec:nis2_richtlijn}
 
+\ref{sec:nationale-europese-richtlijnen-literatuurstudie}
+
 \textbf{In deze secties komen nog de verschillende aspecten van de NIS2-richtlijn aan bod. Deze worden hier opgelijst en hier zal ook komen waar in het DLP model dit aan bod komt.}
+
+\textbf{WIP, wordt maandag afgewerkt.}
 
 % Een risicobeoordeling rond de NIS2-richtlijn bevat volgende elementen:
 
@@ -327,6 +375,8 @@ Om de effectiviteit van de regex-gebaseerde detectie te beoordelen, gebruiken we
 
 \begin{table}[h]
     \centering
+    \small
+    \scriptsize
     \begin{tabular}{|c|c|c|}
         \hline
         \textbf{} & \textbf{Werkelijke Gevoelige Data} & \textbf{Geen Gevoelige Data} \\ \hline

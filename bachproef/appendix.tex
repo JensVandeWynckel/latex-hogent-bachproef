@@ -6,7 +6,12 @@
 \label{app:appendix}
 
 De configuratie in Tabel~\ref{tab:custom-eu-card} werd gebruikt om in Netskope creditcardnummers te detecteren aan de hand van vooraf gedefinieerde identifiers.  
-Het script in Lijst~\ref{lst:dlp-script} automatiseert het verzenden van testgegevens via \texttt{https://dlptoolbox.com} en Netskope om de detectie van creditcardnummers te testen.
+Het script in Lijst~\ref{lst:dlp-script} automatiseert het verzenden van testgegevens via \texttt{https://dlptoolbox.com} en Netskope om de detectie van creditcardnummers te testen. 
+Dit script werd niet gebruikt in het onderzoek omdat \texttt{dlptoolbox} regelmatig bij veel verkeer de gebruiker afschermde.
+Het script \ref{lst:send-request} automatiseert het verzenden van testgegevens naar een zelf opgestelde Ngrok webapplicatie, die de testgegevens verwerkt.
+Tabel \ref{tab:eval-criteria-performance} geeft een overzicht van hoe de performantie van de Netskope agent mogelijks geëvalueerd kan worden. 
+Deze tabel werd deels gebruikt, maar was moeilijk vergelijkbaar door de verschillende tools die gebruikt werden.
+\textcite{Netskope2025Utilization} stelt vast dat de agent een zeer lage impact heeft op de performantie van de computer.
 
 % \section{Custom DLP-regel: Detectie van creditcardnummers}
 % \label{sec:custom-dlp-regel}
@@ -14,6 +19,7 @@ Het script in Lijst~\ref{lst:dlp-script} automatiseert het verzenden van testgeg
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{p{4cm} p{10cm}}
         \toprule
         \textbf{Regel} & EU - PCI - Card Number \\
@@ -71,6 +77,7 @@ Het script in Lijst~\ref{lst:dlp-script} automatiseert het verzenden van testgeg
 \begin{table}[h]
     \centering
     \small
+    \scriptsize
     \begin{tabular}{p{4cm} p{10cm}}
         \toprule
         \textbf{Regel} & BE - Card Number with Terms \\
@@ -99,7 +106,7 @@ Het script in Lijst~\ref{lst:dlp-script} automatiseert het verzenden van testgeg
 % \section{Selenium-script voor batchgewijze verzending van testdata}
 % \label{sec:selenium-script}
 
-\begin{lstlisting}[style=custompython,caption={Selenium-script voor batchgewijze verzending van testdata},label={lst:dlp-script}]
+\begin{lstlisting}[style=custompython,caption={Selenium-script voor batchgewijze verzending van testdata},label={lst:dlp-script}, captionpos=b]
     from selenium import webdriver
     from selenium.webdriver.common.by import By
     from selenium.webdriver.chrome.options import Options
@@ -155,12 +162,13 @@ Het script in Lijst~\ref{lst:dlp-script} automatiseert het verzenden van testgeg
 
 test
 
-\begin{lstlisting}[style=custompython,caption={Selenium WebDriver script voor automatisering van gegevensverwerking},label={lst:send-request}]
+\begin{lstlisting}[style=custompython,caption={Selenium WebDriver script voor automatisering van gegevensverwerking variabelen},label={lst:send-request}, captionpos=b]
     import csv
     import sys
     import time
     import os
     import signal
+    import pyperclip
     from datetime import datetime
     from selenium import webdriver
     from selenium.webdriver.common.by import By
@@ -168,149 +176,227 @@ test
     from selenium.webdriver.support.ui import WebDriverWait
     from selenium.webdriver.support import expected_conditions as EC
     from selenium.webdriver.common.action_chains import ActionChains
+    from selenium.webdriver.common.keys import Keys
 
     csv.field_size_limit(sys.maxsize)
-
-    URL = "https://a5c0-2a02-1812-2e39-6e00-412f-e204-a11e-c6f2.ngrok-free.app/"
+    URL = "https://<hash>.ngrok-free.app/"
     SUMMARY_FILE = "emails_summary.csv"
     EMAILS_FILE = "emails.csv"
     LAST_SENT_FILE = "last_sent.txt"
     LOG_FILE = "log.csv"
     WAIT_SECONDS = 1
     RETRY_LIMIT = 1
-    PAUSE_BETWEEN_FIELDS = 0.05
 \end{lstlsting}
 
-\begin{lstlisting}
-    interrupted = False
-    def handle_sigint(signum, frame):
-        global interrupted
-        interrupted = True
-        print("\nOnderbroken (CTRL+C)...")
+\begin{lstlisting}[style=custompython,caption={Selenium WebDriver script voor automatisering van gegevensverwerking},label={lst:send-request-2}, captionpos=b]
+interrupted = False
+def handle_sigint(signum, frame):
+    global interrupted
+    interrupted = True
+    print("\n🛑 Onderbroken door gebruiker (CTRL+C)...")
+signal.signal(signal.SIGINT, handle_sigint)
 
-    signal.signal(signal.SIGINT, handle_sigint)
+# CHROME SETUP (stealth)
+options = Options()
+# options.add_argument("--headless")
+options.add_argument("--disable-gpu")
+options.add_argument("--disable-blink-features=AutomationControlled")
+options.add_experimental_option("excludeSwitches", ["enable-automation"])
+options.add_experimental_option("useAutomationExtension", False)
 
-    options = Options()
-    #options.add_argument("--headless")  # Uncomment als je headless wil
-    options.add_argument("--disable-gpu")
-    options.add_argument("--disable-blink-features=AutomationControlled")
-    driver = webdriver.Chrome(options=options)
-    wait = WebDriverWait(driver, 6)
+driver = webdriver.Chrome(options=options)
+driver.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {
+    'source': "Object.defineProperty(navigator, 'webdriver', { get: () => undefined });"
+})
+wait = WebDriverWait(driver, 6)
 
-    def bypass_ngrok_warning():
-        try:
-            visit_btn = WebDriverWait(driver, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Visit Site')]"))
-            )
-            print("Ngrok waarschuwingspagina gedetecteerd...")
-            visit_btn.click()
-            time.sleep(2)
-        except:
-            pass
-
-    def log_email_send(file_key, content):
-        timestamp = datetime.now().strftime("%-m/%-d/%y %-I:%M %p")
-        size = len(content.encode('utf-8'))
-        log_exists = os.path.exists(LOG_FILE)
-
-        with open(LOG_FILE, "a", encoding="utf-8", newline='') as logfile:
-            writer = csv.writer(logfile)
-            if not log_exists:
-                writer.writerow(["timestamp", "file", "size_bytes"])
-            writer.writerow([timestamp, file_key, size])
-
-    emails_dict = {}
-    with open(EMAILS_FILE, "r", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            emails_dict[row["file"].strip()] = row["message"].strip()
-
-    to_send = []
-    with open(SUMMARY_FILE, "r", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            file_key = row["file"].strip()
-            if file_key in emails_dict:
-                to_send.append(file_key)
-
-    start_index = 0
-    if os.path.exists(LAST_SENT_FILE):
-        with open(LAST_SENT_FILE, "r") as f:
-            last_sent = f.read().strip()
-            if last_sent in to_send:
-                start_index = to_send.index(last_sent) + 1
-
-    total_sent = 0
-    failed = []
-
-    def try_send(email_content):
-        for attempt in range(RETRY_LIMIT + 1):
-            try:
-                textarea = wait.until(EC.presence_of_element_located((By.ID, "sensitive_data")))
-                textarea.clear()
-                try:
-                    textarea.send_keys(email_content)
-                except Exception:
-                    actions = ActionChains(driver)
-                    actions.move_to_element(textarea).click().send_keys(email_content)
-                    actions.perform()
-
-                time.sleep(PAUSE_BETWEEN_FIELDS)
-
-                launch_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Launch']")))
-                launch_btn.click()
-
-                RESULTAAT ZICHTBAAR I
-                WebDriverWait(driver, 5).until(
-                    EC.presence_of_element_located((By.ID, "result"))
-                )
-                return True
-
-            except Exception:
-                if attempt < RETRY_LIMIT:
-                    print("Formulier mislukte, probeer herladen...")
-                    driver.get(URL)
-                    bypass_ngrok_warning()
-                    time.sleep(1)
-                else:
-                    return False
-
-    driver.get(URL)
-    bypass_ngrok_warning()
-    print(f"Start verzenden vanaf index {start_index} ({to_send[start_index]})")
-
+def bypass_ngrok_warning():
     try:
-        for i, file_key in enumerate(to_send[start_index:], start=start_index + 1):
-            if interrupted:
-                break
+        btn = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, "//button[contains(text(),'Visit Site')]")
+        ))
+        print("⚠️ Ngrok warning…")
+        btn.click()
+        time.sleep(2)
+    except:
+        pass
 
-            print(f"\n[{i}/{len(to_send)}] Versturen: {file_key}")
-            email_content = emails_dict[file_key]
+def log_email_send(file_key, content):
+    ts = datetime.now().strftime("%-m/%-d/%y %-I:%M %p")
+    size = len(content.encode('utf-8'))
+    header = not os.path.exists(LOG_FILE)
+    with open(LOG_FILE, "a", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        if header:
+            w.writerow(["timestamp","file","size_bytes"])
+        w.writerow([ts, file_key, size])
 
-            success = try_send(email_content)
-            if success:
-                print(f"Succesvol verzonden ({len(email_content)} tekens)")
-                total_sent += 1
-                with open(LAST_SENT_FILE, "w") as f:
-                    f.write(file_key)
-                log_email_send(file_key, email_content)
-                time.sleep(WAIT_SECONDS)
-            else:
-                print(f"Mislukt na retry: {file_key}")
-                failed.append(file_key)
+# laad emails in
+emails_dict = {}
+with open(EMAILS_FILE, "r", encoding="utf-8") as f:
+    for row in csv.DictReader(f):
+        emails_dict[row["file"].strip()] = row["message"].strip()
 
-    finally:
+to_send = []
+with open(SUMMARY_FILE, "r", encoding="utf-8") as f:
+    for row in csv.DictReader(f):
+        fk = row["file"].strip()
+        if fk in emails_dict:
+            to_send.append(fk)
+
+# laatste verzonden key
+start = 0
+if os.path.exists(LAST_SENT_FILE):
+    with open(LAST_SENT_FILE, "r") as f:
+        last = f.read().strip()
+        if last in to_send:
+            start = to_send.index(last) + 1
+
+total_sent = 0
+failed = []
+
+# functie om te verzenden
+def try_send(content):
+    for attempt in range(RETRY_LIMIT + 1):
         try:
-            driver.quit()
-        except Exception:
-            pass  # suppress quit errors
+            # 1) Vul clipboard via pyperclip
+            pyperclip.copy(content)
 
-        print("\nSAMENVATTING")
-        print(f"Verstuurd: {total_sent}")
-        print(f"Mislukt: {len(failed)}")
-        if failed:
-            print("Mislukte e-mails:")
-            for f in failed:
-                print(f" - {f}")
-        if total_sent > 0:
-            print(f"Laatste succesvolle e-mail: {to_send[start_index + total_sent - 1]}")
-        sys.exit(0)
+            # 2) Focus textarea & paste via Cmd+V
+            ta = wait.until(EC.presence_of_element_located((By.ID, "sensitive_data")))
+            driver.execute_script("arguments[0].scrollIntoView(true);", ta)
+            ta.click()
+            time.sleep(0.1)  # laat focus settle
+            ActionChains(driver) \
+                .key_down(Keys.COMMAND) \
+                .send_keys('v') \
+                .key_up(Keys.COMMAND) \
+                .perform()
+
+            # 3) Klik Launch
+            btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Launch']")))
+            driver.execute_script("arguments[0].scrollIntoView(true);", btn)
+            ActionChains(driver).move_to_element(btn).click().perform()
+
+            # 4) Wacht op resultaat
+            wait.until(EC.presence_of_element_located((By.ID, "result")))
+            return True
+
+        except Exception:
+            if attempt < RETRY_LIMIT:
+                print("⚠️ Fout, herlaad en probeer opnieuw…")
+                driver.get(URL)
+                bypass_ngrok_warning()
+                time.sleep(1)
+            else:
+                return False
+
+# verzend emails
+driver.get(URL)
+bypass_ngrok_warning()
+print(f"🚀 Start vanaf index {start} ({to_send[start] if to_send else '–'})")
+
+try:
+    for idx, fk in enumerate(to_send[start:], start=start + 1):
+        if interrupted:
+            break
+
+        print(f"\n📤 [{idx}/{len(to_send)}] {fk}")
+        ok = try_send(emails_dict[fk])
+        if ok:
+            print("✅ Succes")
+            total_sent += 1
+            with open(LAST_SENT_FILE, "w") as f:
+                f.write(fk)
+            log_email_send(fk, emails_dict[fk])
+            time.sleep(WAIT_SECONDS)
+        else:
+            print("❌ Mislukt:", fk)
+            failed.append(fk)
+finally:
+    driver.quit()
+    print("\n📊 SAMENVATTING")
+    print("Verstuurd:", total_sent)
+    print("Mislukt:", len(failed))
+    if failed:
+        print("Mislukte keys:", ", ".join(failed))
+    if total_sent:
+        print("Laatste succesvol:", to_send[start + total_sent - 1])
+    sys.exit(0)
 \end{lstlisting}
+
+\begin{lstlisting}[style=custompython,caption={Python-script voor het categoriseren en samenvatten van emails in een CSV-bestand},label={lst:email-summary}, captionpos=b]
+import os
+import polars as pl
+import tiktoken
+from tqdm import tqdm
+import csv
+
+csv_file_path = "datasets/emails.csv"
+output_csv = "emails_summary.csv"
+encoding_name = "cl100k_base"
+
+# Tokens
+encoding = tiktoken.get_encoding(encoding_name)
+
+def count_tokens(text: str) -> int:
+    try:
+        return len(encoding.encode(text))
+    except Exception:
+        return 0
+
+# Lees het CSV-bestand in batches
+batch_size = 50_000
+reader = pl.read_csv(csv_file_path, has_header=True, encoding="utf8-lossy", truncate_ragged_lines=True)
+
+# Check kolomnamen
+assert set(reader.columns) == {"file", "message"}, "Unexpected CSV structure. Verwachte kolommen: file, message"
+
+# Data prepareren
+data = reader.select(["file", "message"])
+
+# Output-bestand
+with open(output_csv, "w", newline="", encoding="utf-8") as out_file:
+    writer = csv.writer(out_file)
+    writer.writerow(["file", "tokens", "char_len"])
+
+    for row in tqdm(data.iter_rows(), total=data.height, desc="Verwerken"):
+        file, msg = row
+        if msg is None:
+            continue
+        token_count = count_tokens(msg)
+        char_len = len(msg)
+        writer.writerow([file, token_count, char_len])
+\end{lstlisting}
+
+\begin{table}[h]
+    \centering
+    \small
+    \scriptsize
+    \begin{tabular}{
+        >{\raggedright\arraybackslash}p{3.5cm} 
+        >{\raggedright\arraybackslash}p{4cm} 
+        >{\raggedright\arraybackslash}p{2.5cm} 
+        >{\raggedright\arraybackslash}p{4cm}
+    }
+        \toprule
+        \textbf{Evaluatiecriterium} & \textbf{Tool} & \textbf{Type} & \textbf{Toelichting / Alternatief} \\ 
+        \midrule
+        CPU-gebruik & Activity Monitor & GUI & Basis realtime overzicht, geen logging \\
+                    & htop & CLI & Real-time overzicht per proces, logging mogelijk \\
+                    & dstat & CLI & Combineert CPU, RAM, netwerk en disk in één tool \\
+        \midrule
+        RAM-gebruik & Activity Monitor & GUI & Beperkt overzicht per proces \\
+                    & htop & CLI & Gedetailleerd geheugenverbruik per proces \\
+        \midrule
+        Netwerkimpact & iPerf3 & CLI & Meet upload/download throughput, vereist server \\
+                      & ping / traceroute & CLI & Latency en route-analyse \\
+                      & Wireshark & GUI & Inspectie op pakketniveau, diepgaand netwerkverkeer \\
+        \midrule
+        Disk I/O & iostat & CLI & Meet disk throughput, latency, queue depth \\
+                 & fs\_usage & CLI & File-level tracing van systeemprocessen \\
+        \bottomrule
+    \end{tabular}
+    \caption{Overzicht evaluatiecriteria en bijhorende tools voor performantieanalyse (macOS)}
+    \label{tab:eval-criteria-performance}
+\end{table}
