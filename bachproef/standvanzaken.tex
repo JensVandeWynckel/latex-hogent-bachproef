@@ -8,27 +8,27 @@
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 
 
-\section{Data Leakage Prevention (DLP)}%
+\section{Data Loss Prevention (DLP)}%
 
-Een DLP-systeem heeft als doel drie soorten gegevens binnen een organisatie te beschermen: data-at-rest, data-in-motion en data-in-use. 
+Een DLP-systeem heeft als doel drie soorten gegevens binnen een organisatie te beschermen: \textit{data-in-motion}, \textit{data-at-rest} en \textit{data-in-use} . 
 Data-at-rest verwijst naar statische informatie die is opgeslagen in bedrijfssystemen, zoals documentbeheersystemen, e-mailservers, bestandsservers, netwerkschijven, 
 persoonlijke computers en opslagruimtenetwerken (\gls{san}). 
-Data-in-motion verwijst naar bedrijfsdata dat wordt verwerkt binnen het uitgaande netwerkverkeer, zoals e-mails en online verkeer. 
-Data-in-use bestaat uit informatie die medewerkers gebruiken op eindgebruikersapparaten, zoals een bestand kopiëren naar een USB-schijf. 
+Data-in-motion verwijst naar bedrijfsdata die worden verwerkt binnen het uitgaande netwerkverkeer, zoals e-mails en online verkeer. 
+Data-in-use bestaat uit informatie die medewerkers gebruiken op eindgebruikersapparaten, zoals een bestand kopiëren naar een \gls{usb}-schijf. 
 De definitie van vertrouwelijkheid binnen een organisatie vereist een grondigere analyse. 
 Soorten informatie zoals \gls{pii}, inclusief namen, identiteitskaart- en creditcardgegevens, worden doorgaans in elke organisatie als vertrouwelijk beschouwd.
 Deze definitie krijgt echter ingewikkeldere aspecten bij bedrijfsgeheimen en interne communicatie, die vaak onregelmatig zijn. 
 Vertrouwelijke informatie verwijst naar gegevens die binnen de organisatie zijn verzameld en niet algemeen toegankelijk zijn. 
-Een DLP-systeem bevat de mogelijkheid om gevoelige gegevens te herkennen in een of meerdere van de genoemde datatypen.
+Een DLP-systeem bevat de mogelijkheid om gevoelige gegevens te herkennen in een of meerdere van de genoemde datatypes.
 
 \subsection{PCI en PII}
 
 Persoonlijk identificeerbare informatie (\gls{pii}), zoals namen, rijksregisternummers, e-mail\-adressen, telefoonnummers en dergelijke kunnen direct of indirect worden gebruikt voor de identificatie van een persoon. 
-Met het oog op de \gls{avg} zijn er strikte regels met betrekking tot toestemming en transparantie bij de verwerking van \gls{pii}. 
+% Met het oog op de \gls{avg} zijn strikte regels met betrekking tot toestemming en transparantie bij de verwerking van \gls{pii}. 
+De \gls{avg} legt strikte regels op voor de verwerking van \gls{pii}, vooral bij het verkrijgen van toestemming en het waarborgen van transparantie.
 Payment Card Industry (\gls{pci})-gegevens bevatten alle kaart- en betaalgegevens zoals debit-/creditcardnummers, Primary Account Numbers (\gls{pan}) en andere confidentiële authenticatiegegevens zoals \gls{cvv}. 
-Om te voldoen aan de \gls{pcidss}-norm, 
-moeten organisaties strenge maatregelen implementeren om deze kaartgegevens te beveiligen. 
-Bedrijven die \gls{pii}- en \gls{pci}-data verwerken lopen het risico op zware sancties als deze gegevens niet voldoende beschermd worden.
+Om te voldoen aan de \gls{pcidss}-norm moeten organisaties strenge maatregelen implementeren om deze kaartgegevens te beveiligen. 
+Bedrijven die \gls{pii}- en \gls{pci}-data verwerken lopen het risico op zware sancties wanneer deze gegevens niet voldoende beschermd worden.
 
 \subsection{Detectie methoden voor gegevensverlies}
 
@@ -36,42 +36,44 @@ Identificatiemiddelen worden gebruikt om gevoelige informatie, zoals \gls{pii} e
 Dit gebeurt op basis van reguliere expressies (regex). 
 Regex is een krachtig hulpmiddel dat DLP helpt specifieke gegevenstypen te herkennen door middel van uitdrukkingen, termen en patronen, 
 zoals \texttt{BE\textbackslash d\{2\}\textbackslash s?\textbackslash d\{4\}\textbackslash s?\textbackslash d\{4\}\-\textbackslash s?\textbackslash d\{4\}} 
-dat kan dienen voor Belgische \gls{iban}-codes. 
+% dat kan dienen voor Belgische \gls{iban}-codes. 
+Dit kan dienen voor Belgische \gls{iban}-codes.
 Hoewel dit patroon effectief is voor standaard \gls{iban}-formaten, 
-kan het worden omzeild door een karakter toe te voegen in de invoer, wat het belang benadrukt van extra controles. 
+kan het worden omzeild door het toevoegen van een karakter in de invoer, wat het belang benadrukt van extra controles. 
 
 De aangemaakte identificatie voor confidentiële gegevens moet voldoen aan de volgende richtlijnen:
 
 \begin{itemize}
-    \item Vooraf gedefinieerde en aanpasbare patronen voor datadetectie: Het is cruciaal om duizenden vooraf ingestelde regels voor het herkennen van gegevens beschikbaar te hebben en deze te kunnen aanpassen aan de behoeften van de organisatie.
-    \item Ondersteuning voor verschillende soorten bestandstypen (Word, Excel, PDF, JPG, PNG, CSV, ZIP en RAR, enz.) en categorieën (afbeeldingen, databases, spreadsheets, enz.).
-    \item Ondersteuning voor landspecifieke identificatienummers (\gls{iban}'s, postcodes, adressen, nationale identiteitskaarten, IP-adressen, pas\-poort- en telefoonnummers).
+    % Hier nog eens naar kijken
+    \item Vooraf gedefinieerde en aanpasbare patronen voor datadetectie. Het is cruciaal om duizenden vooraf gedefinieerde regels voor het herkennen van gegevens beschikbaar te hebben en deze te kunnen aanpassen aan de behoeften van de organisatie.
+    \item Ondersteuning van verschillende soorten bestandstypen (Word, Excel, PDF, JPG, PNG, CSV, ZIP en RAR, enz.) en categorieën (afbeeldingen, databases, spreadsheets, enz.).
+    \item Ondersteuning van landspecifieke identificatienummers (\gls{iban}'s, postcodes, adressen, nationale identiteitskaarten, IP-adressen, pas\-poort- en telefoonnummers).
     \item Voldoen aan de wet- en regelgeving.
 \end{itemize}
 
 De bescherming van \gls{pii} en \gls{pci}-gegevens vormt een kernaspect van DLP. \textcite{Wason2020CASB} legt de nadruk op het belang van de integratie van Cloud Access Security Brokers (\gls{casb}) in cloudomgevingen. 
-\gls{casb} biedt organisaties de mogelijkheid om een uitgebreide zichtbaarheid te krijgen in het gebruik van cloudtoepassingen, inclusief goedgekeurde en ongeautoriseerde (shadow IT) diensten. 
-Het houdt bij hoe de confidentiële data wordt opgeslagen en verplaatst/verwerkt, wat handig is voor het identificeren van deze data en het voorkomen van datalekken.
+\gls{casb} biedt organisaties de mogelijkheid om een uitgebreide zichtbaarheid te verwerven in het gebruik van cloudtoepassingen, inclusief goedgekeurde en ongeautoriseerde (shadow IT) diensten. 
+Het houdt bij hoe de confidentiële data worden opgeslagen en verplaatst/verwerkt, wat handig is voor het identificeren van deze data en het voorkomen van datalekken.
 
 \subsection{\IfLanguageName{dutch}{Regelsets}{Rule sets}}
 \label{subsec:regelsets-literatuurstudie}
 
 De regelsets binnen Netskope zijn de focus van dit onderzoek. Deze bestaan uit een combinatie van verschillende identificatiemethoden, zoals beschreven in de documentatie van \textcite{Netskope2025DLP}. 
-Deze identificatoren of ook entiteiten genoemd, zijn de basis van DLP-regels en vormen samen een regelset. 
-Meerdere regelsets kunnen worden gedefinieerd binnen een profiel \autocite{Netskope2025Profiles}.
-
+Deze identificatiegegevens ook wel entiteiten genoemd, zijn de basis van DLP-regels en vormen samen een regelset. 
+% Meerdere regelsets kunnen worden gedefinieerd binnen een profiel \autocite{Netskope2025Profiles}.
+Binnen een profiel kunnen meerdere DLP-regels worden gedefinieerd \autocite{Netskope2025Profiles}.
 
 % A DLP profile is a collection of predefined or custom DLP rules, classifiers, and custom fingerprint rules. If any of the rules or classifiers match the content, then the DLP profile flags the content as a policy violation. Using predefined profiles let you start evaluating loss of critical data in the cloud immediately. Creating new DLP profiles and rules enables you to refine custom methods of prevention. For insight about building custom DLP profiles and rules, see DLP Best Practices Runbook.
 
-\textbf{Tabel naar Nederlands}
+% \textbf{Tabel moet nog naar Nederlands verzet worden!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}
 
 {\small
 \begin{itemize}
-    \item \textbf{Predefined data identifiers}: Dit zijn vooraf gedefinieerde identificatoren die zijn ontworpen door Netskope.
-    \item \textbf{Custom data identifiers}: Dit zijn op maat gemaakte identificatoren die organisaties kunnen definiëren om specifieke soorten gevoelige gegevens te herkennen die relevant zijn voor hun bedrijfsvoering.
-    \item \textbf{Keyword identifiers}: Dit zijn specifieke woorden of zinnen die worden gebruikt om gevoelige gegevens te identificeren. Dit kan bijvoorbeeld een lijst zijn van veelvoorkomende achternamen die in combinatie met een rijksregisternummer kunnen worden gebruikt.
-    \item \textbf{Regular expressions (RegEx)}: Dit zijn patronen die worden gebruikt om specifieke gegevensformaten te identificeren. RegEx kan worden gebruikt om complexe gegevensstructuren te herkennen, zoals \gls{iban}-nummers of e-mailadressen.
-    \item \textbf{Exact match criteria}: Dit zijn specifieke voorwaarden die moeten worden vervuld om te bepalen of een gegevenstype als gevoelig wordt beschouwd, zoals 
+    \item \textbf{Vooraf gedefinieerde identificatiegegevens}: Deze gegevens zijn ontworpen door \textcite{Netskope2025DLP}.
+    \item \textbf{Zelf aangemaakte identificatiegegevens}: Dit zijn op maat gemaakte identificatoren die organisaties kunnen definiëren om specifieke soorten gevoelige gegevens te herkennen die relevant zijn voor hun bedrijfsvoering.
+    \item \textbf{Sleutelwoord identificatoren}: Dit zijn specifieke woorden of zinnen die worden gebruikt om gevoelige gegevens te identificeren. Dit kan bijvoorbeeld een lijst zijn van veelvoorkomende achternamen die in combinatie met een rijksregisternummer kunnen worden gebruikt.
+    \item \textbf{Reguliere expressies (regex)}: Dit zijn patronen die worden gebruikt om specifieke gegevensformaten te identificeren. regex kan worden gebruikt om complexe gegevensstructuren te herkennen, zoals \gls{iban}-nummers of e-mailadressen.
+    \item \textbf{Exact Match identificatoren}:  Dit zijn specifieke voorwaarden die moeten worden vervuld om te bepalen of een gegevenstype als gevoelig wordt beschouwd, zoals een exact overeenkomend rijksregisternummer of een specifiek e-mailadres.
 \end{itemize}
 }
 
@@ -85,17 +87,17 @@ Volgens \textcite{brouwer2021cloud} heeft Netskope een uitgebreide lijst van DLP
 verschillend van EU-identificatiegegevens tot Singaporese identificatiegegevens en medische rapporten. 
 Deze regelsets zijn uitgebalanceerd en sluiten aan bij de regelgeving van de meeste westerse landen. 
 
-Deze vooraf gedefinieerde regelsets zijn niet veranderbaar en kunnen niet verder worden gepersonaliseerd. 
+Deze vooraf gedefinieerde regelsets zijn niet aanpasbaar en kunnen niet verder worden gepersonaliseerd. 
 Gebruikers kunnen echter wel hun eigen DLP-profielen definiëren voor specifieke use-cases, zoals in volgende sectie wordt besproken. 
 
-Een voorbeeld van een vooraf gedefinieerde regelset is de regelset voor 'DLP-PII', die is ontworpen om gevoelige persoonlijke informatie te identificeren en te beschermen. 
-Deze regelset omvat gegevens zoals naam, adres, geboortedatum, e-mailadres, MedicareID, paspoortinformatie en sociale zekerheidsnummers. Alleen zijn deze specifiek gericht voor de Verenigde Staten en Canada. 
+Een voorbeeld van een vooraf gedefinieerde regelset is de regelset voor \texttt{DLP-PII}, die is ontworpen om gevoelige persoonlijke informatie te identificeren en te beschermen. 
+Deze regelset omvat gegevens zoals naam, adres, geboortedatum, e-mailadres, MedicareID, paspoortinformatie en sociale zekerheidsnummers. Deze zijn echter specifiek ontworpen voor toepassing in de Verenigde Staten en Canada. 
 Aangezien dit onderzoek zich richt op de bescherming van Belgische persoons\-- en betalingsgegevens, voldoet deze regelset niet aan de vereisten van de Belgische wetgeving.
 
-Daarnaast biedt Netskope ook de 'EU General Data Protection Regulation (GDPR)' regelset aan, die specifiek is ontworpen om te voldoen aan al de vereisten van de \gls{avg}. 
+Daarnaast biedt Netskope ook de \texttt{EU General Data Protection Regulation (GDPR)} regelset aan, die specifiek is ontworpen om te voldoen aan al de vereisten van de \gls{avg}. 
 Deze regelset richt zich op persoonsgegevens van een natuurlijk persoon binnen de Europese Unie. 
-In Tabel \ref{tab:EU-AVG Netskope} zijn de gegevenscategorieën weergegeven die Netskope heeft gedefinieerd voor deze regelset \autocite{Netskope2023GDPR}. 
-De entiteit/ dataset zelf is niet publiek beschikbaar, dus zal deze aan de hand van een steekproefevaluatie worden beoordeeld. 
+In tabel~\ref{tab:EU-AVG Netskope} zijn de gegevenscategorieën weergegeven die Netskope heeft gedefinieerd voor deze regelset \autocite{Netskope2023GDPR}. 
+De entiteit, ook wel dataset of identificatiegegevens genoemd, is niet publiek beschikbaar, dus zal deze aan de hand van een steekproefevaluatie worden beoordeeld. 
 
 \begin{table}[h]
     \centering
@@ -112,7 +114,7 @@ De entiteit/ dataset zelf is niet publiek beschikbaar, dus zal deze aan de hand 
     Paspoort & Naam, Adres, Geboortedatum, Biometrische gegevens, Paspoortnummer, Uitgifteland, Uitgiftedatum, Vervaldatum \\
     \bottomrule
     \end{tabular}
-    \caption{Data categorieën van EU-AVG-ruleset \autocite{Netskope2023GDPR}}
+    \caption{Data categorieën van EU-\gls{avg}-ruleset \autocite{Netskope2023GDPR}}
     \label{tab:EU-AVG Netskope}
 \end{table}
 
@@ -120,16 +122,16 @@ De entiteit/ dataset zelf is niet publiek beschikbaar, dus zal deze aan de hand 
 \label{subsubsec:aangepaste-regels-literatuurstudie}
 
 De focus van dit onderzoek ligt op de aangepaste regelsets, zoals besproken in Hoofdstuk \ref{ch:proofofconcept}. 
-Elke regelset, oftewel profiel genoemd, bestaat uit DLP-regels, content classificaties of fingerprintregels \autocite{Netskope2025CreateProfiles}.
+Elke regelset, ook wel profiel genoemd, bestaat uit DLP-regels, content classificaties of fingerprintregels \autocite{Netskope2025CreateProfiles}.
 Elke regel bestaat uit een of meerdere entiteiten, die elk een specifiek type gegevens identificeren. 
-Dit kan bijvoorbeeld een specifieke reeks cijfers zijn die overeenkomt met een rijksregisternummer of een reeks woorden die samen een bepaalde context vormen, zoals een naam in de buurt van een adres. 
+Dit kan bijvoorbeeld een specifieke reeks cijfers zijn die overeenkomen met een rijksregisternummer of een reeks woorden die samen een bepaalde context vormen. 
 
 \subsection{\IfLanguageName{dutch}{Entiteit}{Entity}}
 \label{subsec:entiteit-literatuurstudie}
 
 De entiteit is de basis van een DLP-regel. 
 Deze entiteit houdt verschillende vormen van gegevens bij, zoals een reeks cijfers, woorden of zinnen. 
-Dit onderzoek basseert zich op het gebruik van de entiteit 'Exact Match' en 'Regular Expression'. 
+Dit onderzoek baseert zich op het gebruik van de entiteit 'Exact Match' en 'Regular Expression'. 
 De configuratie gebruikt standaard de vooraf gedefinieerde entiteiten van Netskope. 
 Als Netskope voor een specifieke behoefte geen vooraf gedefinieerde entiteit voorziet, dan zal een aangepaste entiteit worden aangemaakt.
 Deze aangepaste entiteiten zullen vooral bestaan uit 'Exact Match', aangezien regex-regels, dankzij hun complexiteit, meer false positives kunnen genereren.
@@ -143,7 +145,7 @@ Deze aangepaste entiteiten zullen vooral bestaan uit 'Exact Match', aangezien re
 
 Detectienauwkeurigheid houdt in hoe goed het DLP-systeem in staat is om confidentiële gegevens te identificeren. 
 Een hogere detectienauwkeurigheid wordt bereikt door het gebruik van goed afgestemde regelsets en geavanceerde herkenningsmethoden, zoals reguliere expressies (regex), keywords en contextuele analyse.
-Netskope maakt gebruik van predefined datasets voor het verbeteren van de detectienauwkeurigheid. 
+Netskope maakt gebruik van vooraf gedefinieerde datasets voor het verbeteren van de detectienauwkeurigheid. 
 Deze datasets bevatten gestructureerde gegevens zoals \gls{pii} en bieden ondersteuning voor verschillende soorten eisen, waaronder de \gls{avg} \autocite{Clementelli2023}. 
 Netskope maakt ook gebruik van een vertrouwheidsscore om de betrouwbaarheid van de gedetecteerde data te bepalen. 
 Deze score helpt bij het evalueren van de waarschijnlijkheid dat bepaalde gegevens confidentieel zijn, 
@@ -151,8 +153,8 @@ wat nodig is voor het verminderen van false positives en false negatives.
 Om deze nauwkeurigheid te verhogen, kunnen regelsets aangepast worden aan nieuwe typen confidentiële data of veranderende bedrijfsprocessen.
 In deze proof-of-concept wordt de detectienauwkeurigheid beoordeeld door de verhouding tussen true positives, false positives, 
 false negatives en true negatives, samengevat in een Confusion Matrix \autocite{Microsoftn.d.}.
-Bij de evaluatie van de detectienauwkeurigheid wordt er gebruik gemaakt van de \textit{Enron Email Dataset}, verkregen van \textcite{Cukierski2015Enron}.
-Deze dataset is door \textcite{Cukierski2015Enron} samengesteld uit de originele \textcite{Enron2015} Email Dataset, die oorspronkelijk is verzameld door de \textbf{Federal Energy Regulatory Commission} (FERC), 
+Bij de evaluatie van de detectienauwkeurigheid wordt gebruik gemaakt van de \textit{Enron E-mail Dataset}, ontleend aan \textcite{Cukierski2015Enron}.
+Deze dataset is door \textcite{Cukierski2015Enron} samengesteld uit de originele \textcite{Enron2015} E-mail Dataset, die oorspronkelijk is verzameld door de \textbf{Federal Energy Regulatory Commission} (FERC), 
 tijdens haar onderzoek naar het faillissement van Enron in 2001 \autocite{Wade2003, Healy2003}.
 Deze dataset bevat \textbf{meer dan 500.000 e-mails} van Enron-medewerkers, waaronder interne bedrijfscommunicatie, klantinteracties en financiële rapportages.
 
@@ -180,13 +182,14 @@ De implementatie van een DLP-oplossing kan een merkbare impact hebben op de pres
 wat invloed heeft op de workflow en gebruikerservaring van de eindgebruikers. 
 Netskope heeft een cloudgebaseerde architectuur die het mogelijk maakt om DLP-regels in real-time toe te passen op zowel in- als uitgaand netwerkverkeer.
 Deze deep content inspection toepassing houdt in dat Netskope continu gegevens inspecteert en analyseert. 
-Afhankelijk van de configuratie en de hoeveelheid netwerkverkeer kan dit leiden tot een verhoogd CPU- en geheugengebruik bij de eindgebruikers,
-vooral wanneer er meerdere complexe DLP-regels actief zijn.
+Afhankelijk van de configuratie en de hoeveelheid netwerkverkeer, kan dit leiden tot een verhoogd \gls{cpu}- en geheugengebruik bij de eindgebruikers,
+vooral wanneer meerdere complexe DLP-regels actief zijn.
+
 Volgens de documentatie van \textcite{Netskope2025Utilization} functioneert de DLP-oplossing stabiel onder productielast, 
 zolang het correct is afgestemd op de infrastructuur en het netwerkverkeer.
-Tenslotte spelen netwerklatentie, throughput ook een belangrijke rol in de gebruikerservaring.
-\textcite{Netskope2021SLA} heeft een Service Level Agreement (SLA) opgesteld die garandeert dat de latentie voor niet-gedecodeerd verkeer minder dan 10 milliseconden bedraagt.
-Voor gedecodeerd verkeer, zoals SSL/TLS-verkeer dat wordt ontsleuteld voor inspectie, is de latentie gegarandeerd onder de 50 milliseconden.
+Tenslotte spelen netwerklatentie en throughput ook een belangrijke rol in de gebruikerservaring.
+\textcite{Netskope2021SLA} heeft een Service Level Agreement (\gls{sla}) opgesteld die garandeert dat de latentie voor niet-gedecodeerd verkeer minder dan 10 milliseconden bedraagt.
+Voor gedecodeerd verkeer, zoals \gls{ssl}/\gls{tls}-verkeer die worden ontsleuteld voor inspectie, is de latentie gegarandeerd onder de 50 milliseconden.
 Aangezien deze SLA-waarden bijzonder laag liggen, voert dit onderzoek hierover geen diepgaande technische analyse uit.
 In plaats daarvan evalueert dit onderzoek de impact vanuit het perspectief van de eindgebruikers en verwerkt deze in de gebruikersevaluatie.
 
@@ -199,40 +202,62 @@ In plaats daarvan evalueert dit onderzoek de impact vanuit het perspectief van d
 \section{Netskope}%
 \label{sec:netskope-literatuurstudie}
 
-Netskope heeft zich ontwikkeld tot een vooraanstaande speler in cloudbeveiliging door zijn geavanceerde Secure Service Edge (SSE)-platform. 
-Het levert geïntegreerde CASB- en DLP-mogelijk\-heden. 
+Netskope heeft zich ontwikkeld tot een vooraanstaande speler in cloudbeveiliging door zijn geavanceerde Secure Service Edge (\gls{sse})-platform. 
+Het levert geïntegreerde \gls{casb}- en DLP-mogelijk\-heden. 
 Volgens \textcite{Riley2018} onderscheidt Netskope zich met functies zoals flexibele regelconfiguraties en realtime-detectie van gevoelige data. 
-\textcite{VanDerWalt2022} identificeren belangrijke aspecten binnen Secure Access Service Edge (SASE) frameworks die nog onvoldoende onderzoek bevatten,
+\textcite{VanDerWalt2022} identificeren belangrijke aspecten binnen Secure Access Service Edge (\gls{sase}) frameworks die nog onvoldoende onderzoek bevatten,
 onder meer netwerk- en beveiligingsdiensten in een cloudgebaseerde omgeving. 
-Deze aspecten zijn onder andere de integratie van verschillende beveiligingscomponenten zoals Secure Web Gateways (SWG), CASB en Zero Trust Network Access (ZTNA). 
+Deze aspecten zijn onder andere de integratie van verschillende beveiligingscomponenten zoals Secure Web Gateways (\gls{swg}), Cloud Access Security Broker \gls{casb} en Zero Trust Network Access (\gls{ztna}). 
 Hierbij dienen deze onderdelen samen te werken om een integrale beveiligingsstrategie te creëren. 
 Om deze integratie van beveiligingscomponenten en Zero Trust-principes verder te versterken, 
 is Netskope lid van de \textcite{SpectraAlliance2025}, een samenwerking tussen vier cybersecuritybedrijven: CrowdStrike, Okta, Proofpoint en Netskope.
 Deze alliantie is gericht op het bieden van een sterke Zero Trust-architectuur door verschillende beveiligingsdomeinen samen te laten werken. 
-Netskope levert hierbij expertise op het gebied van cloud- en webbeveiliging, met een sterke focus op DLP\- en CASB\--functionaliteiten.
-Bovendien is er een toenemende vraag naar het ontwikkelen van API\--integraties voor Security Information and Event Management (SIEM)\--systemen, 
-zodat gegevens uit verschillende bronnen effectief kunnen worden verzameld en geanalyseerd.
+Netskope levert hierbij expertise op het gebied van cloud- en webbeveiliging, met een sterke focus op DLP\- en \gls{casb}\--functionaliteiten.
+% Bovendien is een toenemende vraag naar het ontwikkelen van API\--integraties voor Security Information and Event Management (\gls{siem})\--systemen, 
+% zodat gegevens uit verschillende bronnen effectief kunnen worden verzameld en geanalyseerd.
+De vraag naar het ontwikkelen van \gls{api}-integraties voor \gls{siem}-systemen neemt toe, zodat gegevens uit verschillende bronnen efficiënt kunnen worden verzameld en geanalyseerd.
 
-Bij het evalueren van DLP-oplossingen binnen een SASE-architectuur is Netskope gekozen vanwege de unieke combinatie van functionaliteiten en prestaties die het biedt, 
-evenals de verhouding ten opzichte van andere oplossingen. In 2018 werd Netskope door \textcite{Hille2018} beschreven als een van de innovators voor Cloud Security Management Platforms, 
-zoals te zien in Figuur \ref{fig:netskope}.  
+Bij het evalueren van DLP-oplossingen binnen een \gls{sase}-architectuur wordt Netskope gekozen vanwege de unieke combinatie van functionaliteiten en prestaties die het biedt, 
+% evenals de verhouding ten opzichte van andere oplossingen. 
+In 2018 werd Netskope door \textcite{Hille2018} beschreven als een van de innovators voor Cloud Security Management Platforms, 
+zoals te zien in figuur~\ref{fig:netskope}.  
 Toen waren ze volgens \textcite{Hille2018} nog relatief onder de radar, maar met een zeer aantrekkelijk productaanbod. 
 Dit aanbod is sindsdien verder uitgebreid en omvat nu een breed assortiment aan functies die zijn ontworpen om cloudarchitecturen te beschermen. 
 
-In de meest recente Magic Quadrant voor Security Service Edge (SSE) positioneert Gartner Netskope opnieuw als Leader, zoals weergegeven in Figuur \ref{fig:netskope2024}.
+In de meest recente Magic Quadrant voor Security Service Edge (\gls{sse}) positioneert Gartner Netskope opnieuw als Leader, zoals weergegeven in figuur~\ref{fig:netskope2024}.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{img/netskopeinnovator.png}
-    \caption{Quelle: Crisp Research AG, 2018 - Cloud Security Management Platforms \autocite{Hille2018}}
-    \label{fig:netskope}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \scriptsize
+%     \includegraphics[width=0.6\textwidth]{img/netskopeinnovator.png}
+%     \caption{Quelle: Crisp Research AG, 2018 \-- Cloud Security Management Platforms \autocite{Hille2018}}
+%     \label{fig:netskope}
+% \end{figure}
 
-\begin{figure}[h]
+% \begin{figure}[H]
+%     \centering
+%     \scriptsize
+%     \includegraphics[width=0.6\textwidth]{img/netskope2024.png}
+%     \caption{Gartner Magic Quadrant voor Security Service Edge (\gls{sse}) \autocite{Gartner2024}}
+%     \label{fig:netskope2024}
+% \end{figure}
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{img/netskope2024.png}
-    \caption{Gartner Magic Quadrant voor Security Service Edge (SSE) \autocite{Gartner2024}}
-    \label{fig:netskope2024}
+    \scriptsize
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/netskopeinnovator.png}
+        \caption{Quelle: Crisp Research AG, 2018 -- Cloud Security Management Platforms \autocite{Hille2018}}
+        \label{fig:netskope}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/netskope2024.png}
+        \caption{Gartner Magic Quadrant voor Security Service Edge (\gls{sse}) \autocite{Gartner2024}}
+        \label{fig:netskope2024}
+    \end{minipage}
 \end{figure}
 
 
@@ -243,9 +268,6 @@ In de meest recente Magic Quadrant voor Security Service Edge (SSE) positioneert
 % Forcepoint staat bekend om krachtige gedragsanalyses, maar is minder effectief in het ondersteunen van complexe en dynamische cloudomgevingen. 
 % Microsoft biedt uitstekende integratie met Office 365, maar hierdoor mist het ook Netskope's cloud-agnostische aanpak, die een breder scala aan cloudapplicaties ondersteunt \autocite{NetskopeTAP2024}. 
 % Tenslotte biedt McAfee een breed scala aan beveiligingsoplossingen, maar voor Evolane is Netskope een gebruiksvriendelijker platform met meer flexibiliteit bij het opstellen en aanpassen van regelsets.
-
-
-
 
 % O = onvoldoende
 % V = voldoende
@@ -314,8 +336,11 @@ False positives bij een DLP-systeem ontstaan wanneer legitieme gegevens onterech
 Dit kan leiden tot  \textit{\textbf{onnodige waarschuwingen}}, \textit{\textbf{vertragingen in bedrijfsprocessen}} en \textit{\textbf{frustratie bij eindgebruikers}}. 
 % Bij overmatige false positives kunnen gebruikers belangrijke waarschuwingen negeren, wat leidt tot \textit{\textbf{alertmoeheid}}.
 \textcite{Lukas2023} legt uit dat dit probleem vooral voorkomt in systemen die gebruik maken van machine learning (\gls{ml}) en natuurlijke taalverwerking (\gls{nlp}). 
-Dit komt doordat deze systemen vaak niet in staat zijn om de context van gegevens correct te interpreteren, wat leidt tot onjuiste classificaties.
+% Dit komt doordat deze systemen vaak niet in staat zijn om de context van gegevens correct te interpreteren, wat leidt tot onjuiste classificaties.
+Deze systemen zijn vaak niet in staat om de context van gegevens correct te interpreteren, wat leidt tot onjuiste classificaties.
 Concreet stelt \textcite{Lukas2023} dat deze false positives vooral voorkomen door:
+
+
 
 \begin{itemize}
     \item \textbf{Overmatige generalisatie van patronen}: Het taalmodel associeert bepaalde woordcombinaties, zoals e-mailadressen of namen, automatisch met gevoeligheid, zonder voldoende contextuele verificatie.
@@ -323,6 +348,7 @@ Concreet stelt \textcite{Lukas2023} dat deze false positives vooral voorkomen do
    \item \textbf{Bias in trainingsdata}: Als de trainingsgegevens oververtegenwoordigd zijn met bepaalde formats of types van informatie, zal het model die patronen als gevoelig beschouwen, ook als dat in de praktijk niet klopt.
 \end{itemize}
 
+\textcite{Netskope2023AI} gebruikt \gls{nlp} en \gls{ml} om gevoelige gegevens te detecteren, tijdens dit onderzoek stond deze functionaliteit echter uitgeschakeld.
 \textcite{Olateju2024} stelt vast dat DLP-systemen gemiddeld een false positive-percentage van 4\% tot 5\% vertonen, zelfs bij gebruik van geavanceerde deep learning-algoritmen.
 Dit lijkt misschien beperkt, maar in grote organisaties of cloudomgevingen met duizenden datatransacties per dag kan dit resulteren in een aanzienlijke hoeveelheid foutieve waarschuwingen.
 
@@ -335,7 +361,7 @@ Dit lijkt misschien beperkt, maar in grote organisaties of cloudomgevingen met d
 % analisten gewend raken aan irrelevante meldingen. Dit vergroot het risico op datalekken en non-compliance met wetgeving zoals GDPR of PCI DSS.
 
 % Hoewel volledige eliminatie van false positives onrealistisch is, 
-% zijn er diverse manieren om hun impact te beperken. 
+% zijn  diverse manieren om hun impact te beperken. 
 % Dit kan via contextuele classificatie, hybride detectiemethoden, 
 % en het integreren van gebruikersfeedback in het leerproces van modellen. 
 % Moderne platforms zoals Netskope bieden daarnaast concrete instellingen om detectiegevoeligheid te beheren via confidence scores, 
@@ -353,7 +379,7 @@ Dit lijkt misschien beperkt, maar in grote organisaties of cloudomgevingen met d
 
 % In sectoren zoals de publieke sector en cloud service providers worden grote hoeveelheden gevoelige gegevens verwerkt, w
 % aaronder persoonsgegevens (PII) en betalingsgegevens (PCI). 
-% Om deze data te beschermen worden Data Leakage Prevention (DLP)-systemen ingezet die gebruikmaken van AI en machine learning om potentieel 
+% Om deze data te beschermen worden Data Loss Prevention (DLP)-systemen ingezet die gebruikmaken van AI en machine learning om potentieel 
 % ongewenste gegevensoverdracht te detecteren. Ondanks technologische vooruitgang kampen deze systemen met een gemiddeld false positive-percentage 
 % van circa 4{,}23\%~\cite{detectionaccuracy}. Dit betekent dat een aanzienlijk deel van de gegenereerde waarschuwingen onterecht is, wat verstrekkende
 % gevolgen kan hebben voor operationele processen en compliance.
@@ -376,7 +402,7 @@ Dit lijkt misschien beperkt, maar in grote organisaties of cloudomgevingen met d
 % Hoewel sommige recente studies verbeteringen rapporteren in detectienauwkeurigheid door het gebruik van deep learning 
 % (bijv. 3{,}90\% false positives versus 4{,}35\% bij decision trees~\cite{detectionaccuracy}), ligt de focus in de literatuur hoofdzakelijk op technische performance metrics.
 
-% Er is opvallend weinig onderzoek dat zich richt op de operationele impact van deze valse meldingen. 
+% is opvallend weinig onderzoek dat zich richt op de operationele impact van deze valse meldingen. 
 % Factoren zoals workflowvertraging, menselijke belasting en verminderde gebruikersvertrouwen worden zelden gekwantificeerd, ondanks hun potentiële invloed op de effectiviteit van DLP-systemen.
 
 % \subsection{Onderzoeksnoden en aanbevelingen}
@@ -396,41 +422,44 @@ Dit lijkt misschien beperkt, maar in grote organisaties of cloudomgevingen met d
 
 \section{Juridisch kader voor gegevensbescherming in België}%
 
-De bescherming van persoonlijke en bedrijfsinformatie is een essentieel aspect van de hedendaagse digitale samenleving. 
-Op zowel nationaal als Europees niveau zijn er wettelijke richtlijnen opgesteld om organisaties te ondersteunen bij het garanderen van de vertrouwelijkheid, 
+De bescherming van persoonlijke- en bedrijfsinformatie is een essentieel aspect in de hedendaagse digitale samenleving. 
+Op zowel nationaal als Europees niveau zijn wettelijke richtlijnen opgesteld om organisaties te ondersteunen bij het garanderen van de vertrouwelijkheid, 
 integriteit en toegankelijkheid van gegevens.
 
 \subsection{Algemene Verordening Gegevens\-besch\-erming (AVG)}%
 
-Dit onderzoek zal in overeenstemming zijn met de Algemene Verordening Gegevensbescherming (AVG of GDPR) 2016/679 van 27 april 2016 \autocite{eu_avg2016} en de Belgische wet van 30 juli 2018 \autocite{BelgischeOverheid2018}.
+Dit onderzoek is in overeenstemming met de Algemene Verordening Gegevensbescherming (\gls{avg} of GDPR) 2016/679 van 27 april 2016 \autocite{eu_avg2016} en de Belgische wet van 30 juli 2018 \autocite{BelgischeOverheid2018}.
 Volgens de \textcite{eu_avg2016}, overweging (78), moeten passende, technische en organisatorische maatregelen worden genomen om de rechten van natuurlijke personen te beschermen. 
 Deze overweging zorgt ervoor dat persoonsgegevens op een veilige en verantwoorde manier worden verwerkt. 
 Zo'n beveiliging kan gebeuren door middel van standaardinstellingen die erop zijn gericht om risico's in elke fase van de verwerking van gegevens te minimaliseren.
-Op 25 juli 2024 publiceerde de Europese Unie haar tweede verslag over de toepassing van de AVG \autocite{eu_avg2024}. 
-Dit rapport legt de nadruk op het feit dat de AVG, ondanks verschillende uitdagingen, een goede basis is voor het veilig en transparant behandelen van persoonsgegevens. 
+Op 25 juli 2024 publiceerde de Europese Unie haar tweede verslag over de toepassing van de \gls{avg} \autocite{eu_avg2024}. 
+Dit rapport legt de nadruk op het feit dat de \gls{avg}, ondanks verschillende uitdagingen, een goede basis is voor het veilig en transparant behandelen van persoonsgegevens. 
 
 
 \subsection{Payment Card Industry Data Security Standard (PCI DSS)}%
+\label{sec:pcidss-literatuurstudie}
 
 De Payment Card Industry Data Security Stand\-ard (\gls{pcidss}) bestaat uit een reeks richtlijnen en regels die ontworpen zijn voor organisaties die betalingsinformatie en kaartinformatie verwerken, 
 zoals debit-/ creditcardnummers, Primary Account Numbers (\gls{pan}) en Sensitive Authentication Data (\gls{sad}), zoals Card Verification Value (\gls{cvv}) en magnetische stripgegevens, van alle grote kaartsche\-ma's. 
+
 Deze standaard is ontwikkeld om de veiligheid van kaartinformatie te garanderen en vereist dat organisaties maatregelen nemen om de gegevens van kaarthouders te beschermen \autocite{Elluri2018}. 
 \gls{pcidss} vereist de implementatie van toegangscontroles, zoals \gls{dcs}\textbf{-02} (toegangscontrole tot systemen en gegevens), \gls{dcs}\textbf{-07} (beheer van gebruikersidentiteiten en -toegang), 
-en \gls{dcs}\textbf{-08} (toegangscontrole tot netwerken en systemen), om de veiligheid van kaartinformatie en de bescherming van kaarthoudergegevens te waarborgen \autocite{Elluri2018}.
+en \gls{dcs}\textbf{-08} (toegangscontrole tot netwerken en systemen).%, om de veiligheid van kaartinformatie en de bescherming van kaarthoudergegevens te waarborgen \autocite{Elluri2018}.
 
 \subsection{ISO 27001: Informatiebeveiliging}%
+\label{sec:iso-literatuurstudie}
 
-Bovendien moet de DLP-oplossing rekening houden met de vereisten van \gls{iso}, de internationale norm voor het beheer van informatiebeveiliging. 
+Bovendien moet de DLP-oplossing rekening houden met de vereisten van \gls{iso}, de internationale norm voor het beheer van informatiebeveiliging \autocite{ISO2022}. 
 In dit verband bespreken \textcite{Alsanabani2020} de noodzaak van DLP-oploss\-ingen die zowel detectie- als preventieve methoden samenbrengen. 
 De preventieve aanpak probeert datalekken te vermijden door onder andere het gehele confidentiële bestand te versleutelen, toegangscontrole aan te passen en het labelen van de inhoud.
 
 \subsection{Nationale en Europese richtlijnen}%
 \label{sec:nationale-europese-richtlijnen-literatuurstudie}
 
-Buiten de Belgische wetgeving zijn er ook tal van Europese richtlijnen en nationale standaarden die een belangrijke rol hebben in de bescherming van bedrijfsdata. 
-Hierbij kan gedacht worden aan de Algemene Verordening Gegevensbescherming (\gls{avg}), de EU Cybersecurity Act en belangrijke Europese richtlijnen, waaronder de \gls{nis2}-richtlijn. 
+Buiten de Belgische wetgeving spelen tal van Europese richtlijnen en nationale standaarden een belangrijke rol in de bescherming van bedrijfsdata.
+Hierbij kan gedacht worden aan wetgeving zoals de Algemene Verordening Gegevensbescherming (\gls{avg}) en aan belangrijke Europese richtlijnen, waaronder de \gls{nis2}-richtlijn. 
 Deze richtlijnen worden verder uitgebreid met specifieke normen, zoals de \gls{pcidss} voor betalingsgegevens en internationale normen, zoals \gls{iso} voor de beveiliging van informatie. 
-De \gls{nis2}-richtlijn (Richtlijn (EU) 2022/2555), die op 16 januari 2023 is aangenomen door de \textcite{nis2directive}, 
+De \gls{nis2}-richtlijn (Richtlijn (EU) 2022/2555), die op 16 januari 2023 in werking is getreden door het \textcite{nis2directive}, 
 heeft als doel de cyberbeveiliging binnen de EU te versterken door een hoog niveau van beveiliging te waarborgen voor netwerken en informatiesystemen. 
 Artikel 21 van de \gls{nis2}-richtlijn richt zich op de beveiliging van netwerken en informatiesystemen en legt de verplichting op aan lidstaten om 
 ervoor te zorgen dat aanbieders van essentiële en belangrijke diensten passende technische en organisatorische maatregelen nemen. 
@@ -440,11 +469,11 @@ Maatregelen die over het DLP-systeem kunnen gaan, zijn onder andere:
     \item Risicoanalyse (lid 2, punten a en e): Organisaties moeten een risicobeheerproces implementeren dat hen in staat stelt om risico's voor de beveiliging van netwerken en informatiesystemen te identificeren, te evalueren en te beheersen.
     \item Encryptie en toegangscontroles (lid 2, punten h en i): Het gebruik van encryptie, toegangscontroles en regelmatige beveiligingstests en audits.
     \item Incidentenbehandeling (lid 2, punt b): Organisaties moeten procedures en mechanismen hebben voor het detecteren, melden en reageren op beveiligingsincidenten.
-    \item Bewustwording en training (lid 2, punt g): Opleidingen om medewerkers te informeren over goede cyberhygiëne en risicomanagement \autocite{nis2directive}. Het DLP-systeem van Netskope staat in voor het trainen van de eindgebruiker, mocht deze iets foutief doen.
+    \item Bewustwording en training (lid 2, punt g): Opleidingen om medewerkers te informeren over goede cyberhygiëne en risicomanagement \autocite{nis2directive}. Het DLP-systeem van Netskope staat in voor het trainen van de eindgebruiker, indien deze iets foutief zou doen.
 \end{itemize}
 
 De studie van \textcite{Nayak2020} geeft een uitgebreid overzicht van systemen voor het detecteren en voorkomen van datalekken, 
-inclusief de indeling van systemen op basis van de status van de gegevens (data-at-rest, data-in-motion, dat\-a-in-use) en de detectietechnieken. 
+inclusief de indeling van systemen op basis van de status van de gegevens (\textit{data-in-motion}, \textit{data-at-rest} en \textit{data-in-use} ) en de detectietechnieken. 
 Dit overzicht zal gebruikt worden voor het ontwikkelen van regex-gebaseerde regels in DLP-oploss\-ingen. 
 De studie legt de nadruk op het feit dat datalekken zowel onvoorzien als opzettelijk kunnen optreden en geeft uitdagingen aan, 
 zoals het identificeren van gevoelige informatie, het balanceren van de detectienauwkeurigheid en de integratie van geavanceerde methodologieën.
@@ -453,7 +482,7 @@ zoals het identificeren van gevoelige informatie, het balanceren van de detectie
 
 \subsection{Andere relevante wetgeving}%
 
-Tabel \ref{tab:wetgeving_dlp} bevat de belangrijkste wettelijke richtlijnen en uitspraken die relevant zijn voor het ontwerp en de implementatie van een Data Leakage Prevention-oplossing voor Belgische bedrijven.
+Tabel \ref{tab:wetgeving_dlp} bevat de belangrijkste wettelijke richtlijnen en uitspraken die relevant zijn voor het ontwerp en de implementatie van een Data Loss Prevention-oplossing voor Belgische bedrijven.
 
 % \begin{figure}
 %     \centering
@@ -474,10 +503,10 @@ Tabel \ref{tab:wetgeving_dlp} bevat de belangrijkste wettelijke richtlijnen en u
         \midrule
         \gls{avg} & Bescherming persoonsgegevens & Dataclassificatie en toegangscontrole \\
         \gls{pcidss} & Beveiliging van betalingsgegevens & Encryptie en toegangsbeheer \\
-        \gls{iso} & Informatiebeveiliging & Risicoanalyse en ISMS-implementatie \\
-        \gls{ccb}-framework & Strategie voor cybersecurity België & Aanbevelingen voor risicobeheer \\
+        \gls{iso} & Informatiebeveiliging & Risicoanalyse en \gls{isms}-implementatie \\
+        % \gls{ccb}-framework & Strategie voor cybersecurity België & Aanbevelingen voor risicobeheer \\
         \gls{nis2} & Beveiliging netwerken en diensten & Incidentrapportage en risicoanalyse \\
-        EU Cybersecurity Act & Certificering van beveiligingstechnologie & DLP-oplossingen certificeren \\
+        % EU Cybersecurity Act & Certificering van beveiligingstechnologie & DLP-oplossingen certificeren \\
         Schrems II & Gegevensoverdracht naar niet-EU-landen & Beperking van cloud-gebaseerde opslag \\
         \bottomrule
     \end{tabular}
@@ -506,7 +535,7 @@ De organisatie gebruikt principes zoals \textit{Privacy by Design} en \textit{Se
 Deze principes staan in lijn met de \gls{avg} en \gls{iso} normen, waarbij de focus ligt op het minimaliseren van gegevensverwerking en het behouden van de privacy van gebruikers.
 De inzichten van Sofico zijn rechtstreeks van toepassing op dit onderzoek.
 \textit{Privacy by Design} en \textit{Security by Design} zijn namelijk gericht op minimale gegevensverwerking, transparantie, logging en traceerbaarheid. 
-Binnen \textcite{Netskope2024PrivByDesign} worden deze principes toegepast via \textit{\textbf{in-memory verwerking}}, \textit{\textbf{gegevensobfuscatie}}, \textit{\textbf{klantgecontroleerde datalokalisatie}} en \textit{\textbf{uitgebreide transactie-logging}}.
+Binnen \textcite{Netskope2024PrivByDesign} worden deze principes toegepast via \textit{\textbf{in-memory verwerking}}, \textit{\textbf{gegevensobfuscatie}}, \textit{\textbf{klantgecontroleerde data lokalisatie}} en \textit{\textbf{uitgebreide transactie-logging}}.
 
 % Tijdens het vak \textit{IT Professional \& Career Orientation (ITPCO)} werd aandacht besteed aan de ethische, 
 % juridische en organisatorische aspecten van gegevensverwerking en informatieveiligheid. 

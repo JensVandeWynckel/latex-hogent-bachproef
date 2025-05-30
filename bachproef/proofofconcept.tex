@@ -5,18 +5,21 @@
 \chapter{\IfLanguageName{dutch}{Proof of Concept}{Proof of Concept}}%
 \label{ch:proofofconcept}
 
-\section{\IfLanguageName{dutch}{DLP Regels}{DLP Rules}}
+\section{\IfLanguageName{dutch}{DLP-Regels}{DLP Rules}}
 \label{sec:DLP rules}
+
+Deze proof of concept (PoC) richt zich op het implementeren van Data Loss Prevention (DLP) regels binnen de Netskope omgeving.
+Voor dit onderzoek wordt Netskope \textbf{126.0.0.0} gebruikt, de meest recente versie van Netskope op het moment van schrijven.
 
 \subsection{\IfLanguageName{dutch}{Vooraf gedefinieerde regelsets}{Predefined Rulesets}}
 \label{subsec:vooraf-gedefinieerde-regelsets}
 
-In tabel \ref{tab:Netskope regelsets} staan de vooraf gedefinieerde regelsets van Netskope die zullen worden gebruikt in dit onderzoek. 
-Deze regelsets moeten voldoen aan de Belgische en Europese wetgevingen, maar aangezien ze niet aanpasbaar zijn, zullen deze regelsets niet verder worden gepersonaliseerd. 
-Mocht de vooraf gedefinieerde regelset niet voldoen aan de opgestelde evaluatiecriteria \ref{sec:correctheid}, dan zal er een nieuwe regelset worden gedefinieerd voor toekomstig gebruik. 
+In tabel~\ref{tab:Netskope regelsets} staan de vooraf gedefinieerde regelsets van Netskope die zullen worden gebruikt in dit onderzoek. 
+Deze regelsets moeten voldoen aan de Belgische en Europese wetgeving, maar aangezien ze niet aanpasbaar zijn, zullen deze regelsets niet verder worden aangepast. 
+Mocht de vooraf gedefinieerde regelset niet voldoen aan de opgestelde evaluatiecriteria~\ref{sec:correctheid}, dan zal een nieuwe regelset worden gedefinieerd met andere thresholds. 
 Deze nieuwe regelset zal een aanvullende rol krijgen om samen met de vooraf gedefinieerde regelsets te worden gebruikt.
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \small
     \scriptsize
@@ -24,27 +27,23 @@ Deze nieuwe regelset zal een aanvullende rol krijgen om samen met de vooraf gede
         \toprule
         \textbf{Wetgeving} & \textbf{Netskope Regelsets} & \textbf{Toelichting} \\
         \midrule
-        AVG (GDPR) & 
+        \gls{avg} (GDPR) & 
         EU General Data Protection Regulation (GDPR) \newline 
         GDPR (narrow) & 
-        Detectie van persoonsgegevens volgens de AVG. Narrow zal strikter en specifieker de gegevens detecteren. \\
+        Detectie van persoonsgegevens volgens de \gls{avg}. Narrow zal strikter en specifieker de gegevens detecteren. \\
         
-        PCI DSS en DORA & 
+        \gls{pcidss} en \gls{dora} & 
         Payment Card Industry Data Security Standard. PCI-DSS \newline 
         DLP-PCI \newline 
         Best Practice PCI DLP Profile & 
         Detectie van creditcardgegevens, betalingsinformatie en andere financiële data. \\
         
-        ISO 27001 & 
+        \gls{iso} & 
         Best Practice Confidential Tag Profile \newline 
         Best Practices ML-Based Detections & 
         Geen specifieke regelset, maar focus op governance, risicobeheer en vertrouwelijkheid. \\
-        
-        CCB-framework & 
-        Best Practices ML-Based Detections & 
-        Richtlijnen voor risicobeheer, gedragsanalyse en incidentdetectie via ML-gebaseerde detectie. \\
-        
-        NIS2 & 
+
+        \gls{nis2} & 
         Custom policies + logging & 
         Richt op incidentdetectie en rapportering voor kritieke infrastructuur. \\
         \bottomrule
@@ -54,7 +53,7 @@ Deze nieuwe regelset zal een aanvullende rol krijgen om samen met de vooraf gede
 \end{table}
 
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \small
     \scriptsize
@@ -67,7 +66,7 @@ Deze nieuwe regelset zal een aanvullende rol krijgen om samen met de vooraf gede
         EU-Name-DOB \newline
         EU-Name-Address \newline
         \textit{BE-National-ID (RRN)} &
-        Basispakket voor identificatie van natuurlijke personen, inclusief Belgische RRN-detectie. Gericht op bredere AVG-compliance. \\
+        Basispakket voor identificatie van natuurlijke personen, inclusief Belgische rijksregisternummer-detectie. Gericht op bredere \gls{avg}-compliance. \\
         
         Gevoelige gegevens &
         EU-Identity-Health \newline
@@ -76,7 +75,7 @@ Deze nieuwe regelset zal een aanvullende rol krijgen om samen met de vooraf gede
         EU-Name-Political \newline
         \textit{BE-HealthData-Tag} \newline
         \textit{BE-SocialeZekerheid} &
-        Detectie van gevoelige data zoals gezondheid, religie, afkomst. Gericht op risico’s m.b.t. verwerking van bijzondere persoonsgegevens. \\
+        Detectie van gevoelige data zoals gezondheid, religie, afkomst. Gericht op risico’s met betrekking tot verwerking van bijzondere persoonsgegevens. \\
         
         Financiële gegevens &
         EU-Name-PAN \newline
@@ -84,18 +83,18 @@ Deze nieuwe regelset zal een aanvullende rol krijgen om samen met de vooraf gede
         EU-Name-PAN-CVV \newline
         PCI-DSS \newline
         \textit{BE-IBAN, BE-BIC} &
-        Beveiliging van betaal- en bankgegevens, met focus op DORA/PCI-DSS-compliance en Belgische bankstructuur. \\
+        Beveiliging van betaal- en bankgegevens, met focus op \gls{dora}/\gls{pcidss}-compliance en Belgische bankstructuur. \\
         
         Overheidsdiensten &
         EU-Identity-Name \newline
         EU-Name-Region-Date \newline
-        \textit{BE-Natinoal-ID (RRN)} \newline
-        \textit{BE-NIS2-incidenten} \newline
-        \textit{BE-FOD-Notificatieplicht} &
+        \textit{BE-Natinoal-ID (RRN)} &
+        % \textit{BE-NIS2-incidenten} \newline
+        % \textit{BE-FOD-Notificatieplicht} &
         Gericht op compliance voor openbare instellingen: incidentmelding, Belgische verplichtingen en gegevenslokalisatie. \\
         \bottomrule
     \end{tabular}
-    \caption{Samengestelde DLP-profielen met gestructureerde weergave van regels}
+    \caption{Samengestelde DLP-profielen met gestructureerd weergegeven regels}
     \label{tab:custom-dlp-profielen}
 \end{table}
 
@@ -160,39 +159,39 @@ Elke gemaakte DLP-regel bevat volgende elementen:
 {\small
 \begin{itemize}
     \item \textbf{Regel}: De naam van de DLP-regel die wordt gebruikt.
-    \item \textbf{Type}: Het type DLP-regel dat wordt gebruikt. Dit kan een DLP regel zijn of een fingerprint.
-    \item \textbf{Expressie}: De expressie die wordt gebruikt om de DLP-regel te definiëren. P staat voor 'predefined', D staat voor 'custom dictionary' en E voor 'exact match'.
-    \item \textbf{\textit{Predefined Identifiers}}: De vooraf gedefinieerde entiteiten die worden gebruikt in de expressie. Dit zijn entiteiten die door Netskope zijn gedefinieerd en die kunnen worden gebruikt in de DLP-regel.
-    \item \textbf{\textit{Custom Dictionary Identifiers}}: De aangepaste entiteiten die worden gebruikt in de expressie. Hierin staan lijsten van woorden, nummers of reguliere expressies gedefinieerd. 
-    \item \textbf{\textit{RegEx}}: De reguliere expressies die worden gebruikt in de DLP-regel, zoals bijvoorbeeld voor het rijksregisternummer.
-    \item \textbf{\textit{Exact match}}: De exacte match die wordt gebruikt om de DLP-regel te definiëren. 
-    \item \textbf{Gebruikte techniek}: De techniek die wordt gebruikt om de DLP-regel te definiëren.
+    \item \textbf{Type}: Het type DLP-regel dat wordt gebruikt. Dit kan een DLP-regel zijn of een fingerprint.
+    % \item \textbf{PAS AAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}
+    \item \textbf{Expressie}: De expressie die wordt gebruikt om de DLP-regel te definiëren. P staat voor \textit{predefined}, D staat voor \textit{custom dictionary} en E voor \textit{exact match}.
+    \item \textbf{\textit{Vooraf gedefinieerde identificatiegegevens}}: Dit zijn entiteiten die door Netskope zijn gedefinieerd en die kunnen worden gebruikt in de DLP-regel.
+    \item \textbf{\textit{Eigen dataset-gedefinieerde identificatiegegevens}}: De aangepaste entiteiten die worden gebruikt in de expressie. Hierin staan lijsten van woorden, nummers of reguliere expressies gedefinieerd. 
+    \item \textbf{\textit{Regex}}: Reguliere expressies bestaan uit een reeks tekens die een patroon definiëren, zoals een rijksregister- of \gls{iban}-nummer.
+    \item \textbf{\textit{Exacte overeenkomst}}: Deze overeenkomsten worden gebruikt om specifieke termen of woorden te identificeren die in de DLP-regel worden gebruikt, zoals een wachtwoord.
+    \item \textbf{Gebruikte techniek}: De techniek die wordt gebruikt om de DLP-regel te definiëren, zoals reguliere expressies of vooraf gedefinieerde identificatiegegevens.
     \item \textbf{\textit{Bron(nen)}}: De bronnen die zijn gebruikt om de DLP-regel te definiëren. Dit kunnen woordenlijsten zijn, maar ook andere bronnen zoals websites of documenten.
-    \item \textbf{Threshold}: De drempelwaarde die wordt gebruikt om de DLP-regel te definiëren. Dit kan 'Low', 'Medium', 'High' of 'Critical' zijn. Vanaf de waarde 'Medium' zal Netskope de actie van de gebruiker blokkeren. 'Low' is enkel een waarschuwing.
+    \item \textbf{Threshold}: De drempelwaarde die wordt gebruikt om de DLP-regel te definiëren. Dit kan \textbf{Low}, \textbf{Medium}, \textbf{High} of \textbf{Critical} zijn. Vanaf de waarde \textbf{Medium} zal Netskope de actie van de gebruiker blokkeren. \textbf{Low} is enkel een waarschuwing.
 \end{itemize}
 }
 
-In tabellen \ref{tab:custom-be-id}, \ref{tab:custom-be-iban} en \ref{tab:custom-be-iban-terms}, \ref{tab:custom-eu-card} en \ref{tab:custom-eu-card-terms} staan de aangepaste DLP-regels die zijn ontwikkeld voor dit onderzoek. 
-Dankzij het gebruik van DLP-regels met en zonder termen, kunnen false positives sneller worden gedetecteerd. 
-\textbf{Meer regels worden hier nog aan toegevoegd, momenteel moeten ze nog getweaked worden.}
+In tabellen~\ref{tab:custom-be-id},~\ref{tab:custom-be-iban} en~\ref{tab:custom-be-iban-terms},~\ref{tab:custom-eu-card} en~\ref{tab:custom-eu-card-terms} staan de aangepaste DLP-regels die zijn ontwikkeld voor dit onderzoek. 
+Dankzij het gebruik van DLP-regels met en zonder het gebruik van \textbf{termen}, kunnen false positives sneller worden gedetecteerd. 
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \small
     \scriptsize
     \begin{tabular}{p{4cm} p{10cm}}
         \toprule
-        \textbf{Regel} & BE - National ID and Surname \\
+        \textbf{Regel} & BE \-- National ID and Surname \\
         \midrule
         \textbf{Type} & DLP Rule \\
         \textbf{Expressie} & \texttt{(P1 OR P2) AND (P0 OR D0 OR D1)} \\
-        \textbf{Predefined Identifiers} & 
-        (P0) - Surnames (International) \newline
-        (P1) - National ID Numbers (BE) \newline
-        (P2) - National ID Terms (BE; “RRN”) \\
-        \textbf{Custom Dictionary Identifiers} & 
-        (D0) - Full Names (BE) A-P \newline
-        (D1) - Full Names (BE) P-Z \\
+        \textbf{Vooraf gedefinieerde identificatiegegevens} & 
+        (P0) \-- Surnames (International) \newline
+        (P1) \-- National ID Numbers (BE) \newline
+        (P2) \-- National ID Terms (BE; “RRN”) \\
+        \textbf{Eigen gedefinieerde identificatiegegevens} & 
+        (D0) \-- Full Names (BE) A-P \newline
+        (D1) \-- Full Names (BE) P-Z \\
         \textbf{Gebruikte techniek} & Regex voor RRN in combinatie met woordenlijsten van Belgische achternamen \\
         \textbf{Bron(nen)} & \textcite{Statbel2023, Statbel2024} \\
         \textbf{Threshold} & Low: 2 \quad Medium: 10 \quad High: 25 \quad Critical: 50 \\
@@ -205,83 +204,83 @@ Dankzij het gebruik van DLP-regels met en zonder termen, kunnen false positives 
 
 
 
-\begin{table}[h]
+% % % % % % % % \begin{table}[h]
+% % % % % % % %     \centering
+% % % % % % % %     \small
+% % % % % % % %     \scriptsize
+% % % % % % % %     \begin{tabular}{p{4cm} p{10cm}}
+% % % % % % % %         \toprule
+% % % % % % % %         \textbf{Regel} & BE -  \\
+% % % % % % % %         \midrule
+% % % % % % % %         \textbf{Type} & DLP Rule \\
+% % % % % % % %         \textbf{Expressie} & \texttt{} \\
+% % % % % % % %         \textbf{Vooraf gedefinieerde identificatiegegevens} & 
+% % % % % % % %         (P0) - \newline
+% % % % % % % %         (P1) - \newline
+% % % % % % % %         (P2) -  \\
+% % % % % % % %         \textbf{Eigen gedefinieerde identificatiegegevens} & 
+% % % % % % % %         (D0) - \newline
+% % % % % % % %         (D1) - \\
+% % % % % % % %         \textbf{Gebruikte techniek} & \\
+% % % % % % % %         \textbf{Bron(nen)} & \textcite{} \\
+% % % % % % % %         \textbf{Threshold} & Low: 2 \quad Medium: 10 \quad High: 25 \quad Critical: 50 \\
+% % % % % % % %         \bottomrule
+% % % % % % % %     \end{tabular}
+% % % % % % % %     \caption{Custom DLP-regel: }
+% % % % % % % %     \label{tab:custom-}
+% % % % % % % % \end{table}
+
+
+\begin{table}[H]
     \centering
     \small
     \scriptsize
     \begin{tabular}{p{4cm} p{10cm}}
         \toprule
-        \textbf{Regel} & BE -  \\
-        \midrule
-        \textbf{Type} & DLP Rule \\
-        \textbf{Expressie} & \texttt{} \\
-        \textbf{Predefined Identifiers} & 
-        (P0) - \newline
-        (P1) - \newline
-        (P2) -  \\
-        \textbf{Custom Dictionary Identifiers} & 
-        (D0) - \newline
-        (D1) - \\
-        \textbf{Gebruikte techniek} & \\
-        \textbf{Bron(nen)} & \textcite{} \\
-        \textbf{Threshold} & Low: 2 \quad Medium: 10 \quad High: 25 \quad Critical: 50 \\
-        \bottomrule
-    \end{tabular}
-    \caption{Custom DLP-regel: }
-    \label{tab:custom-}
-\end{table}
-
-
-\begin{table}[h]
-    \centering
-    \small
-    \scriptsize
-    \begin{tabular}{p{4cm} p{10cm}}
-        \toprule
-        \textbf{Regel} & BE - PCI - IBAN \\
+        \textbf{Regel} & BE \-- PCI \-- IBAN \\
         \midrule
         \textbf{Type} & DLP Rule \\
         \textbf{Expressie} & \texttt{P0 OR P1 OR P2 OR P3 } \\
-        \textbf{Predefined Identifiers} & 
-        (P0) - Deposit Account Numbers (BE)
-        (P1) - IBAN (BE; formatted)
-        (P2) - IBAN (BE; unformatted)
-        (P3) - IBAN (all) \\
-        \textbf{Gebruikte techniek} & Vooraf gedefinieerde DLP identifiers gebruikt rond IBAN en bankrekeningnummers \\
+        \textbf{Vooraf gedefinieerde identificatiegegevens} & 
+        (P0) \-- Deposit Account Numbers (BE)
+        (P1) \-- IBAN (BE; formatted)
+        (P2) \-- IBAN (BE; unformatted)
+        (P3) \-- IBAN (all) \\
+        \textbf{Gebruikte techniek} & Vooraf gedefinieerde DLP identificatiegegevens gebruikt rond \gls{iban} en bankrekeningnummers \\
         \textbf{Bron(nen)} & Null \\
         \textbf{Threshold} & Low: 1 \quad Medium: 3 \quad High: 5 \quad Critical: 10 \\
         \bottomrule
     \end{tabular}
-    \caption{Custom DLP-regel: }
+    \caption{Vooraf gedefinieerde DLP-regel: Detectie van Belgische \gls{iban}-nummers}
     \label{tab:custom-be-iban}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \small
     \scriptsize
     \begin{tabular}{p{4cm} p{10cm}}
         \toprule
-        \textbf{Regel} & BE - PCI - IBAN with Bank Terms \\
+        \textbf{Regel} & BE \-- PCI \-- IBAN with Bank Terms \\
         \midrule
         \textbf{Type} & DLP Rule \\
         \textbf{Expressie} & \texttt{(P2 NEAR P0) OR (P2 NEAR P1) OR (P2 NEAR P6) OR (P2 NEAR P7) OR (P2 NEAR P8) OR (P3 NEAR P0) OR (P3 NEAR P1) OR (P3 NEAR P6) OR (P3 NEAR P7) OR (P3 NEAR P8) OR (P4 NEAR P0) OR (P4 NEAR P1) OR (P4 NEAR P6) OR (P4 NEAR P7) OR (P4 NEAR P8) OR (P5 NEAR P0) OR (P5 NEAR P1) OR (P5 NEAR P6) OR (P5 NEAR P7) OR (P5 NEAR P8)} \\
-        \textbf{Predefined Identifiers} & 
-        (P0) - IBAN Terms \newline 
-        (P1) - Bank Account Terms (BE) \newline
-        (P2) - Deposit Account Numbers (BE) \newline
-        (P3) - IBAN (BE; formatted) \newline
-        (P4) - IBAN (BE; unformatted) \newline
-        (P5) - IBAN (all) \newline
-        (P6) - Card Number Terms (English) \newline
-        (P7) - Card Security Terms (English) \newline
-        (P8) - Bank Account Number Terms (English) \\
-        \textbf{Gebruikte techniek} & Vooraf gedefinieerde DLP identifiers gebruikt rond IBAN en bankrekeningnummers in combinatie met woordenlijsten van Belgische termen. \\
+        \textbf{Vooraf gedefinieerde identificatiegegevens} & 
+        (P0) \-- IBAN Terms \newline 
+        (P1) \-- Bank Account Terms (BE) \newline
+        (P2) \-- Deposit Account Numbers (BE) \newline
+        (P3) \-- IBAN (BE; formatted) \newline
+        (P4) \-- IBAN (BE; unformatted) \newline
+        (P5) \-- IBAN (all) \newline
+        (P6) \-- Card Number Terms (English) \newline
+        (P7) \-- Card Security Terms (English) \newline
+        (P8) \-- Bank Account Number Terms (English) \\
+        \textbf{Gebruikte techniek} & Vooraf gedefinieerde DLP identificatiegegevens gebruikt rond \gls{iban} en bankrekeningnummers in combinatie met woordenlijsten van Belgische termen. \\
         \textbf{Bron(nen)} & Null \\
         \textbf{Threshold} & Low: 1 \quad Medium: 2 \quad High: 5 \quad Critical: 9 \\
         \bottomrule
     \end{tabular}
-    \caption{Vooraf gedefinieerde DLP-regel: Detectie van Belgische IBAN-nummers in combinatie met banktermen}
+    \caption{Vooraf gedefinieerde DLP-regel: Detectie van Belgische \gls{iban}-nummers in combinatie met banktermen}
     \label{tab:custom-be-iban-terms}
 \end{table}
 
@@ -305,10 +304,10 @@ Dankzij het gebruik van DLP-regels met en zonder termen, kunnen false positives 
 \section{\IfLanguageName{dutch}{Toepassingen}{Applications}}
 \label{subsubsec:toepassingen}
 
-Tabel \ref{tab:toepassingen} geeft een overzicht van de gemaakte profielen 
-Dit zijn toepassingen van de eerder opgestelde regels in tabel \ref{tab:datatypes_risico_uitgebreid}.
+Tabel~\ref{tab:toepassingen} geeft een overzicht van de gemaakte profielen. 
+Dit zijn toepassingen van de eerder opgestelde regels in tabel~\ref{tab:datatypes_risico_uitgebreid}.
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \small
     \scriptsize
@@ -319,7 +318,7 @@ Dit zijn toepassingen van de eerder opgestelde regels in tabel \ref{tab:datatype
         \textbf{SaaS}     & Collaboration, Cloud Storage, Application Suite & Slack, Teams, Teamleader, Google Drive, Jira, Confluence \\
         \textbf{Web}      & Professional Networking, Development Tools & LinkedIn, GitHub \\
         \textbf{IaaS}     & \gls{iaas}/\gls{paas}, Web Hosting, \gls{isp} & AWS, Azure, Google Cloud, OVH, DigitalOcean, Cloudflare \\
-        \textbf{Email}    & Webmail, Email Outbound App & Gmail, Outlook, ProtonMail, Mailchimp, Thunderbird \\
+        \textbf{E-mail}    & Webmail, E-mail Outbound App & Gmail, Outlook, ProtonMail, Mailchimp, Thunderbird \\
         \textbf{Endpoint} & Endpoint DLP, Utilities & \gls{usb}, clipboard, printers, external devices \\
         \bottomrule
     \end{tabular}
@@ -340,7 +339,7 @@ Dit zijn toepassingen van de eerder opgestelde regels in tabel \ref{tab:datatype
 % \item \textbf{SaaS} (Software as a Service): DLP-oplossingen richten zich op gegevens in beweging (\textit{Data-in-Motion}), zoals bij het gebruik van forward proxies en bij statische gegevens (\textit{Data-at-Rest}) voor APIs.
 % \item \textbf{Web}: Hier wordt DLP toegepast op geëncrypteerd verkeer en voor alle poorten, met focus op gegevens in beweging tussen systemen.
 % \item \textbf{IaaS} (Infrastructure as a Service): Net zoals bij SaaS, wordt DLP toegepast op gegevens in beweging en in rust, ook 
-% \item \textbf{Email}: Bij het beheren van e-mailverkeer, zoals webmail, richt de uitgewerkte DLP-oplossing zich zowel op gegevens in beweging als op gegevens in rust.
+% \item \textbf{E-mail}: Bij het beheren van e-mailverkeer, zoals webmail, richt de uitgewerkte DLP-oplossing zich zowel op gegevens in beweging als op gegevens in rust.
 % \item \textbf{Endpoint}: Endpoint Data Loss Prevention (DLP) richt zich op het beschermen van gegevens in gebruik (\textit{Data-in-Use}) door middel van endpointbeveiliging. Dit houdt het volgende in: het monitoren en beperken van gegevensoverdracht via USB-opslagmedia, klemborden, printers en andere externe apparaten.
 % \end{itemize}
 
@@ -358,18 +357,18 @@ Dit zijn toepassingen van de eerder opgestelde regels in tabel \ref{tab:datatype
 % Via de API werden bestanden gescand op gevoelige informatie op het moment van upload, synchronisatie of delen. 
 % Door middel van policyregels gebaseerd op GDPR- en PCI-profielen werd onder andere het delen van persoonsgegevens en creditcardinformatie geblokkeerd of gelogd.
 
-In de SaaS-omgeving worden cloudapplicaties zoals \textbf{\textit{Slack}}, \textbf{\textit{Microsoft Teams}}, \textbf{\textit{Teamleader}}, 
-\textbf{\textit{Google Drive}}, \textbf{\textit{Jira}} en \textbf{\textit{Confluence}} beveiligd door een combinatie van forward proxy-verkeer en geavanceerde API-integraties binnen Netskope. 
+In de \gls{saas}-omgeving worden cloudapplicaties zoals \textbf{\textit{Slack}}, \textbf{\textit{Microsoft Teams}}, \textbf{\textit{Teamleader}}, 
+\textbf{\textit{Google Drive}}, \textbf{\textit{Jira}} en \textbf{\textit{Confluence}} beveiligd door een combinatie van forward proxy-verkeer en geavanceerde \gls{api}-integraties binnen Netskope. 
 Deze toepassingen \ref{tab:toepassingen} vallen onder de categorieën \textit{Collaboration}, \textit{Cloud Storage} en \textit{Application Suite} \autocite{Netskope2025API}.
 
 De \textit{\textbf{forward proxy}}-setup zorgt voor real-time controle over gebruikersverkeer, 
 inclusief het scannen van bestanden en berichten tijdens het verzenden of uploaden. 
 Hierdoor wordt data-in-motion onmiddellijk geanalyseerd en geblokkeerd indien nodig.
 
-Via API-integraties worden bestanden en berichten gescand op het moment van upload, synchronisatie of delen \autocite{Netskope2025API}. 
+Via \gls{api}-integraties worden bestanden en berichten gescand op het moment van upload, synchronisatie of delen \autocite{Netskope2025API}. 
 Zo wordt ook data-at-rest beschermd, bijvoorbeeld bij reeds opgeslagen documenten in Google Drive of bij gedeelde bestanden in Slack-kanalen \autocite{Netskope2022Slack}.
 
-De integraties van deze applicaties met Netskope zijn deels al geïmplementeerd door Evolane. 
+De integraties van deze applicaties met Netskope zijn reeds deels geïmplementeerd door Evolane. 
 Aangezien de focus van dit onderzoek ligt op de DLP-regels, zal deze integratie niet verder uitgewerkt worden.
 
 \subsection{\IfLanguageName{dutch}{Web}{Web}}
@@ -382,20 +381,20 @@ Netskope onderschept versleutelde \gls{https}-verzoeken en analyseert deze op de
 Zo wordt het dataverlies via webformulieren, berichten of uploads proactief tegengehouden. 
 Deze aanpak focust op \textit{data-in-motion} en wordt toegepast op websites zoals \textbf{LinkedIn}, \textbf{GitHub}, \textbf{Messenger}, \textbf{ChatGPT} en \textbf{Google Forms}.
 
-De eerste test om te zien of de Netskope DLP-regels correct werken, werd uitgevoerd op de website \texttt{dlptoolbox.com}.
-Het gebruikte script \ref{lst:dlp-script} is ontworpen om testgegevens van \texttt{dlptest.com} te versturen naar het testformulier op \texttt{dlptoolbox.com}.
-De testdata bevatte combinaties van persoonsnamen, en creditcardnummers (\textit{Visa} en \textit{Mastercard}), gestructureerd in \gls{csv}-formaat, zoals hieronder weergegeven:
+De eerste test om te zien of de Netskope DLP-regels correct werken, wordt uitgevoerd op de website \texttt{dlptoolbox.com}.
+Het gebruikte script~\ref{lst:dlp-script} is ontworpen om testgegevens van \texttt{dlptest.com} te versturen naar het testformulier op \texttt{dlptoolbox.com}.
+De testdata bevatten combinaties van persoonsnamen, en creditcardnummers (\textit{Visa} en \textit{Mastercard}), gestructureerd in \gls{csv}-formaat, zoals hieronder weergegeven:
 
 \begin{quote}\small
 \texttt{Robert Aragon, 4929-3813-3266-4295} \newline
 \texttt{Ashley Borden, 5370-4638-8881-3020}
 \end{quote}
 
-Voor deze korte evaluatie werd een \textit{Python}-script opgebouwd dat gebruikmaakt van \textbf{Selenium}. 
+Voor deze korte evaluatie wordt een \textit{Python}-script opgebouwd dat gebruikmaakt van \textbf{Selenium}. 
 Het script is ontworpen om testgegevens aan de hand van batches in te voeren via het online platform \texttt{dlptoolbox.com}.
 Dit platform biedt een veilige manier om DLP-regels realistisch te testen binnen de browseromgeving van de gebruiker.
 Het script stuurt gegevens automatisch in batches van tien rijen naar het testformulier \ref{lst:dlp-selenium} en verzendt deze data aan de hand van een \texttt{POST}-request naar de server.
-Dit werd tijdens de uitvoering in rijen van 10 gedaan, aangezien de dataset \autocite{DLPTest2025Sample} 30 000 rijen bevat.
+Dit wordt tijdens de uitvoering in rijen van 10 gedaan, aangezien de dataset \autocite{DLPTest2025Sample} 30 000 rijen bevat.
 
 {\small
 \begin{lstlisting}[style=custompython,caption={Versturen van batches via Selenium},label={lst:dlp-selenium}, captionpos=b, basicstyle=\small\ttfamily]
@@ -407,10 +406,10 @@ textarea.send_keys(batch)
 \end{lstlisting}
 }
 
-Na verzending wordt de gelekte data teruggestuurd \ref{lst:dlp-teruggelezen}. Netskope staat in alert modus, zodat alle keren dat er gevoelige data wordt gedetecteerd, een incident wordt aangemaakt. 
+Na verzending wordt de gelekte data teruggestuurd~\ref{lst:dlp-teruggelezen}. Netskope staat in alert modus, zodat iedere keer dat gevoelige data wordt gedetecteerd, een incident wordt aangemaakt. 
 
 {\small
-\begin{lstlisting}[style=custompython, caption={Versturen van batches via Selenium},label={lst:dlp-teruggelezen}, captionpos=b, basicstyle=\small\ttfamily]
+\begin{lstlisting}[style=custompython, caption={Verzonden data wordt teruggelezen},label={lst:dlp-teruggelezen}, captionpos=b, basicstyle=\small\ttfamily]
 leaked_box = driver.find_element(By.ID, "clientDataLeaked")
 leaked_data = leaked_box.get_attribute("value")
 print(f"Gelekte data:\n{leaked_data}")
@@ -419,7 +418,7 @@ print(f"Gelekte data:\n{leaked_data}")
 
 Elke testcyclus wordt afgesloten met een reset van het formulier om interferentie te voorkomen. 
 De testgegevens en het script zijn louter \textbf{\textit{ter illustratie}} en worden niet gebruikt in de uiteindelijke evaluatie van de DLP-regels.
-Het script wordt wel aangepast om aan de hand van een eigen opgestelde \textit{Ngrok}-server de data te versturen zodat Netskope de data kon scannen \ref{sec:automatisering-poc}.
+Het script wordt wel aangepast om aan de hand van een eigen opgestelde \textit{Ngrok}-server de data te sturen, zodat Netskope de data kon scannen~\ref{sec:automatisering-poc}.
 
 
 % \begin{lstlisting}[style=custompython,label={lst:dlp-selenium},caption={Selenium-script voor batchgewijze verzending van testdata}]
@@ -438,7 +437,7 @@ Het script wordt wel aangepast om aan de hand van een eigen opgestelde \textit{N
 %     URL = "https://dlptoolbox.com/postmaster.aspx"
 %     INPUT_FILE = "dlp_testdata.csv"
 %     ROWS_PER_BATCH = 10
-%     WAIT_SECONDS = 5
+%     WAIT = 5
     
 %     # Setup Chrome
 %     options = Options()
@@ -455,7 +454,7 @@ Het script wordt wel aangepast om aan de hand van een eigen opgestelde \textit{N
     
 %     for i in range(0, len(lines), ROWS_PER_BATCH):
 %         batch = "\n".join(lines[i:i+ROWS_PER_BATCH])
-%         print(f"📤 Versturen batch {i//ROWS_PER_BATCH + 1}:\n{batch} 📤")
+%         print(f" Versturen batch {i//ROWS_PER_BATCH + 1}:\n{batch}")
     
 %         textarea = wait.until(EC.presence_of_element_located((By.ID, "clientDataClear")))
 %         textarea.clear()
@@ -463,7 +462,7 @@ Het script wordt wel aangepast om aan de hand van een eigen opgestelde \textit{N
     
 %         launch_btn = wait.until(EC.element_to_be_clickable((By.ID, "btnLaunch")))
 %         launch_btn.click()
-%         time.sleep(WAIT_SECONDS)
+%         time.sleep(WAIT)
     
 %         leaked_box = driver.find_element(By.ID, "clientDataLeaked")
 %         leaked_data = leaked_box.get_attribute("value")
@@ -486,7 +485,7 @@ Het script wordt wel aangepast om aan de hand van een eigen opgestelde \textit{N
 % Forward proxy and API
 % Linode, Akamai, AWS, Azure, Google Cloud, Digital Ocean, OVH, Vultr, Hetzner, Kinsta, Cloudflare,
 
-In de IaaS-omgeving biedt Netskope beveiliging aan de hand van forward proxy en API-integraties. 
+In de \gls{iaas}-omgeving biedt Netskope beveiliging aan de hand van forward proxy en \gls{api}-integraties. 
 Platforms zoals \textbf{\textit{AWS}}, \textbf{\textit{Azure}}, \textbf{\textit{Google Cloud}}, \textbf{\textit{DigitalOcean}}, \textbf{\textit{OVH}}, \textbf{\textit{Hetzner}}, \textbf{\textit{Linode}} 
 en \textbf{\textit{Cloudflare}} vallen onder deze categorie. Deze cloudinfrastructuurplatforms worden vaak gebruikt voor het hosten van virtuele machines, opslagdiensten en netwerkcomponenten.
 
@@ -499,16 +498,16 @@ en \textbf{\textit{Cloudflare}} vallen onder deze categorie. Deze cloudinfrastru
 
 
 
-\subsection{\IfLanguageName{dutch}{Email}{Email}}
-\label{subsubsec:email-poc}
+\subsection{\IfLanguageName{dutch}{E-mail}{E-mail}}
+\label{subsubsec:e-mail-poc}
 % Webmail and API
 % Outlook, Gmail, Exchange, Office 365, Thunderbird, Protonmail, Mailchimp, Sendinblue
 
-Voor emailverkeer kan DLP worden toegepast op zowel webmail (zoals \textbf{\textit{Gmail}} en \textbf{\textit{Outlook Web Access}}) als softwareclients (zoals \textbf{\textit{Thunderbird}} en \textbf{\textit{Outlook}}).
-Netskope biedt ook SMTP Proxy-ondersteuning voor het scannen van emailverkeer \autocite{Netskope2025Email}. Dit omvat het scannen van uitgaande emails op gevoelige bijlagen of tekstinhoud vóór verzending (outbound).
+Voor e-mailverkeer kan DLP worden toegepast op zowel webmail (zoals \textbf{\textit{Gmail}} en \textbf{\textit{Outlook Web Access}}) als softwareclients (zoals \textbf{\textit{Thunderbird}} en \textbf{\textit{Outlook}}).
+Netskope biedt ook SMTP Proxy-ondersteuning voor het scannen van e-mailverkeer \autocite{Netskope2025Email}. Dit omvat het scannen van uitgaande e-mails op gevoelige bijlagen of tekstinhoud vóór verzending (outbound).
 Deze ondersteuning ligt niet binnen de scope van dit onderzoek, maar eens deze geïmplementeerd is, werkt deze op dezelfde manier als de webmail en client-integraties.
-Netskope zal voordat de email wordt verzonden (\textit{data-in-motion}), de inhoud scannen op gevoelige gegevens.
-Via API-integraties met \textbf{\textit{Microsoft 365}} en \textbf{\textit{Gmail}} kunnen berichten en bijlagen worden gescand op basis van GDPR-regels, PCI-gegevens en Belgische identifiers (zoals RRN).
+Netskope zal voordat de e-mail wordt verzonden (\textit{data-in-motion}), de inhoud scannen op gevoelige gegevens.
+Via \gls{api}-integraties met \textbf{\textit{Microsoft 365}} en \textbf{\textit{Gmail}} kunnen berichten en bijlagen worden gescand op basis van \gls{avg}-regels, \gls{pci}-gegevens en Belgische identificatiegegevens (zoals rijksregisternummer).
 
 \subsection{\IfLanguageName{dutch}{Endpoint}{Endpoint}}
 \label{subsubsec:endpoint-poc}
@@ -516,22 +515,24 @@ Via API-integraties met \textbf{\textit{Microsoft 365}} en \textbf{\textit{Gmail
 % USB, clipboard, printers, external devices
 
 DLP kan op endpoints worden geïmplementeerd, waarbij de focus ligt op het beschermen van gegevens in gebruik (\textit{data-in-use}). 
-Netskope bekijkt en beperkt de overdracht van gevoelige gegevens via \gls{usb}-opslagmedia, klemborden, printers en andere externe apparaten.
+\textcite{Netskope2025Endpoint} bekijkt en beperkt de overdracht van gevoelige gegevens via \gls{usb}-opslagmedia, klemborden, printers en andere externe apparaten.
 Deze functionaliteit kan geblokkeerd of toegelaten worden op basis van de DLP-regels die zijn ingesteld.
 De testen worden manueel uitgevoerd op een \textit{MacOS}-systeem, de confidentiële gegevens van reeds gedetecteerde testdata wordt opgeslagen en naar een \gls{usb}-stick gekopieerd.
-In geval van een overtreding, zal Netskope een waarschuwing tonen en daarna de actie blokkeren.
+In geval van een overtreding, zal Netskope een waarschuwing tonen en vervolgens de actie blokkeren.
 
 \subsection{\IfLanguageName{dutch}{Testgegevens}{Test Data}}
 \label{subsubsec:poc-testgegevens}
 
-Voor dit onderzoek is \textbf{een achtste} van de testgegevens gebruikt van \textit{Enron's Email Dataset} \autocite{Cukierski2015Enron}.
-Deze dataset bevat emails van het bedrijf Enron, zoals besproken in sectie~\ref{sec:detectienauwkeurigheid-literatuurstudie}.
-De emails worden gecategoriseerd onder \textbf{user}~\ref{subsubsec:dataset-categorisering} en bevatten zowel confidentiële als niet-confidentiële gegevens.
-Het doel van deze testgegevens is om te zien hoeveel confidentiële gegevens gedetecteerd kunnen worden door de Netskope agent en om de detectienauwkeurigheid van de DLP-regels te evalueren.
-Tijdens de evaluatie zullen de door Netskope gedetecteerde gegevens steekproefsgewijs worden vergeleken en hieruit volgt een conclusie.
-Een voorbeeld van zo'n email is te zien in Listing~\ref{lst:dlp-email-ex}.
+Voor dit onderzoek is \textbf{een achtste} van de testgegevens gebruikt van \textit{Enron's E-mail Dataset} \autocite{Cukierski2015Enron}.
+Deze dataset bevat e-mails van het bedrijf Enron, zoals besproken in sectie~\ref{sec:detectienauwkeurigheid-literatuurstudie}.
+De e-mails worden gecategoriseerd onder \textbf{user}~\ref{subsubsec:dataset-categorisering} en bevatten zowel confidentiële als niet-confidentiële gegevens.
+Het doel van deze testgegevens is om te kijken hoeveel confidentiële gegevens gedetecteerd kunnen worden door de Netskope agent en om de detectienauwkeurigheid van de DLP-regels te evalueren.
+Tijdens de evaluatie zullen de door Netskope gedetecteerde gegevens steekproefsgewijs worden vergeleken.
+% Uit deze evaluatie zal een conclusie worden getrokken
+% hieruit volgt een conclusie.
+Een voorbeeld van zo'n e-mail is te zien in Listing~\ref{lst:dlp-e-mail-ex}.
 
-\begin{lstlisting}[style=custompython, caption={Voorbeeld van een email uit de Enron dataset}, label={lst:dlp-email-ex}, captionpos=b]
+\begin{lstlisting}[style=custompython, caption={Voorbeeld van een e-mail uit de Enron dataset}, label={lst:dlp-e-mail-ex}, captionpos=b]
 Message-ID: <14280616.1075855349137.JavaMail.evans@thyme>
 Date: Fri, 7 Dec 2001 09:40:02 -0800 (PST)
 From: martin.cuilla@enron.com
@@ -559,12 +560,12 @@ Subject:
 hey marty do you still have a job?
 \end{lstlisting}
 
-Deze email bevat een bijlage \texttt{X-FileName: pallen.nsf}, 
+Deze e-mail bevat een bijlage \texttt{X-FileName: pallen.nsf}, als het een echte e-mail was, dan zou Netskope deze bijlage scannen op confidentiële gegevens.
 
 \section{\IfLanguageName{dutch}{Automatisering van Gegevensverwerking en Testverkeer}{Automation of Data Processing and Test Traffic}}
 \label{sec:automatisering-poc}
 
-Om de DLP-regels te evalueren werd een testscript ontwikkelt in \textbf{Python} dat gebruikersinteracties simuleert via een publieke webinterface. 
+Om de DLP-regels te evalueren wordt een testscript ontwikkelt in \textbf{Python} dat gebruikersinteracties simuleert via een publieke webinterface. 
 Deze interface wordt gehost met behulp van een lokale Flask-applicatie die tijdelijk toegankelijk is gemaakt via ngrok \autocite{Ngrok2025Flask}. 
 Een Selenium WebDriver bestuurt vervolgens een browser om gebruikersgedrag te simuleren.
 De structuur van het script is onderverdeeld in onderstaande subsecties, die elk een specifiek aspect van de automatisering en evaluatie van DLP-regels behandelen.
@@ -582,7 +583,7 @@ De structuur van het script is onderverdeeld in onderstaande subsecties, die elk
 \subsection{\IfLanguageName{dutch}{Ngrok Webinterface}{Ngrok Web Interface}}
 \label{subsubsec:ngrok-webinterface}
 
-Voor het opzetten van een tijdelijke webinterface werd gebruik gemaakt van \textbf{ngrok} \autocite{Ngrok2025Flask}.
+Voor het opzetten van een tijdelijke webinterface wordt gebruik gemaakt van \textbf{ngrok} \autocite{Ngrok2025Flask}.
 Deze tool maakt gratis lokale webapplicaties tijdelijk toegankelijk via een gehashte \gls{url} \texttt{https://<hash>.ngrok-free.app}.
 % \autocite{Ngrok2025NAT} ts 
 \ref{lst:ngrok-webinterface}.
@@ -607,10 +608,10 @@ if __name__ == '__main__':
 \subsection{\IfLanguageName{dutch}{Dataset categorisering}{Dataset Categorization}}
 \label{subsubsec:dataset-categorisering}
 
-Aangezien Enron's email-dataset \textbf{517 401} verschillende emails bevat \autocite{Cukierski2015Enron}, werd de dataset gecategoriseerd per \textbf{user} \ref{lst:email-summary}. 
-Elke email bevat informatie over de \textbf{user} en wat voor \textbf{type/token} email het is. Een voorbeeld hiervan is te zien in de \gls{csv}-file \ref{lst:dlp-email-ex}.
+Aangezien Enron's e-mail-dataset \textbf{517 401} verschillende e-mails bevat \autocite{Cukierski2015Enron}, wordt de dataset gecategoriseerd per \textbf{user} \ref{lst:e-mail-summary}. 
+Elke e-mail bevat informatie over de \textbf{user} en wat voor \textbf{type/token} e-mail het is. Een voorbeeld hiervan is te zien in de \gls{csv}-file \ref{lst:dlp-e-mail-ex}.
 De categorisering gebeurt aan de hand van een \gls{csv}-bestand dat \textbf{file}, \textbf{tokens} en \textbf{char\_len} als kolommen heeft.
-Dit is een samenvattend bestand om later bij de evaluatie van Netskope incidenten \ref{sec:incidenten-resultaten} de emails te kunnen terugvinden. 
+Dit is een samenvattend bestand om later bij de evaluatie van Netskope incidenten~\ref{sec:incidenten-resultaten} de e-mails te kunnen terugvinden. 
 
 \begin{lstlisting}[style=custompython, label={lst:dlp-csv}, caption={emails\_summary.csv \gls{csv}-bestand}, captionpos=b]
 file,tokens,char_len
@@ -639,8 +640,8 @@ Deze WebDriver kan worden geconfigureerd om een browser te besturen en gebruiker
     driver = webdriver.Chrome(options=options)
 \end{lstlisting}
 
-Aangezien de evaluatie gebaseerd is op realistische testdata, moest het gedrag van de browser ook realistisch zijn.
-Volgende \textcite{Selenium2025WebDriver} best practices werden toegepast om de browser te laten functioneren als een echte gebruiker:
+Aangezien de evaluatie gebaseerd is op realistische testdata, moet het gedrag van de browser ook realistisch zijn.
+Volgende \textcite{Selenium2025WebDriver} best practices worden toegepast om de browser te laten functioneren als een echte gebruiker:
 
 \begin{lstlisting}[style=custompython,label={lst:dlp-stealth},caption={Best practice voor browserautomatisering}, captionpos=b]
     driver.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {
@@ -652,8 +653,9 @@ Volgende \textcite{Selenium2025WebDriver} best practices werden toegepast om de 
 \subsection{\IfLanguageName{dutch}{Clipboard met Pyperclip}{Clipboard with Pyperclip}}
 \label{subsubsec:clipboard}
 
-Om de email-dataset in het formulier te injecteren, wordt pyperclip gebruikt \ref{lst:dlp-pyperclip}.
-Deze \textit{Python} module maakt het mogelijk om tekst naar het klembord te kopiëren en van het klembord te plakken \autocite{Pyperclip2025}.
+Om de e-mail-dataset in het formulier te injecteren, wordt pyperclip gebruikt~\ref{lst:dlp-pyperclip}.
+Deze \textit{Python} module maakt het mogelijk om tekst te kopiëren naar het klembord en het te plaatsen in het formulier.
+% Deze \textit{Python} module maakt het mogelijk om tekst naar het klembord te kopiëren en van het klembord te plakken \autocite{Pyperclip2025}.
 
 \begin{lstlisting}[style=custompython, label={lst:dlp-pyperclip}, caption={Clipboardmanipulatie met Pyperclip}, captionpos=b]
     pyperclip.copy(content)
@@ -663,7 +665,7 @@ Deze \textit{Python} module maakt het mogelijk om tekst naar het klembord te kop
 \label{subsubsec:gebruikersinteractie}
 
 De Netskope Client is geïnstalleerd op een \textit{MacOS} machine. De interactie met het formulier gebeurde eerste met de standaard Selenium-methode \texttt{\detokenize{textarea.send_keys(..)}}. 
-Deze methode voert karakters individueel in in het tekstveld en is niet altijd even betrouwbaar, vooral niet bij het invoeren van emails boven de \textbf{10 000} karakters oftewel \textbf{10 KB}.
+Deze methode voert karakters individueel in in het tekstveld en is niet altijd even betrouwbaar, vooral niet bij het invoeren van e-mails boven de \textbf{10 000} karakters oftewel \textbf{10 KB}.
 De interactie met het formulier gebeurt hierdoor met \textbf{ActionChains} \autocite{Selenium2025ActionChains}~\ref{lst:dlp-actionchain}. 
 Dit laat toe om toetsenbordcommando's zoals \texttt{Cmd+V} te simuleren, wat de invoer van grote hoeveelheden tekst vergemakkelijkt en versnelt.
 
@@ -683,7 +685,7 @@ Zoals toegelicht in de \textcite{Selenium2025ActionChains} ActionChains-document
 Bij elke succesvolle verzending registreert het script het tijdstip (\textbf{timestamp}), 
 de bestandssleutel (\textbf{user} en \textbf{token}) en de grootte (\textbf{char\_len}) in een logbestand \ref{lst:dlp-logging}.
 
-\begin{lstlisting}[style=custompython,label={lst:dlp-logging}, caption={Logging van verzonden emails}, captionpos=b]
+\begin{lstlisting}[style=custompython,label={lst:dlp-logging}, caption={Logging van verzonden e-mails}, captionpos=b]
 def log_email_send(file_key, content):
     ts = datetime.now().strftime("%-m/%-d/%y %-I:%M %p")
     size = len(content.encode('utf-8'))
@@ -695,9 +697,9 @@ def log_email_send(file_key, content):
         w.writerow([ts, file_key, size])
 \end{lstlisting}
 
-Het script logt de laatst verzonden email in een apart tekstbestand, zodat het bij een herstart voorkomt dat reeds verzonden emails opnieuw worden verzonden \ref{lst:dlp-last-sent}.
+Het script logt de laatst verzonden e-mail in een apart tekstbestand, zodat het bij een herstart voorkomt dat reeds verzonden e-mails opnieuw worden verzonden \ref{lst:dlp-last-sent}.
 
-\begin{lstlisting}[style=custompython,label={lst:dlp-last-sent}, caption={Logging van verzonden emails}, captionpos=b]
+\begin{lstlisting}[style=custompython,label={lst:dlp-last-sent}, caption={Logging van laatst verzonden bericht}, captionpos=b]
 with open(LAST_SENT_FILE, "w") as f:
     f.write(fk)
 \end{lstlisting}
@@ -705,9 +707,25 @@ with open(LAST_SENT_FILE, "w") as f:
 \section{\IfLanguageName{dutch}{Netskope alerts}{Netskope alerts}}
 \label{subsubsec:netskope-alerts}
 
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{img/netskopeinnovator.png}
-%     \caption{ \autocite{Hille2018}}
-%     \label{fig:netskope}
-% \end{figure}
+Tijdens de evaluatieperiode~\ref{sec:evaluatie-criteria} worden de DLP-profielen in \textbf{\texttt{Alert}} of \textbf{\texttt{User Alert}} modus gebruikt.
+In de \textbf{\texttt{User Alert}} modus worden overtredingen onderschept en worden gebruikers gewaarschuwd.
+Zo een waarschuwing, zoals te zien in figuur~\ref{fig:netskope}, zal de gebruiker de optie geven om de actie te annuleren of door te zetten.
+Dit geeft de gebruiker de kans om te leren of \textit{\textbf{False Positives}} te rapporteren.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/netskopealert.png}
+    \caption{Netskope \textbf{\texttt{User Alert}} voor een DLP-regel}
+    \label{fig:netskope}
+\end{figure}
+
+Alle incidenten die worden gegenereerd door Netskope worden opgeslagen in de Netskope Cloud en kunnen worden bekeken via de Netskope webinterface~\ref{fig:netskope_incidenten}.
+
+\begin{figure}[H]
+    \centering
+    \scriptsize
+    \includegraphics[width=0.99\textwidth]{img/netskope_incidents2.png}
+    \caption{Incidenten in Netskope}
+    \label{fig:netskope_incidenten}
+\end{figure}

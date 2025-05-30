@@ -9,10 +9,80 @@
 % onderzoeksvra(a)g(en). Wat was jouw bijdrage aan het onderzoeksdomein en
 % hoe biedt dit meerwaarde aan het vakgebied/doelgroep? 
 % Reflecteer kritisch over het resultaat. In Engelse teksten wordt deze sectie
-% ``Discussion'' genoemd. Had je deze uitkomst verwacht? Zijn er zaken die nog
+% ``Discussion'' genoemd. Had je deze uitkomst verwacht? Zijn hier zaken die nog
 % niet duidelijk zijn?
 % Heeft het onderzoek geleid tot nieuwe vragen die uitnodigen tot verder 
 %onderzoek?
 
 % \lipsum[76-80]
+
+
+Deze bachelorproef heeft de mogelijkheden van Netskope Data Loss Prevention onderzocht ter bescherming van confidentiële data binnen de Belgische regelgeving.
+Door gebruik te maken van vooraf- en eigen gedefinieerde DLP-regels, samen met identificatoren voor dataclassificatie, 
+slaagt Netskope in het detecteren van confidentiële data zoals \gls{pii}- en \gls{pci}-gegevens in verschillende omgevingen, waaronder \textbf{\gls{saas}}, \textbf{web}, \textbf{\gls{iaas}}, \textbf{e-mail} en \textbf{endpoints}.
+% De centrale onderzoeksvraag werd beantwoord door een proof of concept op te zetten in een gecontroleerde testomgeving bij Evolane,
+De centrale onderzoeksvraag werd beantwoord door het opzetten van een proof of concept in een gecontroleerde testomgeving bij Evolane,
+waarbij vooral gekeken werd naar de \textbf{correctheid} van de agent en de \textbf{effectiviteit} van de detectie.
+De resultaten van \textit{Enron's} dataset tonen aan dat Netskope \textbf{correct reageerde} op risico’s, waarbij een groot aantal incidenten gerelateerd waren aan realistische datapatronen zoals naam- en e-mailadrescombinaties.
+Hoewel de evaluatie vooral de vooraf gedefinieerde DLP-regelset \texttt{DLP-Predefined} registreerde, werden de thresholds geoptimaliseerd naar de context van \textbf{Evolane}.
+Het gehele onderzoek werd uitgevoerd met aandacht voor de Belgische en Europese wetgeving en bijkomende richtlijnen, zoals de \textbf{\gls{avg}}, \textbf{\gls{nis2}} en \textbf{\gls{pcidss}}, \textbf{\gls{dora}}, \textbf{\gls{iso}} sen \textbf{Schrems II}.
+De onderzoeksdoelstellingen zijn behaald en de proof of concept heeft een meerwaarde geleverd als basis voor DLP-oplossingen binnen Belgische organisaties.
+
+
+
+% Op basis van het uitgevoerde onderzoek blijkt dat Netskope een veelzijdige en effectieve oplossing biedt voor het beschermen van vertrouwelijke gegevens binnen Belgische organisaties. 
+% Door een combinatie van vooraf gedefinieerde en op maat gemaakte DLP-regels, aangevuld met gerichte dataclassificatie, 
+% slaagt Netskope erin om gevoelige informatie zoals PII- en PCI-gegevens accuraat te detecteren in uiteenlopende omgevingen — waaronder SaaS, Web, IaaS, e-mail en endpoints. 
+% De centrale onderzoeksvraag werd beantwoord door de implementatie van een proof of concept in een gecontroleerde testomgeving bij Evolane. 
+% Daarbij werd zowel de performantie van de agent als de effectiviteit van de detectie grondig geëvalueerd.
+
+% De resultaten tonen aan dat Netskope in staat is om correct te reageren op risico’s, waarbij een overweldigend aantal incidenten gerelateerd was aan realistische datapatronen, 
+% zoals naam- en e-mailadrescombinaties. Ook werd een juridisch kader geïntegreerd in de configuratie van de DLP-regels, met aandacht voor AVG-, NIS2- en PCI DSS-compliance. 
+% Het toevoegen van Belgische identificatiekenmerken zoals het rijksregisternummer verhoogde bovendien de relevantie van de oplossing voor de lokale context.
+
+% Hoewel de validatie met een beperkte interne testgroep enkele beperkingen kende, werd dit ruimschoots gecompenseerd door de analyse van de grootschalige Enron-maildataset. 
+% De combinatie van functionele evaluatie en juridische afstemming toont aan dat Netskope niet enkel technisch performant is, maar ook inzetbaar is als compliant DLP-systeem voor Belgische organisaties.
+
+% Reflecterend kan worden gesteld dat de onderzoeksdoelstellingen werden behaald en dat het opgezette onderzoek een duidelijke meerwaarde levert aan zowel Evolane als andere organisaties die overwegen een DLP-oplossing te implementeren. 
+% De PoC leidde bovendien tot waardevolle inzichten in het optimaliseren van regelsets en drempelwaarden, afgestemd op contextspecifieke risico’s. Wat onverwacht bleek, 
+% was de lage classificatiegraad van ‘kritieke’ incidenten, wat wijst op de noodzaak om standaardconfiguraties kritisch te evalueren.
+
+% \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}
+% \label{sec:onderzoeksvraag}
+
+% Deze bachelorproef onderzocht de mogelijkheden van Netskope Data Loss Prevention voor het beschermen van confidentiële gegevens binnen de Belgische regelgeving,
+% met als doel DLP-oplossingen te \textbf{ontwerpen}, \textbf{implementeren} en \textbf{evalueren} voor Evolane.
+% Om de centrale onderzoeksvraag~\ref{sec:onderzoeksvraag} te beantwoorden, zijn vijf deelvragen geformuleerd en beantwoord.
+
+% \textbf{Centrale vraag:} \textit{“Hoe kan een op Netskope gebaseerde DLP-oplossing worden ontworpen en geïmplementeerd om vertrouwelijke gegevens te beschermen en te voldoen aan de Belgische regelgeving?”}
+
+% \begin{enumerate}
+%   \item[\textbf{1.}] \emph{Welke mogelijkheden biedt Netskope (\gls{sse}) platform voor DLP in de context van vertrouwelijke gegevensbescherming?}
+%     Netskope \gls{sse} platform biedt veel mogelijkheden voor DLP aan, waaronder \texttt{Real-Time Protection}-regels~\ref{fig:netskope_rules} en dataclassificerende DLP-profielen~\ref{tab:custom-dlp-profielen}.
+%     De \gls{sse} architectuur ondersteunt \textit{data-in-motion}, \textit{data-at-rest} en \textit{data-in-use} op verschillende omgevingen zoals \gls{saas}~\ref{subsubsec:saas-poc}, Web~\ref{subsubsec:web-poc}, \gls{iaas}~\ref{subsubsec:iaas-poc}, E-mail~\ref{subsubsec:e-mail-poc} en Endpoint~\ref{subsubsec:endpoint-poc}.  
+
+%   \item[\textbf{2.}] \emph{Hoe kunnen regelsets en dataclassificatie in Netskope DLP worden afgestemd op de Belgische wetgeving, zoals de \gls{avg} en \gls{nis2}-richt\-lijn?}
+%     Netskope DLP biedt vooraf gedefinieerde profielen en identificatiegegevens die voldoen aan de de \gls{avg} wetgeving en de NIS2-richtlijn.
+%     Verder zijn ook eigen gedefinieerde regelsets aangemaakt voor Belgische PII-gegevens zoals het rijksregisternummer samen met de meeste voorkomende Belgische achternamen.
+%     De afstemming van deze regels gebeurde door thresholds~\ref{tab:risico_thresholds} in te stellen, die zijn geoptimaliseerd aan de hand van \textbf{waarschijnlijkheid} en \textbf{impact} van de confidentiële gegevens voor Evolane~\ref{sec:toelichting_scores}.
+%     Aangezien tijdens de evaluatie van de PoC de standaard thresholds van Netskope prioriteit hadden, was slechts 0,01 \% van de incidenten geclassificeerd als \emph{Critical}.
+
+%   \item[\textbf{3.}] \emph{Welke technieken en methoden kunnen worden toegepast om \gls{pii}- en \gls{pci}-gegevens effectief te detecteren en te beschermen binnen het Netskope-platform?}
+%     Tijdens de proof of concept zijn DLP-regels aangemaakt vanuit eigen- en vooraf gedefinieerde identificatiegegevens. 
+%     Deze regels detecteren PII-gegevens zoals namen, e-mailadressen, rijksregisternummers~\ref{tab:custom-be-id} en Belgische betalingsgegevens~\ref{tab:custom-eu-card},~\ref{tab:custom-eu-card-terms}.
+%     Tijdens de evaluatie van de PoC werden e-mails van het Amerikaanse bedrijf \textit{Enron} geanalyseerd, waarbij de \texttt{EU-Name-e-mail (narrow)} en \texttt{Name-E-mail} regels samen goed waren voor \textbf{253.507} overtredingen (> 82 \% van het totaal).
+%     Deze evaluatie stond in om de DLP-regels te valideren op een realistische dataset, om aan te tonen dat Netskope DLP effectief is in het detecteren van confidentiële gegevens.
+
+%   \item[\textbf{4.}] \emph{Hoe kan een PoC voor Netskope DLP worden opgezet in een testomgeving om de effectiviteit van de oplossing te evalueren?} 
+%     De PoC voor DLP werd opgezet op de omgeving van Evolane, waarbij de Netskope agent werd geïnstalleerd op de \textit{macOS}-werkstations van 4 medewerkers.
+%     Aangezien dit aantal beperkt was, werd de \textit{Enron}-maildataset gebruikt om de DLP-regels te valideren en te evalueren. 
+%     Voor de evaluatie werd een confusion matrix opgesteld op basis van \textbf{100} steekproefmails, waarbij 50 e-mails volgens Netskope geen confidentiële gegevens bevatten en 50 e-mails die wel confidentiële gegevens bevatten.
+%     Verder werd de perfomantie van de Netskope agent gemonitord via de \textit{macOS Activity Monitor}, waarbij geen merkbare vertraging werd vastgesteld.  
+
+%   \item[\textbf{5.}] \emph{Welke juridische en technische normen moeten worden meegenomen bij het ontwerpen van een DLP-oplossing voor een Belgische organisatie, en hoe kan Netskope aan deze eisen voldoen?}  
+%     Netskope DLP voldoet aan de Belgische en Europese juridische normen zoals de \gls{avg}, \gls{nis2} en \gls{pcidss}.
+%     De implementatie van Netskope DLP houdt rekening met deze regelgeving door al de toegevoegde eigen- en vooraf gedefinieerde DLP-regels hierop te baseren.
+%     Aan de hand van \textbf{geëncrypteerde logs}, die Netskope bijhoudt, wordt eerer ook voldaan aan al de toegepaste wetgevingen en richtlijnen.
+%     De incidenten worden geclassificeerd op basis van de \textbf{thresholds}, het oorspronkelijke bericht van het incident kan niet worden bekeken door de Netskope beheerders.
+% \end{enumerate}
 

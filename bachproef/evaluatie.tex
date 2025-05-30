@@ -5,42 +5,58 @@
 \chapter{\IfLanguageName{dutch}{Evaluatie}{Evaluation}}%
 \label{ch:evaluatie}
 
-
 \section{\IfLanguageName{dutch}{Evaluatie Criteria}{Evaluation Criteria}}
 \label{sec:evaluatie-criteria}
 
-Zoals besproken in Hoofdstuk \ref{ch:stand-van-zaken} zijn er verschillende evaluatiecriteria die gebruikt kunnen worden om de resultaten van de proof of concept te evalueren. 
-Deze criteria zijn onderverdeeld in vier hoofdcategorieën: \textit{functionaliteit}, \textit{correctheid}, \textit{performantie} en \textit{gebruiksvriendelijkheid}. 
+Zoals besproken in hoofdstuk~\ref{ch:stand-van-zaken} zijn verschillende evaluatiecriteria gebruikt die kunnen worden toegepast op de resultaten van de proof of concept.
+% om de resultaten van de proof of concept te evalueren. 
+Deze criteria zijn onderverdeeld in drie hoofdcategorieën: \textit{correctheid}, \textit{performantie} en \textit{gebruiksvriendelijkheid}. 
 De evaluatieperiode loopt van 22 april 2025 tot 25 mei 2025. 
 Werknemers van Evolane zullen hun feedback meegeven tijdens deze periode, zodat false positives geleidelijk aan verminderen. 
-Voor geen foutieve evaluatie mee te geven, zal de confusion matrix \ref{tab:confusion_matrix} bestaan uit resultaten van de laatste week. 
-In deze week zullen eerder gedetecteerde false positives opnieuw getest worden om te zien of het resultaat verschild. 
-
-
-\subsection{\IfLanguageName{dutch}{Functionaliteit}{Functionality}}
-\label{sec:functionaliteit}
-
-De functionaliteit van de proof of concept heeft volgende evaluatiecriteria:
-
-\begin{table}[h]
-    \centering
-    \small
-    \scriptsize
-    \begin{tabular}{p{4cm} p{6cm} p{6cm}}
-        \toprule
-        \textbf{Evaluatiecriteria} & \textbf{Omschrijving} & \textbf{Bron} \\
-        \midrule
+Om geen foutieve evaluatie mee te geven, zal een confusion matrix~\ref{tab:confusion_matrix} bestaan uit resultaten van de laatste week. 
+% In deze week zullen eerder gedetecteerde false positives opnieuw getest worden om te zien of het resultaat verschilt.
+Initieel zullen in deze week alle false positives opnieuw getest worden om te zien of het resultaat verschilt, 
+maar dit is door het gebrek aan feedback veranderd naar de data van het PoC-script~\ref{lst:send-request}.
         
-
-    \end{tabular}
-    \caption{\IfLanguageName{dutch}{Evaluatiecriteria voor functionaliteit}{Evaluation criteria for functionality}}
-    \label{tab:eval-criteria-functionality}
-\end{table}
-
 \subsection{\IfLanguageName{dutch}{Correctheid}{Correctness}}
 \label{sec:correctheid}
 
-Confusion matrix
+Om de correctheid van de proof of concept te meten, wordt gebruik gemaakt van een confusion matrix~\ref{tab:confusion_matrix} die de resultaten van de DLP-regels weergeeft.
+Tijdens de evaluatieperiode zullen een \textbf{100}-tal verstuurde e-mails steekproefsgewijs worden geanalyseerd. Deze e-mails bevatten volgens Netskope zowel gevoelige als niet-gevoelige data.
+Voor \textit{\textbf{False Positives}} wordt in de mail gekeken of de data die als confidentieel werden gedetecteerd, daadwerkelijk ergens deze confidentiële data bevat.
+Aangezien Netskope specifiek zoekt naar de geconfigureerde identificatiegegevens, zullen \textit{\textbf{False Negatives}} vermoedelijk niet voorkomen.
+Verder zullen \textit{\textbf{True Positives}} en \textit{\textbf{True Negatives}} worden bepaald door de data die wel of niet als confidentieel werd gedetecteerd, en of deze data daadwerkelijk confidentieel is of niet.
+Indien een e-mail zou vallen in meerdere categorieën, dan wordt deze e-mail in de categorie geplaatst die het meest overeenkomt met de inhoud van de e-mail.
+
+
+\begin{table}[H]
+    \centering
+    \small
+    \scriptsize
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{} & \textbf{Werkelijke Gevoelige Data} & \textbf{Geen Gevoelige Data} \\ \hline
+        \textbf{Gedetecteerd als gevoelig} & True Positives (TP) & False Positives (FP) \\ \hline
+        \textbf{Niet gedetecteerd als gevoelig} & False Negatives (FN) & True Negatives (TN) \\ \hline
+    \end{tabular}
+    \caption{Confusion Matrix voor regex-detectie}
+    \label{tab:confusion_matrix}
+\end{table}
+
+% \subsubsection{\IfLanguageName{dutch}{Key Performance Indicators}{KPI’s}}
+% \label{subsec:kpis}
+
+% De gebruikte kritieke prestatie-indicatoren (\gls{kpi}'s) zijn gebaseerd  
+
+
+% Om de effectiviteit van de regex-gebaseerde DLP-detectieregels te meten en continu te verbeteren, hanteren we de volgende KPI’s:
+% \begin{itemize}
+%   \item \textbf{Detectiesnelheid (\%)}: percentage van gevoelige datalekken dat correct wordt geïdentificeerd binnen de eerste detectieronde, streefwaarde \(\geq 95\%\).
+%   \item \textbf{False positive ratio}: aantal onterecht geblokkeerde of gemarkeerde items gedeeld door totaal aantal detecties, streefwaarde \(\leq 5\%\).
+%   \item \textbf{Tijd tot remediatie (TTM)}: gemiddelde tijd tussen detectie en afronding van mitigatiemaatregelen, streefwaarde \(\leq 2\) uur.
+%   \item \textbf{Coverage van datatypes (\%)}: aandeel van alle gedefinieerde datatypes dat door DLP-regels wordt afgedekt, streefwaarde \(\geq 90\%\).
+%   \item \textbf{Compliance-niveau (\%)}: mate waarin de DLP-policy voldoet aan AVG, NIS2 en PCI DSS, gemeten via periodieke audits, streefwaarde 100\%.
+% \end{itemize}
 
 \subsection{\IfLanguageName{dutch}{Performantie}{Performance}}
 \label{sec:eva-performantie}
@@ -52,24 +68,21 @@ Confusion matrix
 % - Netwerkimpact (upload/download/latency)
 % - Mogelijk disk I/O (indien relevant)
 
-De metingen van de zijn reeds besproken in Sectie \ref{sec:systeemimpact-literatuurstudie}.
+De metingen van de performantie zijn reeds besproken in sectie~\ref{sec:systeemimpact-literatuurstudie}.
 Hieruit blijkt dat de Netskope agent zijn performantie voornamelijk afhankelijk is van de configuratie van de DLP-regels en de hoeveelheid netwerkverkeer dat wordt verwerkt.
 Aangezien de aangemaakte DLP-identificatoren voornamelijk bestaan uit datasets, zal de Netskope agent weinig impact hebben op de performantie van de computer \autocite{Netskope2025Utilization}.
 Tijdens het uitvoeren van het gebruikte script~\ref{lst:send-request} die testgegevens verstuurt naar de Ngrok website, zal voornamelijk \texttt{Activity Monitor} en \texttt{iPerf3} gebruikt worden om de performantie te meten.
-Andere alternatieve tools, die gericht zijn op \textit{MacOS}-systemen, staan beschreven in Tabel~\ref{tab:eval-criteria-performance}.
+Andere alternatieve tools, die gericht zijn op \textit{macOS}-systemen, staan beschreven in tabel~\ref{tab:eval-criteria-performance}.
 
 % aangezien de Netskope agent vooral op deze besturingssystemen draait binnen de organisatie. 
 % Voor de performantie-evaluatie van de Netskope agent werd gebruik gemaakt van zowel grafische als command-line gebaseerde tools die compatibel zijn met \textit{MacOS}. 
 % Tools werden geselecteerd op basis van nauwkeurigheid, loggingmogelijkheden en hun vermogen om relevante systeem- en netwerkinformatie te capteren.
 
 
-
-
-
 \subsubsection{\IfLanguageName{dutch}{Testscenario's}{Test scenarios}}
 \label{sec:testscenario's}
 
-Tabel \ref{tab:test-scenarios-performance} geeft een overzicht van de testscenario's die uitgevoerd zijn om de performantie van de Netskope agent te evalueren. 
+Tabel~\ref{tab:test-scenarios-performance} geeft een overzicht van de testscenario's die uitgevoerd zijn om de performantie van de Netskope agent te evalueren. 
 De testscenario's zijn ontworpen om de impact van de Netskope agent op de performantie van de computer te meten in verschillende situaties. 
 
 \begin{table}[h]
@@ -82,7 +95,7 @@ De testscenario's zijn ontworpen om de impact van de Netskope agent op de perfor
         \midrule
         \textbf{1} & niet actief & Computer draait op normale manier zonder Netskope \\
         \textbf{2} & actief maar idle & DLP-Policy is niet actief \\
-        \textbf{3} & actief, samen met DLP-Policy & DLP-Policy is actief maar er wordt geen data verwerkt \\
+        \textbf{3} & actief, samen met DLP-Policy & DLP-Policy is actief maar geen data zal worden verwerkt \\
         \textbf{4} & actief, en DLP-Policy wordt gestimuleerd & Confidentiële data wordt verwerkt terwijl de DLP-Policy actief is \\
         \bottomrule
     \end{tabular}
@@ -90,20 +103,20 @@ De testscenario's zijn ontworpen om de impact van de Netskope agent op de perfor
     \label{tab:test-scenarios-performance}
 \end{table}
 
-
 \subsection{\IfLanguageName{dutch}{Gebruiksvriendelijkheid}{Usability}}
 \label{sec:gebruiksvriendelijkheid}
 
-De gebruiksvriendelijkheid van de proof of concept bevat volgende evaluatiecriteria: 
-\textit{Configuratiegemak}, \textit{Documentatie}, \textit{Gebruiksgemak} en \textit{Ondersteuning}. 
-De beoordeling van deze criteria gebeurt aan de hand van feedback van eindgebruikers bij Evolane en mijn persoonlijke ervaring tijdens het configureren van de DLP-regels. 
-De volgende centrale vragen vormen de basis voor de evaluatie van de gebruiksvriendelijkheid:
+% De gebruiksvriendelijkheid van de proof of concept bevat volgende evaluatiecriteria: 
+% \textit{Configuratiegemak}, \textit{Documentatie}, \textit{Gebruiksgemak} en \textit{Ondersteuning}. 
+% De gebruiksvriendelijkheid van de proof of concept bevat onderstaande evaluatiecriteria, samen met de bijhorende centrale vragen.
+De beoordeling van de gebruiksvriendelijkheid gebeurt aan de hand van feedback van eindgebruikers bij Evolane en mijn persoonlijke ervaring tijdens het configureren van de DLP-regels. 
+% De volgende centrale vragen vormen de basis voor de evaluatie van de gebruiksvriendelijkheid:
+De volgende evaluatiecriteria, samen met de bijhorende centrale vragen, vormen de basis voor de evaluatie:
 
-\begin{itemize}
+\begin{itemize}\small
     \item \textbf{Configuratiegemak}: Hoe eenvoudig is het om de DLP-regels te configureren?
-    \item \textbf{Documentatie}: Is er voldoende documentatie beschikbaar voor de DLP-regels?
+    \item \textbf{Documentatie}: Is voldoende documentatie beschikbaar voor de DLP-regels?
     \item \textbf{Gebruiksgemak}: Hoe eenvoudig is het om de DLP-regels te gebruiken?
-    \item \textbf{Ondersteuning}: Is er voldoende ondersteuning beschikbaar voor de DLP-regels?
+    \item \textbf{Ondersteuning}: Is voldoende ondersteuning beschikbaar voor de DLP-regels?
     \label{sec:gebruiksvriendelijkheid-criteria}
 \end{itemize}
-

@@ -10,12 +10,13 @@
 
 \newglossaryentry{pci}{
     name={PCI},
-    description={Payment Card Industry, verwijst vaak naar gegevens in verband met betaalkaarten}
+    description={Payment Card Industry, verwijst vaak naar gegevens in verband met betaalkaarten. Het wordt in dit onderzoek gebruikt om te verwijzen naar alle soorten betaalgegevens}
 }
 
 \newglossaryentry{avg}{
     name={AVG},
-    description={Algemene Verordening Gegevensbescherming, Europese privacywetgeving}
+    description={Algemene Verordening Gegevensbescherming, Europese privacywetgeving voor de bescherming van natuurlijke personen in verband met de verwerking van persoonsgegevens en betreffende het vrije verkeer van die gegevens \autocite{eu_avg2016, eu_avg2024}}
+    % description={Algemene Verordening Gegevensbescherming, Europese privacywetgeving voor de bescherming van persoonsgegevens \autocite{eu_avg2016, eu_avg2024}}
 }
 
 \newglossaryentry{pcidss}{
@@ -25,13 +26,13 @@
 
 \newglossaryentry{nis2}{
     name={NIS2},
-    description={Network and Information Security Directive versie 2, Europese richtlijn voor cybersecurity}
+    description={Network and Information Security Directive versie 2, Europese richtlijn voor cybersecurity \autocite{nis2directive}}
 }
 
-\newglossaryentry{poc}{
-    name={PoC},
-    description={Proof of Concept, een eerste prototype of conceptuele implementatie}
-}
+% \newglossaryentry{poc}{
+%     name={PoC},
+%     description={Proof of Concept, een eerste prototype of conceptuele implementatie}
+% }
 
 \newglossaryentry{sse}{
     name={SSE},
@@ -48,6 +49,16 @@
     description={Infrastructure as a Service, cloud-gebaseerde infrastructuurdiensten}
 }
 
+\newglossaryentry{sla}{
+    name={SLA},
+    description={Service Level Agreement, een overeenkomst die de verwachte serviceprestaties en verantwoordelijkheden tussen een dienstverlener en een klant vastlegt}
+}
+
+\newglossaryentry{tls}{
+    name={TLS},
+    description={Transport Layer Security, een protocol voor het beveiligen van communicatie over netwerken, de opvolger van \gls{ssl}}
+}
+
 \newglossaryentry{paas}{
     name={PaaS},
     description={Platform as a Service, cloud-gebaseerde platformdiensten voor ontwikkeling en implementatie}
@@ -60,17 +71,17 @@
 
 \newglossaryentry{iso}{
     name={ISO/IEC 27001},
-    description={International Organization for Standardization and the International Electrotechnical Commission, internationale standaard voor informatiebeveiliging}
+    description={\textcite{ISO2022}, internationale standaard voor informatiebeveiliging}
+}
+
+\newglossaryentry{isms}{
+    name={ISMS},
+    description={Information Security Management System, een systeem voor het beheren van informatiebeveiliging}
 }
 
 \newglossaryentry{it}{
     name={IT},
     description={Information Technology, informatie- en communicatietechnologie}
-}
-
-\newglossaryentry{nis2}{
-    name={NIS2},
-    description={Network and Information Security Directive 2, een EU-richtlijn over netwerk- en informatiebeveiliging}
 }
 
 \newglossaryentry{dpa}{
@@ -80,7 +91,7 @@
 
 \newglossaryentry{kpi}{
     name={KPI},
-    description={Key Performance Indicator, een meetbare graadmeter voor de effectiviteit of prestaties van een systeem}
+    description={Key Performance Indicator, een meetbare waarde die aangeeft hoe goed een organisatie presteert ten opzichte van haar gestelde doelen}
 }
 
 \newglossaryentry{cpu}{
@@ -105,7 +116,7 @@
 
 \newglossaryentry{csv}{
     name={CSV},
-    description={Comma-Separated Values, een bestandsformaat voor het opslaan van gegevens in tabelvorm}
+    description={Comma-Separated Values, een bestandsformaat voor het opslaan van gegevens in een tabelvorm}
 }
 
 \newglossaryentry{enisa}{
@@ -117,6 +128,7 @@
     name={CVV},
     description={Card Verification Value, een beveiligingscode op een betaalkaart}
 }
+
 
 \newglossaryentry{pan}{
     name={PAN},
@@ -133,14 +145,50 @@
     description={Cloud Access Security Broker, een beveiligingsoplossing voor cloudtoepassingen}
 }
 
+\newglossaryentry{ztna}{
+    name={ZTNA},
+    description={Zero Trust Network Access, een beveiligingsmodel dat geen standaardvertrouwen biedt aan gebruikers of apparaten}
+}
+
+\newglossaryentry{siem}{
+    name={SIEM},
+    description={Security Information and Event Management, een systeem voor het verzamelen en analyseren van beveiligingsgegevens}
+}
+
+\newglossaryentry{swg}{
+    name={SWG},
+    description={Secure Web Gateway, een beveiligingsoplossing die webverkeer beschermt tegen bedreigingen}
+}
+
+\newglossaryentry{sase}{
+    name={SASE},
+    description={Secure Access Service Edge, een netwerkarchitectuur die beveiliging en netwerkfunctionaliteit combineert in de cloud}
+}
+
 \newglossaryentry{sad}{
     name={SAD},
-    description={Sensitive Data, gevoelige gegevens die bescherming vereisen}
+    description={Sensitive Data, gevoelige gegevens die bescherming nodig hebben, zoals persoonsgegevens, financiële gegevens of klanteninformatie}
 }
+
+\newglossaryentry{chd}{
+    name={CHD},
+    description={Cardholder Data, gegevens van de kaarthouder die bescherming nodig hebben, zoals het kaartnummer, de naam van de kaarthouder en de vervaldatum van de kaart}
+}
+
 
 \newglossaryentry{dcs}{
     name={DCS},
     description={Data Classification System, een systeem voor het classificeren van gegevens op basis van gevoeligheid}
+}
+
+\newglossaryentry{npa}{
+    name={NPA},
+    description={Netskope Private Access, een oplossing voor veilige toegang tot interne applicaties zonder een \gls{vpn}}
+}
+
+\newglossaryentry{vpn}{
+    name={VPN},
+    description={Virtual Private Network, een technologie die een veilige verbinding over het internet mogelijk maakt}
 }
 
 \newglossaryentry{san}{
@@ -170,18 +218,94 @@
 
 \newglossaryentry{ssl}{
     name={SSL},
-    description={Secure Sockets Layer, een protocol voor het beveiligen van communicatie over het internet}
+    description={Secure Sockets Layer, een protocol voor het beveiligen van communicatie over het internet, nu vervangen door \gls{tls}}
 }
 
 \newglossaryentry{https}{
     name={HTTPS},
-    description={Hypertext Transfer Protocol Secure, een beveiligde versie van HTTP die SSL/TLS gebruikt voor encryptie}
+    description={Hypertext Transfer Protocol Secure, een beveiligde versie van HTTP die \gls{ssl}/\gls{tls} gebruikt voor encryptie}
 }
 
-% \newglossaryentry{api}{
-%     name={API},
-%     description={Application Programming Interface, een set van protocollen en tools voor het bouwen van softwaretoepassingen, zoals 
-% }
+\newglossaryentry{jwt}{
+    name={JWT},
+    description={JSON Web Token, een open standaard voor het veilig uitwisselen van informatie tussen partijen als een JSON-object}
+}
+
+\newglossaryentry{nda}{
+    name={NDA},
+    description={Non-Disclosure Agreement, een geheimhoudingsovereenkomst tussen partijen om vertrouwelijke informatie te beschermen}
+}
+
+\newglossaryentry{ssh}{
+    name={SSH},
+    description={Secure Shell, een protocol voor veilige communicatie tussen computers over een netwerk}
+}
+
+\newglossaryentry{api}{
+    name={API},
+    description={Application Programming Interface, een set van regels en protocollen voor het bouwen en integreren van softwaretoepassingen}
+}
+
+
+\newglossaryentry{cve}{
+    name={CVE},
+    description={Common Vulnerabilities and Exposures, een lijst van bekende kwetsbaarheden in software en systemen}
+}
+
+\newglossaryentry{owasp}{
+    name={OWASP},
+    description={Open Web Application Security Project, een organisatie die zich richt op het verbeteren van de beveiliging van software}
+}
+
+\newglossaryentry{apikey}{
+    name={API\--sleutels},
+    description={Een unieke sleutel die wordt gebruikt om toegang te krijgen tot een Application Programming Interface (\gls{api}) en om de identiteit van de gebruiker te verifiëren}
+}
+
+\newglossaryentry{iso5}{
+    name={ISO/IEC 27005},
+    description={\textcite{IOSIEC2022}, een internationale standaard voor risicobeheer in informatiebeveiliging}
+}
+
+\newglossaryentry{nist}{
+    name={NIST SP 800\--30 Rev. 1},
+    description={\textcite{NIST800-30} Special Publication 800\--30 Revision 1, een richtlijn voor risicobeheer in informatiebeveiliging}
+}
+
+\newglossaryentry{naw}{
+    name={NAW},
+    description={Naam, Adres, Woonplaats, vaak gebruikt in context van persoonsgegevens}
+}
+
+\newglossaryentry{cvc}{
+    name={CVC},
+    description={Card Verification Code, een beveiligingscode op een betaalkaart, vergelijkbaar met \gls{cvv}}
+}
+
+\newglossaryentry{niss}{
+    name={NISS},
+    description={uniek identificatienummer van een natuurlijk persoon bij de Belgische sociale zekerheid. Voor inwoners van België is het identiek aan het rijksregisternummer}
+}
+
+\newglossaryentry{sso}{
+    name={SSO},
+    description={Single Sign-On, een authenticatiemethode die gebruikers in staat stelt om met één set inloggegevens toegang te krijgen tot meerdere applicaties of systemen}
+}
+
+\newglossaryentry{mfa}{
+    name={MFA},
+    description={Multi-Factor Authentication, een beveiligingsmethode die meerdere verificatiefactoren vereist voor toegang tot een systeem of applicatie}
+}
+
+\newglossaryentry{sspm}{
+    name={SSPM},
+    description={\gls{saas} Security Posture Management, een proces voor het beheren van de beveiligingspositie van \gls{saas}-toepassingen}
+}
+
+\newglossaryentry{uci}{
+    name={UCI},
+    description={User Confidence Index (gebruikersvertrouwensindex), met deze index wordt het vertrouwen van gebruikers in de beveiliging van een systeem of applicatie gemeten} 
+}
 
 % \title{How to create a glossary}
 % \author{}

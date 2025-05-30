@@ -1,40 +1,98 @@
 %%=============================================================================
-%% Conclusie
+%% Discussie
 %%=============================================================================
 
 \chapter{\IfLanguageName{dutch}{Discussie}{Discussion}}%
 \label{ch:discussie}
 
-% \section{\IfLanguageName{dutch}{Toekomstig onderzoek}{Future research}}
-% \label{sec:toekomstig-onderzoek}
-% dit heb ik niet onderzocht, ik heb me enkel hierop gericht. stand van zaken, waar zit er een gat?
+\section{\IfLanguageName{dutch}{Toekomstig onderzoek}{Future research}}
+\label{sec:toekomstig-onderzoek}
 
-\paragraph{Alternatieven DLP-regels}
+Deze bachelorproef heeft zich gericht op de mogelijkheden van Netskope Data Loss Prevention binnen de Belgische context.
+Toekomstig onderzoek kan zich op verschillende gebieden richten om de DLP-oplossingen verder te verbeteren en aan te passen aan de specifieke behoeften van de organisatie.
+In onderstaande secties worden enkele alternatieven besproken die kunnen bijdragen aan deze verbetering.
 
-https://www.b2bpay.co/list-banks-europe
+\section{\IfLanguageName{dutch}{Alternatieve DLP-regels}{Alternatives DLP rules}}
+\label{sec:alternatieven-dlp-regels}
 
-\paragraph{Alternatieven datasets}
+Voor dit onderzoek zijn verschillende DLP-regels onderzocht die mogelijk beter aansluiten bij de Belgische context.
+Sommige vooraf gedefinieerde DLP\--identifica\-tie\-gegevens, zoals \texttt{Expiration Dates (English)}, kunnen bijvoorbeeld alleen gebruikt worden in Engelstalige data.
+Hierdoor zullen termen zoals \textit{vervaldatum}, \textit{2de mei} of \textit{2e mei} niet worden herkend, wat kan leiden tot lagere detecties.
+Voor verder onderzoek kunnen alternatieve DLP-regels worden overwogen, zoals: \texttt{Expiration date (Dutch)}, \texttt{Card Number Terms (Dutch/ French/ German)} en \texttt{Banks in Europe (Dutch/ French/ German)}~\autocite{B2BPay2016}.  
+Tenslotte kan ook een dataset van veel gebruikte wachtwoorden worden overwogen als identificatiegegevens voor DLP-regels. 
+Dit werd niet gebruikt in deze bachelorproef, aangezien in simpele wachtwoordlijsten vaak voorkomende woorden staan, wat voor meer \textit{false positives} zou kunnen zorgen.
 
-\textit{CICIDS 2017} dataset.
+\section{\IfLanguageName{dutch}{Alternatieve datasets}{Alternative datasets}}
+\label{sec:alternatieven-datasets}
 
-\paragraph{Verder onderzoek}
+De proof of concept is uitgevoerd met de \textit{Enron}-dataset, die een representatieve set e-mails van een Amerikaans bedrijf bevat.
+Voor een meer Belgische context zou het gebruik van een dataset met Belgische e-mails nuttig zijn. 
+Deze werd niet gevonden tijdens de literatuurstudie, maar zou de evaluatie van de eigen gedefinieerde DLP-regels kunnen verbeteren.
+Andere datasets zoals \textit{CICIDS 2017} kunnen ook worden overwogen voor toekomstig onderzoek.
+Deze dataset bevat verschillende soorten netwerkverkeer en kan nuttig zijn voor het testen van DLP-regels in een bredere context.
 
-Andere alternatieve tools, die gericht zijn op \textit{MacOS}-systemen, staan beschreven in Tabel~\ref{tab:eval-criteria-performance}.
-Zie \ref{sec:eva-performantie} voor meer informatie over de performantie van de Netskope agent.
+\section{\IfLanguageName{dutch}{Alternatieve wetgeving en richtlijnen}{Alternative legislation}}
+\label{sec:alternatieve-wetgeving}
 
-\paragraph{Onderbouwing van de risico-analysemethodologie}
+In deze bachelorproef is de focus gelegd op de Belgische en Europese wetgeving, maar om hierop uit te breiden, kunnen ook andere wetten worden overwogen.
+% Bijvoorbeeld, de \textbf{\textit{CCB Framework}}~\autocite{CCB2023} biedt een strategie voor cybersecurity in België en kan nuttig zijn voor het ontwikkelen van DLP-oplossingen.
+Bijvoorbeeld, de \textbf{\textit{EU Cybersecurity Act}}~\autocite{EPREU2019}, die richtlijnen biedt voor de certificering van ICT-producten en -diensten binnen de EU, kan ook relevant zijn voor DLP-oplossingen.
+Verder zou \textbf{\textit{The Cyber Resilience Act}}~\autocite{EPC2024} kunnen worden overwogen, die gericht is op het verbeteren van de cyberweerbaarheid van digitale producten en diensten in de EU.
+% Tenslotte kan de \textbf{\textit{The Cyber Solidarity Act}}~\autocite{EPC2025} worden overwogen, die gericht is op het versterken van de samenwerking tussen EU-lidstaten op het gebied van cybersecurity.
+Deze wetgeving en richtlijnen waren minder van toepassing voor dit onderzoek, maar kunnen in de toekomst nuttig zijn voor het verder ontwikkelen van DLP-oplossingen binnen de Belgische context.
 
-\textcite{Zadeh2023} % EVOLANE JENS https://chatgpt.com/c/6829e2e1-262c-8010-8b7a-a362d5f19a38
+% ``Discussion'' genoemd. Had je deze uitkomst verwacht? Zijnr zaken die nog
+% niet duidelijk zijn?
+% Heeft het onderzoek geleid tot nieuwe vragen die uitnodigen tot verder 
+%onderzoek?
 
-% De combinatie van waarschijnlijkheid en impact in een kwantitatieve risicomatrix is gebaseerd op bestaande wetenschappelijke methodes die zich bewezen hebben in cybersecurity-onderzoek. 
-% Zo beschrijven \textcite{Zadeh2023} een gestructureerd raamwerk waarin datalekken uit reële incidenten binnen S\&P 500-organisaties 
-% geanalyseerd worden aan de hand van zowel de ernst van de impact als de kans van voorkomen. 
-% In hun studie gebruiken zij een \textit{likelihood-impact matrix} als besluitvormingshulpmiddel, waarbij verschillende breach types, zoals hacking en verlies/diefstal van draagbare media, 
-% worden gekwalificeerd op basis van hun geobserveerde impact en waarschijnlijkheid. 
+% % % % % \section{\IfLanguageName{dutch}{Toekomstig onderzoek}{Future research}}
+% % % % % \label{sec:toekomstig-onderzoek}
+% % % % % dit heb ik niet onderzocht, ik heb me enkel hierop gericht. stand van zaken, waar zit  een gat?
 
-% Deze benadering sluit nauw aan bij de methodologie die in deze bachelorproef wordt toegepast. 
-% Ook hier wordt een matrix gehanteerd met scores van 1 (laag) tot 5 (hoog) voor zowel impact als waarschijnlijkheid. 
-% In tegenstelling tot Zadeh et al., die de matrix op basis van incidenttypes invullen, is in deze studie gekozen om de analyse toe te passen op combinaties van datatypes (zoals naam + wachtwoord of naam + bankrekeningnummer). 
-% Deze focus maakt de methode beter inzetbaar bij het opstellen van een DLP-configuratie, waar inhoudelijke dataprofielen centraal staan.
+% % % % \paragraph{Alternatieven DLP-regels}
 
-% De studie van Zadeh et al.\ ondersteunt dus de validiteit van een impact-waarschijnlijkheid-gebaseerde benadering en onderbouwt het gebruik van een gestructureerde risico-inschaling per informatiecategorie.
+% % % % https://www.b2bpay.co/list-banks-europe
+
+% % % % Expiration date (Dutch)
+% % % % Card Number Terms (Dutch/ French/ German)
+
+% % % % \paragraph{Alternatieven datasets}
+
+% % % % \textit{CICIDS 2017} dataset.
+% % % % vaak gebruikte wachtwoorden (waarom niet gebruikt in deze bachelorproef?)
+
+
+% % % % Mocht  gebruik werden gemaakt van een Belgische e-maildataset, dan zouden de eigen gedefinieerde DLP-regels beter geevalueerd kunnen worden.
+
+% % % % \paragraph{Verder onderzoek}
+
+% % % % Andere alternatieve tools, die gericht zijn op \textit{MacOS}-systemen, staan beschreven in Tabel~\ref{tab:eval-criteria-performance}.
+% % % % Zie \ref{sec:eva-performantie} voor meer informatie over de performantie van de Netskope agent.
+
+% % % % \paragraph{Onderbouwing van de risico-analysemethodologie}
+
+% % % % \textcite{Zadeh2023} % EVOLANE JENS https://chatgpt.com/c/6829e2e1-262c-8010-8b7a-a362d5f19a38
+
+% % % % % De combinatie van waarschijnlijkheid en impact in een kwantitatieve risicomatrix is gebaseerd op bestaande wetenschappelijke methodes die zich bewezen hebben in cybersecurity-onderzoek. 
+% % % % % Zo beschrijven \textcite{Zadeh2023} een gestructureerd raamwerk waarin datalekken uit reële incidenten binnen S\&P 500-organisaties 
+% % % % % geanalyseerd worden aan de hand van zowel de ernst van de impact als de kans van voorkomen. 
+% % % % % In hun studie gebruiken zij een \textit{likelihood-impact matrix} als besluitvormingshulpmiddel, waarbij verschillende breach types, zoals hacking en verlies/diefstal van draagbare media, 
+% % % % % worden gekwalificeerd op basis van hun geobserveerde impact en waarschijnlijkheid. 
+
+% % % % % Deze benadering sluit nauw aan bij de methodologie die in deze bachelorproef wordt toegepast. 
+% % % % % Ook hier wordt een matrix gehanteerd met scores van 1 (laag) tot 5 (hoog) voor zowel impact als waarschijnlijkheid. 
+% % % % % In tegenstelling tot Zadeh et al., die de matrix op basis van incidenttypes invullen, is in deze studie gekozen om de analyse toe te passen op combinaties van datatypes (zoals naam + wachtwoord of naam + bankrekeningnummer). 
+% % % % % Deze focus maakt de methode beter inzetbaar bij het opstellen van een DLP-configuratie, waar inhoudelijke dataprofielen centraal staan.
+
+% % % % % De studie van Zadeh et al.\ ondersteunt dus de validiteit van een impact-waarschijnlijkheid-gebaseerde benadering en onderbouwt het gebruik van een gestructureerde risico-inschaling per informatiecategorie.
+
+% % % % \subsection{\IfLanguageName{dutch}{CCB Framework}{CCB Framework}}
+% % % % \label{sec:ccb_framework}
+% % % %         % \gls{ccb}-framework & Strategie voor cybersecurity België & Aanbevelingen voor risicobeheer \\
+% % % %         % EU Cybersecurity Act & Certificering van beveiligingstechnologie & DLP-oplossingen certificeren \\
+
+% % % % \subsection{\IfLanguageName{dutch}{EU Cybersecurity Act}{EU Cybersecurity Act}}
+% % % % \label{sec:eu_cybersecurity_act}
+
+% % % % Het \textcite{EPREU2019} stelde de EU Cybersecurity Act in, die de rol van \gls{enisa} versterkt en een richtlijn geeft voor de certificering van ICT-producten en -diensten binnen de EU.
